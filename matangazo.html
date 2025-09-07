@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matangazo - Shule ya Msingi na Sekondari Mfano</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #3b82f6;
+            --accent-color: #f59e0b;
+            --text-dark: #1f2937;
+            --bg-light: #f8fafc;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --info-color: #3b82f6;
+            --danger-color: #ef4444;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            padding-top: 80px;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            transform: translateY(-2px);
+        }
+
+        .page-header {
+            background: linear-gradient(rgba(30, 58, 138, 0.9), rgba(59, 130, 246, 0.9)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23e5e7eb" width="1200" height="400"/><path fill="%23d1d5db" d="M0 300l50-16.7c50-16.6 150-50 250-50s200 33.4 250 50 100 16.7 150 0 100-50 150-16.7c50 33.4 150 100 200 100s100-66.6 150-66.7V400H0z"/></svg>') center/cover;
+            padding: 80px 0 60px 0;
+            color: white;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .announcements-section {
+            padding: 4rem 0;
+        }
+
+        .filter-tabs {
+            margin-bottom: 3rem;
+        }
+
+        .filter-tabs .nav-pills .nav-link {
+            color: var(--text-dark);
+            background: white;
+            border: 2px solid var(--secondary-color);
+            margin: 0 5px 10px 0;
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .filter-tabs .nav-pills .nav-link.active {
+            background: var(--secondary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+        }
+
+        .announcement-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--secondary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .announcement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .announcement-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 50px 50px 0;
+            border-color: transparent var(--accent-color) transparent transparent;
+        }
+
+        .announcement-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .announcement-date {
+            display: flex;
+            align-items: center;
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .announcement-category {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .category-academic {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--info-color);
+        }
+
+        .category-events {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success-color);
+        }
+
+        .category-urgent {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger-color);
+        }
+
+        .category-general {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning-color);
+        }
+
+        .announcement-title {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .announcement-content {
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .announcement-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .announcement-author {
+            display: flex;
+            align-items: center;
+            color: var(--text-dark);
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        .priority-indicator {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            z-index: 10;
+        }
+
+        .priority-high {
+            background: var(--danger-color);
+            animation: pulse 2s infinite;
+        }
+
+        .priority-medium {
+            background: var(--warning-color);
+        }
+
+        .priority-low {
+            background: var(--success-color);
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .sidebar {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar h4 {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        .sidebar-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #f3f4f6;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-item:hover {
+            background: var(--bg-light);
+            padding-left: 10px;
+            margin: 0 -10px;
+            border-radius: 8px;
+        }
+
+        .sidebar-item:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-link {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sidebar-link i {
+            color: var(--secondary-color);
+            width: 20px;
+        }
+
+        .calendar-widget {
+            background: var(--bg-light);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .calendar-date {
+            text-align: center;
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .calendar-month {
+            text-align: center;
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .search-box input {
+            border: 2px solid var(--secondary-color);
+            border-radius: 25px;
+            padding: 12px 50px 12px 20px;
+            width: 100%;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .search-box button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--secondary-color);
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-box button:hover {
+            background: var(--primary-color);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 3rem 0 1rem 0;
+        }
+
+        .btn-primary {
+            background: var(--secondary-color);
+            border: none;
+            border-radius: 25px;
+            padding: 12px 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .no-announcements {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-dark);
+            opacity: 0.6;
+        }
+
+        .no-announcements i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+            
+            .page-header {
+                padding: 60px 0 40px 0;
+            }
+            
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .announcement-card {
+                padding: 1.5rem;
+            }
+            
+            .sidebar {
+                position: static;
+                margin-bottom: 3rem;
+            }
+            
+            .filter-tabs .nav-pills .nav-link {
+                margin-bottom: 10px;
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-graduation-cap me-2"></i>
+                Shule ya Mfano
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Nyumbani</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="kuhusu.html">Kuhusu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="huduma.html">Huduma</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="masomo.html">Masomo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="wanafunzi.html">Wanafunzi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="matangazo.html">Matangazo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="mawasiliano.html">Mawasiliano</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1><i class="fas fa-bullhorn me-3"></i>Matangazo ya Shule</h1>
+            <p>Habari na matukio muhimu ya kila siku</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="announcements-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Search Box -->
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Tafuta matangazo..." onkeyup="filterAnnouncements()">
+                        <button type="button" onclick="filterAnnouncements()">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+
+                    <!-- Filter Tabs -->
+                    <div class="filter-tabs">
+                        <ul class="nav nav-pills" id="filterTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" data-filter="all" onclick="filterByCategory('all')">
+                                    <i class="fas fa-list me-2"></i>Yote
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" data-filter="academic" onclick="filterByCategory('academic')">
+                                    <i class="fas fa-book me-2"></i>Masomo
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" data-filter="events" onclick="filterByCategory('events')">
+                                    <i class="fas fa-calendar me-2"></i>Matukio
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" data-filter="urgent" onclick="filterByCategory('urgent')">
+                                    <i class="fas fa-exclamation me-2"></i>Muhimu
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" data-filter="general" onclick="filterByCategory('general')">
+                                    <i class="fas fa-info me-2"></i>Jumla
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Announcements List -->
+                    <div id="announcementsList">
+                        <!-- Urgent Announcement -->
+                        <div class="announcement-card fade-in" data-category="urgent" data-priority="high">
+                            <div class="priority-indicator priority-high"></div>
+                            <div class="announcement-header">
+                                <div class="announcement-date">
+                                    <i class="fas fa-clock me-2"></i>
+                                    Leo, 6 September 2025
+                                </div>
+                                <span class="announcement-category category-urgent">Muhimu</span>
+                            </div>
+                            <h3 class="announcement-title">Mabadiliko ya Ratiba za Masomo</h3>
+                            <div class="announcement-content">
+                                <p>Kwa sababu ya mazingira ya hali ya hewa, tumebadilisha ratiba za masomo kwa siku mbili zijazo. Masomo yataanza saa 9:00 asubuhi badala ya saa 8:00. Wazazi na wanafunzi wote wanahimizwa kufuata mabadiliko haya.</p>
+                                <ul class="mb-0">
+                                    <li>Masomo ya asubuhi: 9:00 - 12:30</li>
+                                    <li>Mapumziko: 12:30 - 1:30</li>
+                                    <li>Masomo ya mchana: 1:30 - 4:00</li>
+                                </ul>
+                            </div>
+                            <div class="announcement-meta">
+                                <div class="announcement-author">
+                                    <i class="fas fa-user-circle me-2"></i>
+                                    Mwalimu Mkuu - Dkt. Amina Hassan
+                                </div>
+                                <small class="text-muted">Imesomwa mara 245</small>
+                            </div>
+                        </div>
+
+                        <!-- Academic Announcement -->
+                        <div class="announcement-card fade-in" data-category="academic" data-priority="medium">
+                            <div class="priority-indicator priority-medium"></div>
+                            <div class="announcement-header">
+                                <div class="announcement-date">
+                                    <i class="fas fa-clock me-2"></i>
+                                    5 September 2025
+                                </div>
+                                <span class="announcement-category category-academic">Masomo</span>
+                            </div>
+                            <h3 class="announcement-title">Mwanzo wa Muhula wa Kwanza - Agosti 2025</h3>
+                            <div class="announcement-content">
+                                <p>Tunafurahi kutangaza kuwa muhula mpya wa masomo umeanza kwa mafanikio. Wanafunzi wote wanaruhusiwa kurudi shuleni kuanzia tarehe 7 September 2025.</p>
+                                <p><strong>Vitu muhimu vya kuleta:</strong></p>
+                                <ul>
+                                    <li>Vitabu vyote vya masomo</li>
+                                    <li>Sare safi na sahihi</li>
+                                    <li>Vifaa vya uhandisi na utambuzi</li>
+                                    <li>Fomu za malipo za muhula</li>
+                                </ul>
+                            </div>
+                            <div class="announcement-meta">
+                                <div class="announcement-author">
+                                    <i class="fas fa-user-circle me-2"></i>
+                                    Mkuu wa Masomo - Mwalimu John Mwangi
+                                </div>
+                                <small class="text-muted">Imesomwa mara 189</small>
+                            </div>
+                        </div>
+
+                        <!-- Events Announcement -->
+                        <div class="announcement-card fade-in" data-category="events" data-priority="medium">
+                            <div class="priority-indicator priority-medium"></div>
+                            <div class="announcement-header">
+                                <div class="announcement-date">
+                                    <i class="fas fa-clock me-2"></i>
+                                    28 Agosti 2025
+                                </div>
+                                <span class="announcement-category category-events">Matukio</span>
+                            </div>
+                            <h3 class="announcement-title">Sherehe za Sikukuu za Shule - Miaka 15</h3>
+                            <div class="announcement-content">
+                                <p>Tunasherehekea miaka 15 ya kutoa elimu bora! Sherehe kubwa zitafanyika tarehe 15 September 2025 kuanzia saa 3:00 mchana.</p>
+                                <p><strong>Ratiba ya sherehe:</strong></p>
+                                <ul>
+                                    <li>3:00 - 4:00: Hotuba za wageni</li>
+                                    <li>4:00 - 5:30: Michezo na mashindano</li>
+                                    <li>5:30 - 7:00: Chakula na vinywaji</li>
+                                    <li>7:00 - 9:00: Burudani na muziki</li>
+                                </ul>
+                                <p>Wazazi wote wamealikwa kushiriki!</p>
+                            </div>
+                            <div class="announcement-meta">
+                                <div class="announcement-author">
+                                    <i class="fas fa-user-circle me-2"></i>
+                                    Kamati ya Matukio - Bi. Sarah Kimani
+                                </div>
+                                <small class="text-muted">Imesomwa mara 312</small>
+                            </div>
+                        </div>
+
+                        <!-- Academic Results -->
+                        <div class="announcement-card fade-in" data-category="academic" data-priority="high">
+                            <div class="priority-indicator priority-high"></div>
+                            <div class="announcement-header">
+                                <div class="announcement-date">
+                                    <i class="fas fa-clock me-2"></i>
+                                    20 Agosti 2025
+                                </div>
+                                <span class="announcement-category category-academic">Masomo</span>
+                            </div>
+                            <h3 class="announcement-title">Matokeo ya Mitihani ya Mwisho wa Muhula</h3>
+                            <div class="announcement-content">
+                                <p>Matokeo ya mitihani ya mwishoni mwa muhula yameshatolewa. Hongera kwa wanafunzi wetu wote kwa juhudi zao!</p>
+                                <p><strong>Takwimu za jumla:</strong></p>
+                                <ul>
+                                    <li>Wastani wa daraja la 4-7: 78.5%</li>
+                                    <li>Wastani wa kidato cha 1-4: 82.3%</li>
+                                    <li>Idadi ya wanafunzi waliopita: 94%</li>
+                                </ul>
+                                <p>Wazazi wanaweza kupata matokeo ya watoto wao katika ofisi za shule au kupiga simu +255 123 456 789.</p>
+                            </div>
+                            <div class="announcement-meta">
+                                <div class="announcement-author">
+                                    <i class="fas fa-user-circle me-2"></i>
+                                    Mkuu wa Mitihani - Mwalimu Grace Mollel
+                                </div>
+                                <small class="text-muted">Imesomwa mara 456</small>
+                            </div>
+                        </div>
+
+                        <!-- General Announcement -->
+                        <div class="announcement-card fade-in" data-category="general" data-priority="low">
+                            <div class="priority-indicator priority-low"></div>
+                            <div class="announcement-header">
+                                <div class="announcement-date">
+                                    <i class="fas fa-clock me-2"></i>
+                                    15 Agosti 2025
+                                </div>
+                                <span class="announcement-category category-general">Jumla</span>
+                            </div>
+                            <h3 class="announcement-title">Mfumo Mpya wa Malipo ya Kielektroniki</h3>
+                            <div class="announcement-content">
+                                <p>Tumezindua mfumo mpya wa malipo ya kielektroniki ili kurahisisha malipo ya ada za shule. Wazazi sasa wanaweza kulipa kupitia:</p>
+                                <ul>
+                                    <li>M-Pesa: Lipa namba 400200</li>
+                                    <li>Benki za umma</li>
+                                    <li>Kadi za benki</li>
+                                    <li>Huduma za mitandaoni</li>
+                                </ul>
+                                <p>Kwa maelezo zaidi, wasiliana na ofisi za hesabu.</p>
+                            </div>
+                            <div class="announcement-meta">
+                                <div class="announcement-author">
+                                    <i class="fas fa-user-circle me-2"></i>
+                                    Mkuu wa Hesabu - Mwalimu Peter Msigwa
+                                </div>
+                                <small class="text-muted">Imesomwa mara 167</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- No Results Message -->
+                    <div id="noResults" class="no-announcements" style="display: none;">
+                        <i class="fas fa-search"></i>
+                        <h4>Hakuna matangazo yaliyopatikana</h4>
+                        <p>Jaribu kutafuta kwa maneno tofauti au chagua aina nyingine ya tangazo.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <!-- Calendar Widget -->
+                    <div class="sidebar">
+                        <div class="calendar-widget">
+                            <div class="calendar-date" id="currentDate">06</div>
+                            <div class="calendar-month" id="currentMonth">SEPTEMBER 2025</div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Links Sidebar -->
+                    <div class="sidebar">
+                        <h4><i class="fas fa-link me-2"></i>Viungo vya Haraka</h4>
+                        <div class="sidebar-item">
+                            <a href="kuhusu.html" class="sidebar-link">
+                                <i class="fas fa-info-circle"></i>
+                                <span>Kuhusu Shule</span>
+                            </a>
+                        </div>
+                        <div class="sidebar-item">
+                            <a href="masomo.html" class="sidebar-link">
+                                <i class="fas fa-book-open"></i>
+                                <span>Masomo na Mtaala</span>
+                            </a>
+                        </div>
+                        <div class="sidebar-item">
+                            <a href="wanafunzi.html" class="sidebar-link">
+                                <i class="fas fa-users"></i>
+                                <span>Maisha ya Wanafunzi</span>
+                            </a>
+                        </div>
+                        <div class="sidebar-item">
+                            <a href="mawasiliano.html" class="sidebar-link">
+                                <i class="fas fa-phone"></i>
+                                <span>Mawasiliano</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Important Contacts -->
+                    <div class="sidebar">
+                        <h4><i class="fas fa-phone me-2"></i>Nambari Muhimu</h4>
+                        <div class="sidebar-item">
+                            <div class="sidebar-link">
+                                <i class="fas fa-user-tie"></i>
+                                <div>
+                                    <strong>Mwalimu Mkuu</strong><br>
+                                    <small>+255 123 456 789</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sidebar-item">
+                            <div class="sidebar-link">
+                                <i class="fas fa-calculator"></i>
+                                <div>
+                                    <strong>Ofisi ya Hesabu</strong><br>
+                                    <small>+255 123 456 790</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sidebar-item">
+                            <div class="sidebar-link">
+                                <i class="fas fa-first-aid"></i>
+                                <div>
+                                    <strong>Zahanati</strong><br>
+                                    <small>+255 123 456 791</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sidebar-item">
+                            <div class="sidebar-link">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <strong>Barua Pepe</strong><br>
+                                    <small>info@shuleyamfano.tz</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Announcements Summary -->
+                    <div class="sidebar">
+                        <h4><i class="fas fa-chart-line me-2"></i>Takwimu za Matangazo</h4>
+                        <div class="sidebar-item">
+                            <div class="sidebar-link">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <div>
+                                    <strong>Muhimu</strong><br>
+                                    <small>2 matangazo mapya</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sidebar-item">
+                            <div class="sidebar-link">
+                                <i class="fas fa-calendar-alt"></i>
+                                <div>
+                                    <strong>Matukio</strong><br>
+                                    <small>1 tukio lijalo</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sidebar-item">
+                            <div class="sidebar-link">
+                                <i class="fas fa-graduation-cap"></i>
+                                <div>
+                                    <strong>Masomo</strong><br>
+                                    <small>3 matangazo ya masomo</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="mawasiliano">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="fw-bold mb-3">
+                        <i class="fas fa-graduation-cap me-2"></i>
+                        Shule ya Mfano
+                    </h5>
+                    <p>Tunatoa elimu bora kwa maendeleo ya watoto wetu kwa ujuzi, maadili na utamaduni wa Kitanzania.</p>
+                    
+                    <div class="social-links mt-3">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f fa-lg"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-youtube fa-lg"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <h5 class="fw-bold mb-3">Viungo vya Haraka</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="kuhusu.html" class="text-white-50">Kuhusu Shule</a></li>
+                        <li class="mb-2"><a href="masomo.html" class="text-white-50">Masomo</a></li>
+                        <li class="mb-2"><a href="wanafunzi.html" class="text-white-50">Wanafunzi</a></li>
+                        <li class="mb-2"><a href="matangazo.html" class="text-white-50">Matangazo</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <h5 class="fw-bold mb-3">Mawasiliano</h5>
+                    <div class="contact-info">
+                        <p class="mb-2">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            Barabara ya Uhuru, Dar es Salaam
+                        </p>
+                        <p class="mb-2">
+                            <i class="fas fa-phone me-2"></i>
+                            +255 123 456 789
+                        </p>
+                        <p class="mb-2">
+                            <i class="fas fa-envelope me-2"></i>
+                            info@shuleyamfano.tz
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="my-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 Shule ya Mfano. Haki zote zimehifadhiwa.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <small class="text-white-50">Imeundwa kwa mapenzi na teknolojia ya kisasa</small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Set current date in calendar widget
+        function updateCalendar() {
+            const now = new Date();
+            const day = now.getDate().toString().padStart(2, '0');
+            const month = now.toLocaleDateString('sw-TZ', { month: 'long', year: 'numeric' }).toUpperCase();
+            
+            document.getElementById('currentDate').textContent = day;
+            document.getElementById('currentMonth').textContent = month;
+        }
+
+        // Filter announcements by category
+        function filterByCategory(category) {
+            const announcements = document.querySelectorAll('.announcement-card');
+            const tabs = document.querySelectorAll('.filter-tabs .nav-link');
+            const noResults = document.getElementById('noResults');
+            let visibleCount = 0;
+
+            // Update active tab
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.getAttribute('data-filter') === category) {
+                    tab.classList.add('active');
+                }
+            });
+
+            // Filter announcements
+            announcements.forEach(announcement => {
+                if (category === 'all' || announcement.getAttribute('data-category') === category) {
+                    announcement.style.display = 'block';
+                    announcement.classList.add('fade-in');
+                    visibleCount++;
+                } else {
+                    announcement.style.display = 'none';
+                }
+            });
+
+            // Show/hide no results message
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        // Search functionality
+        function filterAnnouncements() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const announcements = document.querySelectorAll('.announcement-card');
+            const noResults = document.getElementById('noResults');
+            let visibleCount = 0;
+
+            announcements.forEach(announcement => {
+                const title = announcement.querySelector('.announcement-title').textContent.toLowerCase();
+                const content = announcement.querySelector('.announcement-content').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || content.includes(searchTerm) || searchTerm === '') {
+                    announcement.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    announcement.style.display = 'none';
+                }
+            });
+
+            // Show/hide no results message
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+
+            // If searching, reset filter to show all categories
+            if (searchTerm !== '') {
+                const tabs = document.querySelectorAll('.filter-tabs .nav-link');
+                tabs.forEach(tab => {
+                    tab.classList.remove('active');
+                    if (tab.getAttribute('data-filter') === 'all') {
+                        tab.classList.add('active');
+                    }
+                });
+            }
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(30, 58, 138, 0.95)';
+            } else {
+                navbar.style.background = 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))';
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeIn 0.6s ease forwards';
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCalendar();
+            
+            // Set up animations for announcement cards
+            const cards = document.querySelectorAll('.announcement-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.animationDelay = `${index * 0.1}s`;
+                observer.observe(card);
+            });
+
+            // Set up search input event listener
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    filterAnnouncements();
+                }
+            });
+
+            // Auto-refresh calendar every hour
+            setInterval(updateCalendar, 3600000);
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Print functionality for announcements
+        function printAnnouncement(element) {
+            const printContent = element.innerHTML;
+            const originalContent = document.body.innerHTML;
+            
+            document.body.innerHTML = `
+                <div style="font-family: Arial, sans-serif; padding: 20px;">
+                    <h1>Shule ya Mfano - Tangazo</h1>
+                    ${printContent}
+                </div>
+            `;
+            
+            window.print();
+            document.body.innerHTML = originalContent;
+            location.reload();
+        }
+
+        // Share announcement functionality
+        function shareAnnouncement(title, content) {
+            if (navigator.share) {
+                navigator.share({
+                    title: `Shule ya Mfano - ${title}`,
+                    text: content,
+                    url: window.location.href
+                });
+            } else {
+                // Fallback for browsers that don't support native sharing
+                const shareText = `${title}\n\n${content}\n\nMaelezo zaidi: ${window.location.href}`;
+                navigator.clipboard.writeText(shareText).then(() => {
+                    alert('Tangazo limekopwa kwenye clipboard!');
+                });
+            }
+        }
+
+        // Add read status tracking
+        function markAsRead(announcementId) {
+            // This would typically save to localStorage or send to server
+            const readAnnouncements = JSON.parse(localStorage.getItem('readAnnouncements') || '[]');
+            if (!readAnnouncements.includes(announcementId)) {
+                readAnnouncements.push(announcementId);
+                localStorage.setItem('readAnnouncements', JSON.stringify(readAnnouncements));
+            }
+        }
+
+        // Auto-mark announcements as read when scrolled into view
+        const readObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+                    const announcementId = entry.target.getAttribute('data-id');
+                    if (announcementId) {
+                        setTimeout(() => markAsRead(announcementId), 3000); // Mark as read after 3 seconds
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        // Observe announcements for read status
+        document.addEventListener('DOMContentLoaded', function() {
+            const announcements = document.querySelectorAll('.announcement-card');
+            announcements.forEach((announcement, index) => {
+                announcement.setAttribute('data-id', `announcement-${index + 1}`);
+                readObserver.observe(announcement);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maisha ya Wanafunzi - Shule ya Mfano</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #3b82f6;
+            --accent-color: #f59e0b;
+            --text-dark: #1f2937;
+            --bg-light: #f8fafc;
+            --success-color: #10b981;
+            --info-color: #06b6d4;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            transform: translateY(-2px);
+        }
+
+        .page-header {
+            background: linear-gradient(rgba(30, 58, 138, 0.9), rgba(59, 130, 246, 0.9)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23f0f9ff" width="1200" height="400"/><path fill="%23e0f2fe" d="M0 250l50-16.7c50-16.6 150-50 250-50s200 33.4 250 50 100 16.7 150 0 100-50 150-16.7c50 33.4 150 100 200 100s100-66.6 150-66.7V400H0z"/></svg>') center/cover;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            margin-top: 76px;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .schedule-section {
+            padding: 4rem 0;
+            background: var(--bg-light);
+        }
+
+        .schedule-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--secondary-color);
+        }
+
+        .schedule-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .time-slot {
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .clubs-section {
+            padding: 4rem 0;
+        }
+
+        .club-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: none;
+            height: 100%;
+        }
+
+        .club-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .club-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            margin: 0 auto 1.5rem;
+        }
+
+        .sports-section {
+            background: var(--bg-light);
+            padding: 4rem 0;
+        }
+
+        .sport-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .sport-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .sport-header {
+            background: linear-gradient(135deg, var(--success-color), var(--info-color));
+            padding: 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .sport-body {
+            padding: 2rem;
+        }
+
+        .leadership-section {
+            padding: 4rem 0;
+        }
+
+        .leader-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            height: 100%;
+        }
+
+        .leader-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .leader-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            margin: 0 auto 1.5rem;
+            border: 4px solid var(--accent-color);
+        }
+
+        .activities-timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .activities-timeline::before {
+            content: '';
+            position: absolute;
+            left: 1rem;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 1.5rem;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: var(--secondary-color);
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--secondary-color);
+        }
+
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 3rem 0 1rem 0;
+        }
+
+        .btn-primary {
+            background: var(--secondary-color);
+            border: none;
+            border-radius: 25px;
+            padding: 12px 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .stats-row {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .badge-custom {
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .activities-timeline {
+                padding-left: 0;
+            }
+            
+            .activities-timeline::before {
+                display: none;
+            }
+            
+            .timeline-item::before {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-graduation-cap me-2"></i>
+                Shule ya Mfano
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Nyumbani</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="kuhusu.html">Kuhusu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="huduma.html">Huduma</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="masomo.html">Masomo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="wanafunzi.html">Wanafunzi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="matangazo.html">Matangazo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="mawasiliano.html">Mawasiliano</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Maisha ya Wanafunzi</h1>
+                    <p>Mazingira ya kujifunza yanayoweza na yenye furaha kwa kila mtoto</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Student Statistics -->
+    <section class="py-4">
+        <div class="container">
+            <div class="stats-row">
+                <div class="row">
+                    <div class="col-md-3 stat-item">
+                        <div class="stat-number">500+</div>
+                        <p class="mb-0">Wanafunzi Wote</p>
+                    </div>
+                    <div class="col-md-3 stat-item">
+                        <div class="stat-number">15</div>
+                        <p class="mb-0">Vilabu Mbalimbali</p>
+                    </div>
+                    <div class="col-md-3 stat-item">
+                        <div class="stat-number">8</div>
+                        <p class="mb-0">Timu za Michezo</p>
+                    </div>
+                    <div class="col-md-3 stat-item">
+                        <div class="stat-number">12</div>
+                        <p class="mb-0">Viongozi wa Wanafunzi</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Daily Schedule Section -->
+    <section class="schedule-section" id="ratiba">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="display-5 fw-bold text-primary">Ratiba ya Kila Siku</h2>
+                    <p class="lead">Mpangilio wa shughuli za kila siku shuleni</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <h4 class="text-primary mb-4">
+                        <i class="fas fa-sun me-2"></i>
+                        Asubuhi
+                    </h4>
+
+                    <div class="schedule-card">
+                        <div class="time-slot">6:30 - 7:30</div>
+                        <h5>Kuingia na Maandalizi</h5>
+                        <p class="mb-0">Wanafunzi wanaingia shuleni na kujiandaa kwa masomo. Ni wakati wa kusalimu na kuwa pamoja.</p>
+                        <div class="mt-3">
+                            <span class="badge-custom" style="background: var(--info-color); color: white;">
+                                <i class="fas fa-users me-1"></i>Wote
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="schedule-card">
+                        <div class="time-slot">7:30 - 8:00</div>
+                        <h5>Ibada ya Asubuhi</h5>
+                        <p class="mb-0">Ibada ya pamoja, maombi na utamaduni. Ni wakati wa kuanzisha siku kwa heshima.</p>
+                        <div class="mt-3">
+                            <span class="badge-custom" style="background: var(--success-color); color: white;">
+                                <i class="fas fa-pray me-1"></i>Ibada
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="schedule-card">
+                        <div class="time-slot">8:00 - 12:00</div>
+                        <h5>Masomo ya Asubuhi</h5>
+                        <p class="mb-0">Masomo makuu: Kiswahili, Hisabati, Sayansi na mengineyo. Kipindi muhimu cha kujifunza.</p>
+                        <div class="mt-3">
+                            <span class="badge-custom" style="background: var(--primary-color); color: white;">
+                                <i class="fas fa-book me-1"></i>Masomo
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <h4 class="text-primary mb-4">
+                        <i class="fas fa-cloud me-2"></i>
+                        Alasiri na Jioni
+                    </h4>
+
+                    <div class="schedule-card">
+                        <div class="time-slot">12:00 - 1:00</div>
+                        <h5>Mchana na Mapumziko</h5>
+                        <p class="mb-0">Chakula cha mchana na mapumziko. Wakati wa kucheza na kuburudika kwa wanafunzi.</p>
+                        <div class="mt-3">
+                            <span class="badge-custom" style="background: var(--warning-color); color: white;">
+                                <i class="fas fa-utensils me-1"></i>Chakula
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="schedule-card">
+                        <div class="time-slot">1:00 - 4:00</div>
+                        <h5>Masomo ya Alasiri</h5>
+                        <p class="mb-0">Kuendelea na masomo: Kiingereza, Jiografia, Historia na masomo mengine muhimu.</p>
+                        <div class="mt-3">
+                            <span class="badge-custom" style="background: var(--primary-color); color: white;">
+                                <i class="fas fa-book-reader me-1"></i>Masomo
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="schedule-card">
+                        <div class="time-slot">4:00 - 5:30</div>
+                        <h5>Shughuli za Ziada</h5>
+                        <p class="mb-0">Michezo, vilabu, sanaa na shughuli nyingine za ziada. Wakati wa kuonyesha talanta.</p>
+                        <div class="mt-3">
+                            <span class="badge-custom" style="background: var(--success-color); color: white;">
+                                <i class="fas fa-running me-1"></i>Shughuli
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clubs and Societies Section -->
+    <section class="clubs-section" id="vilabu">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="display-5 fw-bold text-primary">Vilabu na Vyama</h2>
+                    <p class="lead">Fursa za kuongeza talanta na ujuzi nje ya darasa</p>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="club-card">
+                        <div class="club-icon" style="background: var(--primary-color);">
+                            <i class="fas fa-debate"></i>
+                        </div>
+                        <h4>Klabu ya Mjadala</h4>
+                        <p>Kuimarisha ujuzi wa mazungumzo na hoja. Wanafunzi wanajifunza kutoa maoni yao kwa uwazi.</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>Mijadala ya wiki</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Mashindano ya hotuba</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Mazungumzo ya kijamii</li>
+                        </ul>
+                        <div class="mt-3">
+                            <span class="badge bg-primary">25 Wanachama</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="club-card">
+                        <div class="club-icon" style="background: var(--success-color);">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h4>Klabu ya Mazingira</h4>
+                        <p>Kuhifadhi mazingira na kujifunza uhusiano wa binadamu na asili. Tunaongoza katika hifadhi.</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>Kupanda miti</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Usafi wa mazingira</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Elimu ya kimazingira</li>
+                        </ul>
+                        <div class="mt-3">
+                            <span class="badge bg-success">30 Wanachama</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="club-card">
+                        <div class="club-icon" style="background: var(--info-color);">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h4>Klabu ya Teknolojia</h4>
+                        <p>Kujifunza kompyuta na teknolojia ya kisasa. Tunaongoza katika ubunifu wa kidigitali.</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>Programming na coding</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Uundaji wa tovuti</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Robotics na AI</li>
+                        </ul>
+                        <div class="mt-3">
+                            <span class="badge bg-info">20 Wanachama</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4 mt-2">
+                <div class="col-lg-4">
+                    <div class="club-card">
+                        <div class="club-icon" style="background: var(--accent-color);">
+                            <i class="fas fa-music"></i>
+                        </div>
+                        <h4>Klabu ya Muziki</h4>
+                        <p>Kuimba, kucheza vyombo na kutunga muziki. Tunahifadhi utamaduni na muziki wa kisasa.</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>Kwaya ya shule</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Vyombo vya muziki</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Utunzi wa nyimbo</li>
+                        </ul>
+                        <div class="mt-3">
+                            <span class="badge" style="background: var(--accent-color);">35 Wanachama</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="club-card">
+                        <div class="club-icon" style="background: #8b5cf6;">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h4>Klabu ya Sanaa</h4>
+                        <p>Uchoraji, uchoraji wa rangi na sanaa za mikono. Kuonyesha utunzi na ubunifu wa kisanaa.</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>Uchoraji wa picha</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Sanaa za mikono</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Maonyesho ya sanaa</li>
+                        </ul>
+                        <div class="mt-3">
+                            <span class="badge" style="background: #8b5cf6;">28 Wanachama</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="club-card">
+                        <div class="club-icon" style="background: var(--danger-color);">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <h4>Klabu ya Uandishi</h4>
+                        <p>Kuandika makala, hadithi na mashairi. Tunatoa gazeti la shule na kuboresha ujuzi wa uandishi.</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>Gazeti la shule</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Kuandika hadithi</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Ushairi na fasihi</li>
+                        </ul>
+                        <div class="mt-3">
+                            <span class="badge bg-danger">22 Wanachama</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sports and Recreation Section -->
+    <section class="sports-section" id="michezo">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="display-5 fw-bold text-primary">Michezo na Burudani</h2>
+                    <p class="lead">Afya ya mwili ni muhimu kama afya ya akili</p>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="sport-card">
+                        <div class="sport-header">
+                            <i class="fas fa-swimmer fa-3x mb-3"></i>
+                            <h4>Kuogelea</h4>
+                        </div>
+                        <div class="sport-body">
+                            <p>Tunatumia bwawa la jirani kwa mazoezi ya kuogelea. Ujuzi muhimu kwa kila mtoto.</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-waves text-warning me-2"></i>Kiwango cha Kitaifa</li>
+                                <li><i class="fas fa-users text-info me-2"></i>Waogeleaji 18</li>
+                                <li><i class="fas fa-calendar text-success me-2"></i>Mazoezi Jumamosi</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Sports -->
+            <div class="row g-4 mt-2">
+                <div class="col-lg-4">
+                    <div class="sport-card">
+                        <div class="sport-header">
+                            <i class="fas fa-running fa-3x mb-3"></i>
+                            <h4>Mbio na Riadha</h4>
+                        </div>
+                        <div class="sport-body">
+                            <p>Shughuli za kukimbia, kuruka na kurusha. Tunashiriki mashindano ya riadha ya mkoa.</p>
+                            <div class="mt-3">
+                                <span class="badge bg-success">Timu ya Wavulana</span>
+                                <span class="badge bg-info">Timu ya Wavulana</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="sport-card">
+                        <div class="sport-header">
+                            <i class="fas fa-chess fa-3x mb-3"></i>
+                            <h4>Chess na Bao</h4>
+                        </div>
+                        <div class="sport-body">
+                            <p>Michezo ya akili inayosaidia kuimarisha uongozi na kutafakari kwa kina.</p>
+                            <div class="mt-3">
+                                <span class="badge bg-warning">15 Wachezaji</span>
+                                <span class="badge bg-primary">Mazoezi ya Kila Siku</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="sport-card">
+                        <div class="sport-header">
+                            <i class="fas fa-table-tennis fa-3x mb-3"></i>
+                            <h4>Ping Pong</h4>
+                        </div>
+                        <div class="sport-body">
+                            <p>Mchezo maarufu unaochezwa wakati wa mapumziko na katika mashindano ya shule.</p>
+                            <div class="mt-3">
+                                <span class="badge bg-info">12 Wachezaji</span>
+                                <span class="badge bg-success">Mashindano ya Mwezi</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Student Leadership Section -->
+    <section class="leadership-section" id="uongozi">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="display-5 fw-bold text-primary">Uongozi wa Wanafunzi</h2>
+                    <p class="lead">Kuongoza kizazi cha kesho kupitia uongozi wa leo</p>
+                </div>
+            </div>
+
+            <!-- Executive Committee -->
+            <div class="row mb-5">
+                <div class="col-12 mb-4">
+                    <h3 class="text-center text-primary">Kamati Kuu ya Wanafunzi</h3>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="leader-card">
+                        <div class="leader-avatar">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <h4>Rais wa Wanafunzi</h4>
+                        <h6 class="text-primary">Sarah Mwalimu</h6>
+                        <p>Anaongoza shughuli zote za wanafunzi na kuwakilisha mbele ya uongozi wa shule.</p>
+                        <div class="mt-3">
+                            <span class="badge-custom" style="background: var(--accent-color); color: white;">Kidato cha 4</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="leader-card">
+                        <div class="leader-avatar">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h4>Makamu wa Rais</h4>
+                        <h6 class="text-primary">James Kilimo</h6>
+                        <p>Anasaidia rais na kuongoza wakati rais hayupo. Pia anaongoza miradi maalum.</p>
+                        <div class="mt-3">
+                            <span class="badge-custom" style="background: var(--secondary-color); color: white;">Kidato cha 4</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="leader-card">
+                        <div class="leader-avatar">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <h4>Katibu Mkuu</h4>
+                        <h6 class="text-primary">Grace Msigwa</h6>
+                        <p>Anashughulikia kumbukumbu za mikutano na mawasiliano ya serikali ya wanafunzi.</p>
+                        <div class="mt-3">
+                            <span class="badge-custom" style="background: var(--info-color); color: white;">Kidato cha 3</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Department Heads -->
+            <div class="row mb-5">
+                <div class="col-12 mb-4">
+                    <h3 class="text-center text-primary">Viongozi wa Idara</h3>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="leader-card">
+                        <div class="leader-avatar">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h5>Mkuu wa Masomo</h5>
+                        <h6 class="text-primary">Daniel Komba</h6>
+                        <p>Anasimamia shughuli za kimasomo na kushirikiana na walimu.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="leader-card">
+                        <div class="leader-avatar">
+                            <i class="fas fa-running"></i>
+                        </div>
+                        <h5>Mkuu wa Michezo</h5>
+                        <h6 class="text-primary">Maria Juma</h6>
+                        <p>Anaongoza shughuli zote za michezo na mazoezi ya mwili.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="leader-card">
+                        <div class="leader-avatar">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h5>Mkuu wa Sanaa</h5>
+                        <h6 class="text-primary">Peter Mlay</h6>
+                        <p>Anasimamia shughuli za sanaa, muziki na utamaduni wa shule.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="leader-card">
+                        <div class="leader-avatar">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <h5>Mkuu wa Huduma</h5>
+                        <h6 class="text-primary">Fatuma Said</h6>
+                        <p>Anashughulikia shughuli za kijamii na huduma kwa jamii.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leadership Programs -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="bg-light p-4 rounded-3">
+                        <h4 class="text-primary mb-3 text-center">Programu za Kuongoza</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6><i class="fas fa-users me-2 text-primary"></i>Mafunzo ya Uongozi</h6>
+                                <p>Kila mwaka, viongozi wapya wanapokea mafunzo ya uongozi, mawasiliano na utendaji.</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h6><i class="fas fa-vote-yea me-2 text-primary"></i>Uchaguzi wa Kidemokrasia</h6>
+                                <p>Wanafunzi wanachagua viongozi wao kwa njia ya kidemokrasia kila mwaka.</p>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <h6><i class="fas fa-project-diagram me-2 text-primary"></i>Miradi ya Uongozi</h6>
+                                <p>Viongozi wanaongoza miradi ya kuboresha mazingira ya shule na elimu.</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h6><i class="fas fa-handshake me-2 text-primary"></i>Kushirikiana na Walimu</h6>
+                                <p>Serikali ya wanafunzi inashirikiana na walimu katika mipango ya shule.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Weekly Activities Timeline -->
+    <section class="py-5" style="background: var(--bg-light);">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="display-5 fw-bold text-primary">Shughuli za Wiki</h2>
+                    <p class="lead">Mpango wa shughuli maalum za kila wiki</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="activities-timeline">
+                        <div class="timeline-item">
+                            <h5><i class="fas fa-pray text-primary me-2"></i>Jumatatu - Ibada ya Wiki</h5>
+                            <p>Kuanza wiki kwa ibada ya pamoja na maombi. Ni wakati wa kuomba kwa maendeleo ya masomo na tabia njema.</p>
+                        </div>
+
+                        <div class="timeline-item">
+                            <h5><i class="fas fa-flask text-success me-2"></i>Jumanne - Siku ya Sayansi</h5>
+                            <p>Majaribio ya ziada ya sayansi, mashindano ya ujuzi na shughuli za utafiti wa kisayansi.</p>
+                        </div>
+
+                        <div class="timeline-item">
+                            <h5><i class="fas fa-book text-info me-2"></i>Jumatano - Siku ya Fasihi</h5>
+                            <p>Mashindano ya ushairi, masimulizi ya hadithi za kitamaduni na onyesho la sanaa za lugha.</p>
+                        </div>
+
+                        <div class="timeline-item">
+                            <h5><i class="fas fa-running text-warning me-2"></i>Alhamisi - Siku ya Michezo</h5>
+                            <p>Mashindano ya michezo ya ndani, mazoezi ya ziada na shughuli za afya ya mwili.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="activities-timeline">
+                        <div class="timeline-item">
+                            <h5><i class="fas fa-music text-primary me-2"></i>Ijumaa - Siku ya Sanaa</h5>
+                            <p>Onyesho la talanta, muziki, ngoma za kiasili na maonyesho ya sanaa za mikono.</p>
+                        </div>
+
+                        <div class="timeline-item">
+                            <h5><i class="fas fa-hands-helping text-success me-2"></i>Jumamosi - Huduma za Jamii</h5>
+                            <p>Shughuli za kusaidia jamii, usafi wa mazingira na miradi ya maendeleo ya kijamii.</p>
+                        </div>
+
+                        <div class="timeline-item">
+                            <h5><i class="fas fa-users text-info me-2"></i>Jumapili - Siku ya Familia</h5>
+                            <p>Ziara za wazazi, mikutano ya familia na shughuli za kufurahisha kwa familia nzima.</p>
+                        </div>
+
+                        <div class="timeline-item">
+                            <h5><i class="fas fa-calendar-check text-warning me-2"></i>Mwisho wa Mwezi - Sherehe</h5>
+                            <p>Kutambua mafanikio ya mwezi, kutoa tuzo na sherehe za wanafunzi bora.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-5" style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));">
+        <div class="container">
+            <div class="row align-items-center text-white">
+                <div class="col-lg-8">
+                    <h3 class="mb-3">Je, Ungependa Mtoto Wako Awe Sehemu ya Familia Yetu?</h3>
+                    <p class="lead mb-0">Tunahakikisha kila mtoto anapata mazingira bora ya kukua kiakili, kimwili na kiroho</p>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <a href="mawasiliano.html" class="btn btn-light btn-lg me-3">
+                        <i class="fas fa-phone me-2"></i>Wasiliana Nasi
+                    </a>
+                    <a href="kuhusu.html" class="btn btn-outline-light btn-lg">
+                        <i class="fas fa-info-circle me-2"></i>Jifunze Zaidi
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="fw-bold mb-3">
+                        <i class="fas fa-graduation-cap me-2"></i>
+                        Shule ya Mfano
+                    </h5>
+                    <p>Tunatoa elimu bora kwa maendeleo ya watoto wetu kwa ujuzi, maadili na utamaduni wa Kitanzania.</p>
+                    
+                    <div class="social-links mt-3">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f fa-lg"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-youtube fa-lg"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <h5 class="fw-bold mb-3">Viungo vya Haraka</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="kuhusu.html" class="text-white-50">Kuhusu Shule</a></li>
+                        <li class="mb-2"><a href="masomo.html" class="text-white-50">Masomo</a></li>
+                        <li class="mb-2"><a href="wanafunzi.html" class="text-white-50">Wanafunzi</a></li>
+                        <li class="mb-2"><a href="matangazo.html" class="text-white-50">Matangazo</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <h5 class="fw-bold mb-3">Mawasiliano</h5>
+                    <div class="contact-info">
+                        <p class="mb-2">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            Barabara ya Uhuru, Dar es Salaam
+                        </p>
+                        <p class="mb-2">
+                            <i class="fas fa-phone me-2"></i>
+                            +255 123 456 789
+                        </p>
+                        <p class="mb-2">
+                            <i class="fas fa-envelope me-2"></i>
+                            info@shuleyamfano.tz
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="my-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 Shule ya Mfano. Haki zote zimehifadhiwa.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <small class="text-white-50">Imeundwa kwa mapenzi na teknolojia ya kisasa</small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(30, 58, 138, 0.95)';
+            } else {
+                navbar.style.background = 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))';
+            }
+        });
+        
+        // Add loading animation to cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe cards for animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.schedule-card, .club-card, .sport-card, .leader-card, .timeline-item');
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                observer.observe(card);
+            });
+        });
+        
+        // Add fadeInUp animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Interactive statistics counter
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = parseInt(counter.textContent.replace(/[^0-9]/g, ''));
+                        let current = 0;
+                        const increment = target / 50;
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                counter.textContent = target + (counter.textContent.includes('+') ? '+' : '');
+                                clearInterval(timer);
+                            } else {
+                                counter.textContent = Math.floor(current) + (counter.textContent.includes('+') ? '+' : '');
+                            }
+                        }, 30);
+                        observer.unobserve(counter);
+                    }
+                });
+            });
+            
+            counters.forEach(counter => observer.observe(counter));
+        }
+
+        // Initialize counter animation on page load
+        document.addEventListener('DOMContentLoaded', animateCounters);
+
+        // Add hover effects to club and sport cards
+        document.querySelectorAll('.club-card, .sport-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

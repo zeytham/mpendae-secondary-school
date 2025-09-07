@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuhusu Shule - Shule ya Msingi na Sekondari Mfano</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #3b82f6;
+            --accent-color: #f59e0b;
+            --text-dark: #1f2937;
+            --bg-light: #f8fafc;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            padding-top: 76px;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            transform: translateY(-2px);
+        }
+
+        .page-header {
+            background: linear-gradient(rgba(30, 58, 138, 0.9), rgba(59, 130, 246, 0.9)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23e5e7ff" width="1200" height="400"/><path fill="%23d1d5db" d="M0 300l50-16.7c50-16.6 150-50 250-50s200 33.4 250 50 100 16.7 150 0 100-50 150-16.7c50 33.4 150 100 200 100s100-66.6 150-66.7V400H0z"/></svg>') center/cover;
+            padding: 80px 0 60px 0;
+            color: white;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .breadcrumb-nav {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 10px 20px;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .breadcrumb-nav a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            margin: 0 5px;
+        }
+
+        .breadcrumb-nav a:hover {
+            color: white;
+        }
+
+        .content-section {
+            padding: 4rem 0;
+        }
+
+        .content-section.bg-light {
+            background: var(--bg-light);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            display: block;
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        .history-timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .history-timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--secondary-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-left: 20px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -32px;
+            top: 25px;
+            width: 12px;
+            height: 12px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--secondary-color);
+        }
+
+        .timeline-year {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .vision-mission-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--secondary-color);
+        }
+
+        .vision-mission-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .vision-mission-card .icon {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .vision-mission-card h3 {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .stats-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 4rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .value-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .value-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .value-item .icon {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .value-item h4 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .leader-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .leader-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .leader-image {
+            height: 250px;
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .leader-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .leader-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .leader-title {
+            color: var(--secondary-color);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 3rem 0 1rem 0;
+        }
+
+        .btn-primary {
+            background: var(--secondary-color);
+            border: none;
+            border-radius: 25px;
+            padding: 12px 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .history-timeline {
+                padding-left: 20px;
+            }
+            
+            .timeline-item {
+                margin-left: 10px;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Animation Classes */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in-up.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation (Same as Homepage) -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-graduation-cap me-2"></i>
+                Shule ya Mfano
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Nyumbani</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="about.html">Kuhusu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="huduma.html">Huduma</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="masomo.html">Masomo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="wanafunzi.html">Wanafunzi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="matangazo.html">Matangazo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="mawasiliano.html">Mawasiliano</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Kuhusu Shule Yetu</h1>
+            <p class="lead">Kujua zaidi kuhusu historia, dira, maono na thamani za shule yetu</p>
+            <nav class="breadcrumb-nav">
+                <a href="index.html"><i class="fas fa-home"></i> Nyumbani</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Kuhusu Shule</span>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Historia ya Shule -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title fade-in-up">Historia ya Shule</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="history-timeline fade-in-up">
+                        <div class="timeline-item">
+                            <div class="timeline-year">2010</div>
+                            <h4>Mwanzo wa Shule</h4>
+                            <p>Shule ya Mfano ilianzishwa kwa lengo la kutoa elimu bora kwa jamii ya Dar es Salaam. Tulianza na wanafunzi 50 na walimu 5.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-year">2012</div>
+                            <h4>Ujenzi wa Madarasa Mapya</h4>
+                            <p>Tulipanua miundombinu yetu kwa kujenga madarasa 8 mapya na makabati ya vitabu ili kuongeza uwezo wa kupokea wanafunzi zaidi.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-year">2015</div>
+                            <h4>Kutambuliwa Kimataifa</h4>
+                            <p>Shule yetu ilipata utambuzi wa kimataifa kwa mafanikio yake ya elimu na kuongezwa kwa programu za kisasa.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-year">2018</div>
+                            <h4>Teknolojia Mpya</h4>
+                            <p>Tulianzisha mfumo wa kielektroniki wa elimu na kujenga makabati ya kompyuta ili kuongeza ubora wa ufundishaji.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-year">2025</div>
+                            <h4>Leo</h4>
+                            <p>Kwa sasa, tunafundisha wanafunzi zaidi ya 500 na tuna walimu 25 wenye uzoefu mkubwa. Tunaendelea kutoa elimu bora.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dira na Maono -->
+    <section class="content-section bg-light">
+        <div class="container">
+            <h2 class="section-title fade-in-up">Dira na Maono</h2>
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="vision-mission-card fade-in-up">
+                        <div class="icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3>Maono Yetu</h3>
+                        <p class="lead">Kuwa shule inayoongoza Tanzania katika kutoa elimu ya hali ya juu inayozingatia maadili, ubunifu na teknolojia ya kisasa ili kutengeneza vijana wenye uongozi bora.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 mb-4">
+                    <div class="vision-mission-card fade-in-up">
+                        <div class="icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h3>Dira Yetu</h3>
+                        <p class="lead">Kutoa elimu bora na ya hali ya juu inayochanganya maarifa, ujuzi na maadili kwa kila mtoto ili afikilie uwezo wake kamili na kuwa mwananchi mzuri wa taifa.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Takwimu za Shule -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-item fade-in-up">
+                        <div class="stat-number" data-count="500">0</div>
+                        <div class="stat-label">Wanafunzi</div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-item fade-in-up">
+                        <div class="stat-number" data-count="25">0</div>
+                        <div class="stat-label">Walimu</div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-item fade-in-up">
+                        <div class="stat-number" data-count="15">0</div>
+                        <div class="stat-label">Miaka ya Utumishi</div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-item fade-in-up">
+                        <div class="stat-number" data-count="98">0</div>
+                        <div class="stat-label">% Mafanikio</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Malengo ya Shule -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title fade-in-up">Malengo ya Shule</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="fade-in-up">
+                        <ul class="list-unstyled">
+                            <li class="mb-3">
+                                <i class="fas fa-check-circle text-success me-3"></i>
+                                <strong>Kutoa elimu bora:</strong> Kuandaa wanafunzi katika masomo yote kwa kutumia mbinu za kisasa za ufundishaji
+                            </li>
+                            <li class="mb-3">
+                                <i class="fas fa-check-circle text-success me-3"></i>
+                                <strong>Kujenga tabia njema:</strong> Kuimarisha maadili na utamaduni mzuri miongoni mwa wanafunzi
+                            </li>
+                            <li class="mb-3">
+                                <i class="fas fa-check-circle text-success me-3"></i>
+                                <strong>Kuongeza ujuzi wa kitaaluma:</strong> Kuwasaidia wanafunzi kupata ujuzi mbalimbali wa maisha
+                            </li>
+                            <li class="mb-3">
+                                <i class="fas fa-check-circle text-success me-3"></i>
+                                <strong>Kuimarisha mazingira mazuri:</strong> Kutunza mazingira salama na ya kufundishia vizuri
+                            </li>
+                            <li class="mb-3">
+                                <i class="fas fa-check-circle text-success me-3"></i>
+                                <strong>Kushirikiana na jamii:</strong> Kujenga uhusiano mzuri baina ya shule, wazazi na jamii
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Thamani za Shule -->
+    <section class="content-section bg-light">
+        <div class="container">
+            <h2 class="section-title fade-in-up">Thamani na Sera za Shule</h2>
+            <div class="values-grid fade-in-up">
+                <div class="value-item">
+                    <div class="icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h4>Uongozi</h4>
+                    <p>Tunawaongoza wanafunzi kuwa viongozi bora wa kesho katika nyanja zote za maisha.</p>
+                </div>
+                
+                <div class="value-item">
+                    <div class="icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h4>Uwazi</h4>
+                    <p>Tunafanya kazi kwa uwazi na uaminifu katika shughuli zote za shule.</p>
+                </div>
+                
+                <div class="value-item">
+                    <div class="icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h4>Ubora</h4>
+                    <p>Tunalenga ubora katika kila kitu tunachofanya, kutoka ufundishaji hadi huduma.</p>
+                </div>
+                
+                <div class="value-item">
+                    <div class="icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4>Ushirikiano</h4>
+                    <p>Tunashirikiana na wazazi na jamii kwa maendeleo ya watoto.</p>
+                </div>
+                
+                <div class="value-item">
+                    <div class="icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h4>Ubunifu</h4>
+                    <p>Tunahimiza ubunifu na uvumbuzi katika njia zetu za kufundisha.</p>
+                </div>
+                
+                <div class="value-item">
+                    <div class="icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h4>Haki</h4>
+                    <p>Tunahakikisha haki na usawa kwa wanafunzi wote bila ubaguzi.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Uongozi wa Shule -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title fade-in-up">Uongozi wa Shule</h2>
+            <div class="leadership-grid fade-in-up">
+                <div class="leader-card">
+                    <div class="leader-image">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="leader-info">
+                        <div class="leader-name">Dkt. John Mwalimu</div>
+                        <div class="leader-title">Mkurugenzi Mkuu</div>
+                        <p>Mwalimu mwenye uzoefu wa miaka 20 katika elimu. Ana shahada ya Uzamivu katika Uongozi wa Elimu.</p>
+                    </div>
+                </div>
+                
+                <div class="leader-card">
+                    <div class="leader-image">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="leader-info">
+                        <div class="leader-name">Bi. Mary Fundisha</div>
+                        <div class="leader-title">Mkuu wa Masomo</div>
+                        <p>Msimamizi wa mtaala na mpangaji wa shughuli za kitaaluma. Mwalimu mwenye uzoefu wa miaka 15.</p>
+                    </div>
+                </div>
+                
+                <div class="leader-card">
+                    <div class="leader-image">
+                        <i class="fas fa-user-cog"></i>
+                    </div>
+                    <div class="leader-info">
+                        <div class="leader-name">Mw. Peter Simamia</div>
+                        <div class="leader-title">Meneja wa Utawala</div>
+                        <p>Msimamizi wa shughuli za kiutawala na mazingira ya shule. Mwenye uzoefu wa miaka 12.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Same as Homepage) -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="fw-bold mb-3">
+                        <i class="fas fa-graduation-cap me-2"></i>
+                        Shule ya Mfano
+                    </h5>
+                    <p>Tunatoa elimu bora kwa maendeleo ya watoto wetu kwa ujuzi, maadili na utamaduni wa Kitanzania.</p>
+                    
+                    <div class="social-links mt-3">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f fa-lg"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-youtube fa-lg"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <h5 class="fw-bold mb-3">Viungo vya Haraka</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="about.html" class="text-white-50">Kuhusu Shule</a></li>
+                        <li class="mb-2"><a href="masomo.html" class="text-white-50">Masomo</a></li>
+                        <li class="mb-2"><a href="wanafunzi.html" class="text-white-50">Wanafunzi</a></li>
+                        <li class="mb-2"><a href="matangazo.html" class="text-white-50">Matangazo</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <h5 class="fw-bold mb-3">Mawasiliano</h5>
+                    <div class="contact-info">
+                        <p class="mb-2">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            Barabara ya Uhuru, Dar es Salaam
+                        </p>
+                        <p class="mb-2">
+                            <i class="fas fa-phone me-2"></i>
+                            +255 123 456 789
+                        </p>
+                        <p class="mb-2">
+                            <i class="fas fa-envelope me-2"></i>
+                            info@shuleyamfano.tz
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="my-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 Shule ya Mfano. Haki zote zimehifadhiwa.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <small class="text-white-50">Imeundwa kwa mapenzi na teknolojia ya kisasa</small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Navbar scroll effect (same as homepage)
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(30, 58, 138, 0.95)';
+            } else {
+                navbar.style.background = 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))';
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.fade-in-up');
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+
+        // Counter animation for statistics
+        function animateCounter(element) {
+            const target = parseInt(element.getAttribute('data-count'));
+            let current = 0;
+            const increment = target / 50; // Animation duration control
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target;
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current);
+                }
+            }, 40); // Update every 40ms
+        }
+
+        // Start counter animation when stats section is visible
+        const statsObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counters = entry.target.querySelectorAll('[data-count]');
+                    counters.forEach(counter => {
+                        animateCounter(counter);
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const statsSection = document.querySelector('.stats-section');
+            if (statsSection) {
+                statsObserver.observe(statsSection);
+            }
+        });
+
+        // Timeline animation
+        const timelineObserver = new IntersectionObserver(function(entries) {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateX(0)';
+                    }, index * 200);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            timelineItems.forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateX(-50px)';
+                item.style.transition = 'all 0.6s ease';
+                timelineObserver.observe(item);
+            });
+        });
+
+        // Add hover effects for interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.vision-mission-card, .value-item, .leader-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        });
+
+        // Parallax effect for page header
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const pageHeader = document.querySelector('.page-header');
+            if (pageHeader) {
+                pageHeader.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+    </script>
+</body>
+</html>

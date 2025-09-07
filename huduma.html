@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Huduma za Shule - Shule ya Msingi na Sekondari Mfano</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #3b82f6;
+            --accent-color: #f59e0b;
+            --success-color: #16a34a;
+            --text-dark: #1f2937;
+            --bg-light: #f8fafc;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            padding-top: 76px;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            transform: translateY(-2px);
+        }
+
+        .page-header {
+            background: linear-gradient(rgba(30, 58, 138, 0.9), rgba(59, 130, 246, 0.9)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23e5e7ff" width="1200" height="400"/><path fill="%23d1d5db" d="M0 300l50-16.7c50-16.6 150-50 250-50s200 33.4 250 50 100 16.7 150 0 100-50 150-16.7c50 33.4 150 100 200 100s100-66.6 150-66.7V400H0z"/></svg>') center/cover;
+            padding: 80px 0 60px 0;
+            color: white;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .breadcrumb-nav {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 10px 20px;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .breadcrumb-nav a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            margin: 0 5px;
+        }
+
+        .breadcrumb-nav a:hover {
+            color: white;
+        }
+
+        .content-section {
+            padding: 4rem 0;
+        }
+
+        .content-section.bg-light {
+            background: var(--bg-light);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            display: block;
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            border-top: 5px solid var(--secondary-color);
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(59, 130, 246, 0.05), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-top-color: var(--accent-color);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+            animation: shimmer 1.5s ease-in-out;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem auto;
+            font-size: 2.5rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: rotateY(360deg) scale(1.1);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .service-features {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+
+        .service-features li {
+            padding: 0.5rem 0;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .service-features li i {
+            color: var(--success-color);
+            margin-right: 10px;
+        }
+
+        .education-levels {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 4rem 0;
+        }
+
+        .level-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .level-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-10px);
+        }
+
+        .level-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .level-card h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .health-services {
+            background: var(--bg-light);
+        }
+
+        .health-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .health-item {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .health-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .health-icon {
+            font-size: 2.5rem;
+            color: var(--success-color);
+            margin-bottom: 1rem;
+        }
+
+        .sports-activities {
+            padding: 4rem 0;
+        }
+
+        .sports-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .sport-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .sport-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .sport-image {
+            height: 200px;
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .sport-info {
+            padding: 1.5rem;
+        }
+
+        .sport-card h4 {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .additional-services {
+            background: var(--bg-light);
+        }
+
+        .additional-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .additional-item {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .additional-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .additional-item .icon {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .additional-item h4 {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            border: none;
+            border-radius: 25px;
+            padding: 15px 40px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #d97706;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-outline-light {
+            border: 2px solid white;
+            border-radius: 25px;
+            padding: 13px 35px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-light:hover {
+            background: white;
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 3rem 0 1rem 0;
+        }
+
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in-up.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .service-card {
+                padding: 2rem;
+            }
+            
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation (Same as Homepage) -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-graduation-cap me-2"></i>
+                Shule ya Mfano
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Nyumbani</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="kuhusu.html">Kuhusu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="huduma.html">Huduma</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="masomo.html">Masomo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="wanafunzi.html">Wanafunzi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="matangazo.html">Matangazo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="mawasiliano.html">Mawasiliano</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Huduma za Shule</h1>
+            <p class="lead">Huduma zetu maalum za elimu, afya, michezo na maendeleo ya mtoto</p>
+            <nav class="breadcrumb-nav">
+                <a href="index.html"><i class="fas fa-home"></i> Nyumbani</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Huduma</span>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Main Services Overview -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title fade-in-up">Huduma Zetu Kuu</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card fade-in-up">
+                        <div class="service-icon">
+                            <i class="fas fa-book-reader"></i>
+                        </div>
+                        <h3>Elimu ya Ubora</h3>
+                        <p>Tunatoa elimu ya hali ya juu kwa kutumia mtaala wa kisasa na mbinu za kufundishia zilizoboresha.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Mtaala wa kisasa</li>
+                            <li><i class="fas fa-check"></i> Walimu wenye uzoefu</li>
+                            <li><i class="fas fa-check"></i> Mazingira mazuri ya kujifunzia</li>
+                            <li><i class="fas fa-check"></i> Teknolojia ya elimu</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card fade-in-up">
+                        <div class="service-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Malezi ya Maadili</h3>
+                        <p>Tunaimarisha tabia njema na maadili ya kiislamu na kitamaduni kwa maendeleo kamili ya mtoto.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Mafunzo ya maadili</li>
+                            <li><i class="fas fa-check"></i> Ushauri na mwongozo</li>
+                            <li><i class="fas fa-check"></i> Shughuli za kijamii</li>
+                            <li><i class="fas fa-check"></i> Utamaduni wa Kitanzania</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card fade-in-up">
+                        <div class="service-icon">
+                            <i class="fas fa-stethoscope"></i>
+                        </div>
+                        <h3>Huduma za Afya</h3>
+                        <p>Tunahakikisha afya njema ya wanafunzi kupitia huduma za kimatibabu na mazingira salama.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Kliniki ya shule</li>
+                            <li><i class="fas fa-check"></i> Mpango wa lishe</li>
+                            <li><i class="fas fa-check"></i> Uchunguzi wa afya</li>
+                            <li><i class="fas fa-check"></i> Elimu ya afya</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Levels -->
+    <section class="education-levels">
+        <div class="container">
+            <h2 class="text-center mb-5 text-white">Viwango vya Elimu</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="level-card fade-in-up">
+                        <div class="level-icon">
+                            <i class="fas fa-child"></i>
+                        </div>
+                        <h4>Elimu ya Msingi</h4>
+                        <p>Darasa la 1 hadi la 7 - Msingi imara wa elimu kwa watoto wote</p>
+                        <ul class="list-unstyled mt-3">
+                            <li><i class="fas fa-star text-warning me-2"></i> Masomo ya kimsingi</li>
+                            <li><i class="fas fa-star text-warning me-2"></i> Mazoezi ya vitendo</li>
+                            <li><i class="fas fa-star text-warning me-2"></i> Michezo na burudani</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="level-card fade-in-up">
+                        <div class="level-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h4>Elimu ya Sekondari</h4>
+                        <p>Kidato cha 1 hadi cha 4 - Kuandaa wanafunzi kwa elimu ya juu</p>
+                        <ul class="list-unstyled mt-3">
+                            <li><i class="fas fa-star text-warning me-2"></i> Masomo ya kisayansi</li>
+                            <li><i class="fas fa-star text-warning me-2"></i> Utaalamu mbalimbali</li>
+                            <li><i class="fas fa-star text-warning me-2"></i> Uongozi wa vijana</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Health Services -->
+    <section class="health-services content-section">
+        <div class="container">
+            <h2 class="section-title fade-in-up">Huduma za Afya</h2>
+            <div class="health-grid fade-in-up">
+                <div class="health-item">
+                    <div class="health-icon">
+                        <i class="fas fa-clinic-medical"></i>
+                    </div>
+                    <h4>Kliniki ya Shule</h4>
+                    <p>Kliniki kamili yenye daktari na muuguzi mzuri kwa matibabu ya haraka.</p>
+                </div>
+                
+                <div class="health-item">
+                    <div class="health-icon">
+                        <i class="fas fa-apple-alt"></i>
+                    </div>
+                    <h4>Mpango wa Lishe</h4>
+                    <p>Chakula chenye lishe kamili na cha kiafya kwa ukuaji mzuri wa watoto.</p>
+                </div>
+                
+                <div class="health-item">
+                    <div class="health-icon">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h4>Uchunguzi wa Afya</h4>
+                    <p>Uchunguzi wa kila mwezi wa afya ya watoto na ushauri wa afya.</p>
+                </div>
+                
+                <div class="health-item">
+                    <div class="health-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4>Usalama wa Watoto</h4>
+                    <p>Mazingira salama na yenye ulinzi mzuri wa watoto kila wakati.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sports & Extra Activities -->
+    <section class="sports-activities">
+        <div class="container">
+            <h2 class="section-title fade-in-up">Michezo na Shughuli za Ziada</h2>
+            <div class="sports-grid fade-in-up">
+                <div class="sport-card">
+                    <div class="sport-image">
+                        <i class="fas fa-futbol"></i>
+                    </div>
+                    <div class="sport-info">
+                        <h4>Mpira wa Miguu</h4>
+                        <p>Timu ya mpira wa miguu ya shule inayoshiriki mashindano ya kikanda na kimataifa.</p>
+                    </div>
+                </div>
+                
+                <div class="sport-card">
+                    <div class="sport-image">
+                        <i class="fas fa-basketball-ball"></i>
+                    </div>
+                    <div class="sport-info">
+                        <h4>Mpira wa Kikapu</h4>
+                        <p>Mchezo wa mpira wa kikapu kwa wavulana na wasichana wote wenye vipawa.</p>
+                    </div>
+                </div>
+                
+                <div class="sport-card">
+                    <div class="sport-image">
+                        <i class="fas fa-running"></i>
+                    </div>
+                    <div class="sport-info">
+                        <h4>Riadha</h4>
+                        <p>Shughuli za riadha mbalimbali kama kukimbia, kuruka na kutupa.</p>
+                    </div>
+                </div>
+                
+                <div class="sport-card">
+                    <div class="sport-image">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <div class="sport-info">
+                        <h4>Muziki na Sanaa</h4>
+                        <p>Klabu za muziki, mchezo wa ala za muziki na sanaa za mbalimbali.</p>
+                    </div>
+                </div>
+                
+                <div class="sport-card">
+                    <div class="sport-image">
+                        <i class="fas fa-chess"></i>
+                    </div>
+                    <div class="sport-info">
+                        <h4>Soka la Kichwa</h4>
+                        <p>Mchezo wa soka la kichwa na michezo mingine ya akili kwa wanafunzi.</p>
+                    </div>
+                </div>
+                
+                <div class="sport-card">
+                    <div class="sport-image">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <div class="sport-info">
+                        <h4>Uchoraji na Ubunifu</h4>
+                        <p>Klabu za uchoraji, ubunifu wa mikono na sanaa za kibunifu.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional Services -->
+    <section class="additional-services content-section">
+        <div class="container">
+            <h2 class="section-title fade-in-up">Huduma za Ziada</h2>
+            <div class="additional-grid fade-in-up">
+                <div class="additional-item">
+                    <div class="icon">
+                        <i class="fas fa-bus"></i>
+                    </div>
+                    <h4>Huduma za Usafirishaji</h4>
+                    <p>Magari ya shule yanayosafirisha watoto kwa usalama kutoka na kwenda nyumbani kila siku.</p>
+                </div>
+                
+                <div class="additional-item">
+                    <div class="icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h4>Maktaba ya Kielektroniki</h4>
+                    <p>Maktaba ya kisasa yenye vitabu vya kielektroniki na rasilimali za utafiti.</p>
+                </div>
+                
+                <div class="additional-item">
+                    <div class="icon">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <h4>Kompyuta na Teknolojia</h4>
+                    <p>Chumba cha kompyuta chenye vifaa vya kisasa vya kujifunzia teknolojia.</p>
+                </div>
+                
+                <div class="additional-item">
+                    <div class="icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h4>Ushauri kwa Wazazi</h4>
+                    <p>Mikutano ya mara kwa mara na wazazi kuhusu maendeleo ya watoto wao.</p>
+                </div>
+                
+                <div class="additional-item">
+                    <div class="icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h4>Kozi za Ziada</h4>
+                    <p>Kozi maalum za kuongezea ujuzi kama lugha za kigeni na ujuzi wa kompyuta.</p>
+                </div>
+                
+                <div class="additional-item">
+                    <div class="icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h4>Huduma za Bweni</h4>
+                    <p>Makazi salama ya wanafunzi wanaotoka mbali na huduma zote za lazima.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Je, Unahitaji Maelezo Zaidi?</h2>
+            <p class="lead mb-4">Wasiliana nasi kwa maelezo zaidi kuhusu huduma zetu au kujisajili</p>
+            <div class="d-flex flex-wrap gap-3 justify-content-center">
+                <a href="mawasiliano.html" class="btn btn-primary btn-lg">
+                    <i class="fas fa-phone me-2"></i>Wasiliana Nasi
+                </a>
+                <a href="#" class="btn btn-outline-light btn-lg">
+                    <i class="fas fa-download me-2"></i>Pakua Fomu
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Same as Homepage) -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="fw-bold mb-3">
+                        <i class="fas fa-graduation-cap me-2"></i>
+                        Shule ya Mfano
+                    </h5>
+                    <p>Tunatoa elimu bora kwa maendeleo ya watoto wetu kwa ujuzi, maadili na utamaduni wa Kitanzania.</p>
+                    
+                    <div class="social-links mt-3">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f fa-lg"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-youtube fa-lg"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <h5 class="fw-bold mb-3">Viungo vya Haraka</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="about.html" class="text-white-50">Kuhusu Shule</a></li>
+                        <li class="mb-2"><a href="huduma.html" class="text-white-50">Huduma</a></li>
+                        <li class="mb-2"><a href="masomo.html" class="text-white-50">Masomo</a></li>
+                        <li class="mb-2"><a href="wanafunzi.html" class="text-white-50">Wanafunzi</a></li>
+                        <li class="mb-2"><a href="matangazo.html" class="text-white-50">Matangazo</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <h5 class="fw-bold mb-3">Mawasiliano</h5>
+                    <div class="contact-info">
+                        <p class="mb-2">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            Barabara ya Uhuru, Dar es Salaam
+                        </p>
+                        <p class="mb-2">
+                            <i class="fas fa-phone me-2"></i>
+                            +255 123 456 789
+                        </p>
+                        <p class="mb-2">
+                            <i class="fas fa-envelope me-2"></i>
+                            info@shuleyamfano.tz
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="my-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 Shule ya Mfano. Haki zote zimehifadhiwa.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <small class="text-white-50">Imeundwa kwa mapenzi na teknolojia ya kisasa</small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Navbar scroll effect (same as homepage)
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(30, 58, 138, 0.95)';
+            } else {
+                navbar.style.background = 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))';
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.fade-in-up');
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+
+        // Service cards hover animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const serviceCards = document.querySelectorAll('.service-card');
+            serviceCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.borderTopColor = 'var(--accent-color)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.borderTopColor = 'var(--secondary-color)';
+                });
+            });
+        });
+
+        // Staggered animation for service cards
+        const serviceObserver = new IntersectionObserver(function(entries) {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('animated');
+                    }, index * 200);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const serviceCards = document.querySelectorAll('.service-card');
+            serviceCards.forEach(card => {
+                serviceObserver.observe(card);
+            });
+        });
+
+        // Sports cards hover effect
+        document.addEventListener('DOMContentLoaded', function() {
+            const sportCards = document.querySelectorAll('.sport-card');
+            sportCards.forEach(card => {
+                const sportImage = card.querySelector('.sport-image');
+                
+                card.addEventListener('mouseenter', function() {
+                    sportImage.style.transform = 'scale(1.1)';
+                    sportImage.style.transition = 'transform 0.3s ease';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    sportImage.style.transform = 'scale(1)';
+                });
+            });
+        });
+
+        // Health items animation on scroll
+        const healthObserver = new IntersectionObserver(function(entries) {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0) scale(1)';
+                    }, index * 150);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const healthItems = document.querySelectorAll('.health-item');
+            healthItems.forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(30px) scale(0.9)';
+                item.style.transition = 'all 0.6s ease';
+                healthObserver.observe(item);
+            });
+        });
+
+        // Additional items hover effect
+        document.addEventListener('DOMContentLoaded', function() {
+            const additionalItems = document.querySelectorAll('.additional-item');
+            additionalItems.forEach(item => {
+                const icon = item.querySelector('.icon');
+                
+                item.addEventListener('mouseenter', function() {
+                    icon.style.transform = 'rotateY(360deg) scale(1.2)';
+                    icon.style.transition = 'transform 0.5s ease';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    icon.style.transform = 'rotateY(0) scale(1)';
+                });
+            });
+        });
+
+        // Parallax effect for page header
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const pageHeader = document.querySelector('.page-header');
+            if (pageHeader) {
+                pageHeader.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        });
+
+        // CTA buttons animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctaButtons = document.querySelectorAll('.cta-section .btn');
+            ctaButtons.forEach((button, index) => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px) scale(1.05)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(-2px) scale(1)';
+                });
+            });
+        });
+
+        // Level cards animation
+        const levelObserver = new IntersectionObserver(function(entries) {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateX(0)';
+                    }, index * 300);
+                }
+            });
+        }, { threshold: 0.4 });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const levelCards = document.querySelectorAll('.level-card');
+            levelCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = index % 2 === 0 ? 'translateX(-50px)' : 'translateX(50px)';
+                card.style.transition = 'all 0.8s ease';
+                levelObserver.observe(card);
+            });
+        });
+
+        // Add floating animation to service icons
+        document.addEventListener('DOMContentLoaded', function() {
+            const serviceIcons = document.querySelectorAll('.service-icon');
+            serviceIcons.forEach((icon, index) => {
+                icon.style.animation = `float 3s ease-in-out infinite ${index * 0.5}s`;
+            });
+        });
+
+        // Add float animation keyframes
+        const floatStyle = document.createElement('style');
+        floatStyle.textContent = `
+            @keyframes float {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-10px); }
+            }
+        `;
+        document.head.appendChild(floatStyle);
+    </script>
+</body>
+</html>

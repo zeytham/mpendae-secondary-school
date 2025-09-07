@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shule ya Msingi na Sekondari Mfano</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #3b82f6;
+            --accent-color: #f59e0b;
+            --text-dark: #1f2937;
+            --bg-light: #f8fafc;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            transform: translateY(-2px);
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(30, 58, 138, 0.8), rgba(59, 130, 246, 0.8)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23e5e7eb" width="1200" height="600"/><path fill="%23d1d5db" d="M0 400l50-16.7c50-16.6 150-50 250-50s200 33.4 250 50 100 16.7 150 0 100-50 150-16.7c50 33.4 150 100 200 100s100-66.6 150-66.7V600H0z"/></svg>') center/cover;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .quick-links {
+            background: var(--bg-light);
+            padding: 4rem 0;
+        }
+
+        .link-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            height: 100%;
+            border: none;
+            cursor: pointer;
+        }
+
+        .link-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .link-card .icon {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .link-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .about-preview {
+            padding: 4rem 0;
+        }
+
+        .about-preview img {
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-section {
+            background: var(--bg-light);
+            padding: 4rem 0;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .news-date {
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 3rem 0 1rem 0;
+        }
+
+        .btn-primary {
+            background: var(--secondary-color);
+            border: none;
+            border-radius: 25px;
+            padding: 12px 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            margin: 2rem 0;
+        }
+
+        .slide {
+            display: none;
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .slide-indicators {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .indicator {
+            height: 12px;
+            width: 12px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator.active,
+        .indicator:hover {
+            background-color: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-graduation-cap me-2"></i>
+                Shule ya Mfano
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Nyumbani</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="kuhusu.html">Kuhusu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="huduma.html">Huduma</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="masomo.html">Masomo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="wanafunzi.html">Wanafunzi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="matangazo.html">Matangazo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="mawasiliano.html">Mawasiliano</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="animate__animated animate__fadeInDown">Karibu Shule ya Mfano</h1>
+                <p class="animate__animated animate__fadeInUp">Tunatoa elimu bora kwa maendeleo ya mtoto wako kwa ujuzi, maadili na utamaduni</p>
+                <div class="animate__animated animate__fadeInUp animate__delay-1s">
+                    <a href="kuhusu.html" class="btn btn-primary btn-lg me-3">Jifunze Zaidi</a>
+                    <a href="mawasiliano.html" class="btn btn-outline-light btn-lg">Wasiliana Nasi</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Links Section -->
+    <section class="quick-links">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="display-5 fw-bold text-primary">Viungo vya Haraka</h2>
+                    <p class="lead">Pata haraka unachohitaji</p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="link-card" onclick="scrollToSection('kuhusu')">
+                        <div class="icon">
+                            <i class="fas fa-school"></i>
+                        </div>
+                        <h4>Kuhusu Shule</h4>
+                        <p>Historia, dira na maono ya shule yetu</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="link-card" onclick="scrollToSection('masomo')">
+                        <div class="icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h4>Masomo</h4>
+                        <p>Mtaala wetu na masomo tunayofundisha</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="link-card" onclick="scrollToSection('wanafunzi')">
+                        <div class="icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>Maisha ya Wanafunzi</h4>
+                        <p>Shughuli na mazingira ya kila siku</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="link-card" onclick="scrollToSection('matangazo')">
+                        <div class="icon">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <h4>Matangazo</h4>
+                        <p>Habari na matukio ya shule</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- School Preview Section -->
+    <section class="about-preview" id="kuhusu">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="display-5 fw-bold text-primary mb-4">Shule Yetu</h2>
+                    <p class="lead mb-4">
+                        Shule ya Mfano ni taasisi ya elimu iliyo na utajiri wa miaka 15 ya kutoa elimu bora kwa watoto wa Tanzania. 
+                        Tunahakikisha kila mtoto anapata fursa ya kufikia uwezo wake kamili.
+                    </p>
+                    
+                    <div class="row mb-4">
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h3 class="text-primary fw-bold">500+</h3>
+                                <p>Wanafunzi</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h3 class="text-primary fw-bold">25+</h3>
+                                <p>Walimu</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="btn btn-primary">Soma Zaidi</a>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="slideshow-container">
+                        <div class="slide active">
+                            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='300'><rect fill='%23e0e7ff' width='500' height='300'/><text x='50%' y='50%' text-anchor='middle' dy='0.35em' font-size='20' fill='%233b82f6'>Jengo la Shule</text></svg>" alt="Jengo la Shule">
+                        </div>
+                        <div class="slide">
+                            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='300'><rect fill='%23dcfce7' width='500' height='300'/><text x='50%' y='50%' text-anchor='middle' dy='0.35em' font-size='20' fill='%2316a34a'>Wanafunzi Darasani</text></svg>" alt="Wanafunzi Darasani">
+                        </div>
+                        <div class="slide">
+                            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='300'><rect fill='%23fef3c7' width='500' height='300'/><text x='50%' y='50%' text-anchor='middle' dy='0.35em' font-size='20' fill='%23d97706'>Shughuli za Michezo</text></svg>" alt="Shughuli za Michezo">
+                        </div>
+                    </div>
+                    
+                    <div class="slide-indicators">
+                        <span class="indicator active" onclick="currentSlide(1)"></span>
+                        <span class="indicator" onclick="currentSlide(2)"></span>
+                        <span class="indicator" onclick="currentSlide(3)"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest News Section -->
+    <section class="news-section" id="matangazo">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="display-5 fw-bold text-primary">Matangazo ya Hivi Karibuni</h2>
+                    <p class="lead">Habari na matukio muhimu ya shule</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="news-card">
+                        <div class="news-date">
+                            <i class="fas fa-calendar me-2"></i>5 September 2025
+                        </div>
+                        <h5 class="mt-3 mb-3">Mwanzo wa Muhula wa Kwanza</h5>
+                        <p>Muhula mpya wa masomo umeanza. Wanafunzi wote wanaruhusiwa kurudi shuleni tarehe 7 September 2025.</p>
+                        <a href="#" class="text-primary fw-bold">Soma Zaidi <i class="fas fa-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="news-card">
+                        <div class="news-date">
+                            <i class="fas fa-calendar me-2"></i>28 Agosti 2025
+                        </div>
+                        <h5 class="mt-3 mb-3">Sherehe za Sikukuu za Shule</h5>
+                        <p>Tunasherehekea miaka 15 ya utendaji bora. Sherehe zitafanyika tarehe 15 September 2025.</p>
+                        <a href="#" class="text-primary fw-bold">Soma Zaidi <i class="fas fa-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="news-card">
+                        <div class="news-date">
+                            <i class="fas fa-calendar me-2"></i>20 Agosti 2025
+                        </div>
+                        <h5 class="mt-3 mb-3">Matokeo ya Mtihani</h5>
+                        <p>Matokeo ya mitihani ya mwishoni mwa muhula yameshatolewa. Hongera kwa wanafunzi wetu wote!</p>
+                        <a href="#" class="text-primary fw-bold">Soma Zaidi <i class="fas fa-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="fw-bold mb-3">
+                        <i class="fas fa-graduation-cap me-2"></i>
+                        Shule ya Mfano
+                    </h5>
+                    <p>Tunatoa elimu bora kwa maendeleo ya watoto wetu kwa ujuzi, maadili na utamaduni wa Kitanzania.</p>
+                    
+                    <div class="social-links mt-3">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f fa-lg"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-youtube fa-lg"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <h5 class="fw-bold mb-3">Viungo vya Haraka</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="kuhusu.html" class="text-white-50">Kuhusu Shule</a></li>
+                        <li class="mb-2"><a href="masomo.html" class="text-white-50">Masomo</a></li>
+                        <li class="mb-2"><a href="wanafunzi.html" class="text-white-50">Wanafunzi</a></li>
+                        <li class="mb-2"><a href="matangazo.html" class="text-white-50">Matangazo</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <h5 class="fw-bold mb-3">Mawasiliano</h5>
+                    <div class="contact-info">
+                        <p class="mb-2">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            Barabara ya Uhuru, Dar es Salaam
+                        </p>
+                        <p class="mb-2">
+                            <i class="fas fa-phone me-2"></i>
+                            +255 123 456 789
+                        </p>
+                        <p class="mb-2">
+                            <i class="fas fa-envelope me-2"></i>
+                            info@shuleyamfano.tz
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="my-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 Shule ya Mfano. Haki zote zimehifadhiwa.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <small class="text-white-50">Imeundwa kwa mapenzi na teknolojia ya kisasa</small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Slideshow functionality
+        let slideIndex = 1;
+        
+        function currentSlide(n) {
+            showSlide(slideIndex = n);
+        }
+        
+        function showSlide(n) {
+            let slides = document.getElementsByClassName('slide');
+            let indicators = document.getElementsByClassName('indicator');
+            
+            if (n > slides.length) { slideIndex = 1; }
+            if (n < 1) { slideIndex = slides.length; }
+            
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('active');
+            }
+            
+            for (let i = 0; i < indicators.length; i++) {
+                indicators[i].classList.remove('active');
+            }
+            
+            slides[slideIndex - 1].classList.add('active');
+            indicators[slideIndex - 1].classList.add('active');
+        }
+        
+        // Auto slideshow
+        function autoSlide() {
+            slideIndex++;
+            showSlide(slideIndex);
+            setTimeout(autoSlide, 5000); // Change slide every 5 seconds
+        }
+        
+        // Start auto slideshow when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(autoSlide, 5000);
+        });
+        
+        // Smooth scrolling for navigation links
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+        
+        // Add smooth scrolling to all anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                scrollToSection(targetId);
+            });
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(30, 58, 138, 0.95)';
+            } else {
+                navbar.style.background = 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))';
+            }
+        });
+        
+        // Add loading animation to cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe cards for animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.link-card, .news-card');
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                observer.observe(card);
+            });
+        });
+        
+        // Add fadeInUp animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Contact form handler (for future use)
+        function handleContactForm(event) {
+            event.preventDefault();
+            // This will be implemented when we create the contact page
+            alert('Asante! Ujumbe wako umetumwa. Tutawasiliana nawe hivi karibuni.');
+        }
+    </script>
+</body>
+</html>

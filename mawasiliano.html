@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mawasiliano - Shule ya Msingi na Sekondari Mfano</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Firebase SDK -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.23.0/firebase-app-compat.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.23.0/firebase-firestore-compat.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.23.0/firebase-analytics-compat.min.js"></script>
+        
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #3b82f6;
+            --accent-color: #f59e0b;
+            --text-dark: #1f2937;
+            --bg-light: #f8fafc;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --info-color: #3b82f6;
+            --danger-color: #ef4444;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            padding-top: 80px;
+            background: var(--bg-light);
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            transform: translateY(-2px);
+        }
+
+        .page-header {
+            background: linear-gradient(rgba(30, 58, 138, 0.9), rgba(59, 130, 246, 0.9)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23e5e7eb" width="1200" height="400"/><path fill="%23d1d5db" d="M0 300l50-16.7c50-16.6 150-50 250-50s200 33.4 250 50 100 16.7 150 0 100-50 150-16.7c50 33.4 150 100 200 100s100-66.6 150-66.7V400H0z"/></svg>') center/cover;
+            padding: 80px 0 60px 0;
+            color: white;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .contact-section {
+            padding: 4rem 0;
+        }
+
+        .contact-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--bg-light);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-info-item:hover {
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateX(10px);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1.5rem;
+            font-size: 1.5rem;
+            color: white;
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .contact-details h5 {
+            margin: 0 0 0.5rem 0;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .contact-details p {
+            margin: 0;
+            color: var(--text-dark);
+            opacity: 0.8;
+        }
+
+        .contact-details a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .contact-details a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        .contact-form {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .form-control {
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 12px 16px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: var(--bg-light);
+        }
+
+        .form-control:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            background: white;
+            outline: none;
+        }
+
+        .form-select {
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 12px 16px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: var(--bg-light);
+        }
+
+        .form-select:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            background: white;
+            outline: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            border: none;
+            border-radius: 12px;
+            padding: 15px 40px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-primary .spinner-border {
+            width: 1rem;
+            height: 1rem;
+        }
+
+        .map-container {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--success-color), var(--secondary-color));
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(45deg, #f3f4f6, #e5e7eb);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: var(--text-dark);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .map-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        .working-hours {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .working-hours::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--warning-color), var(--secondary-color));
+        }
+
+        .hours-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .hours-item:last-child {
+            border-bottom: none;
+        }
+
+        .hours-day {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .hours-time {
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .hours-time.closed {
+            color: var(--danger-color);
+            font-style: italic;
+        }
+
+        .alert {
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            border: none;
+            font-weight: 500;
+        }
+
+        .alert-success {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success-color);
+        }
+
+        .alert-danger {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger-color);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-link.facebook {
+            background: #1877f2;
+        }
+
+        .social-link.whatsapp {
+            background: #25d366;
+        }
+
+        .social-link.email {
+            background: var(--accent-color);
+        }
+
+        .social-link.phone {
+            background: var(--success-color);
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 3rem 0 1rem 0;
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+            
+            .page-header {
+                padding: 60px 0 40px 0;
+            }
+            
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .contact-card,
+            .contact-form,
+            .map-container,
+            .working-hours {
+                padding: 1.5rem;
+            }
+            
+            .contact-info-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .contact-icon {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-validation {
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        .form-validation.invalid {
+            color: var(--danger-color);
+        }
+
+        .form-validation.valid {
+            color: var(--success-color);
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            display: none;
+        }
+
+        .loading-spinner {
+            width: 3rem;
+            height: 3rem;
+            border: 4px solid rgba(59, 130, 246, 0.3);
+            border-top: 4px solid var(--secondary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-graduation-cap me-2"></i>
+                Shule ya Mfano
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Nyumbani</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="kuhusu.html">Kuhusu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="huduma.html">Huduma</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="masomo.html">Masomo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="wanafunzi.html">Wanafunzi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="matangazo.html">Matangazo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="mawasiliano.html">Mawasiliano</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1><i class="fas fa-envelope me-3"></i>Mawasiliano</h1>
+            <p>Tupo hapa kukusaidia. Wasiliana nasi kwa njia yoyote inayokufaa</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <!-- Contact Info Cards -->
+            <div class="row mb-5">
+                <div class="col-12 text-center mb-4">
+                    <h2 class="section-title">Njia za Kutufikia</h2>
+                    <p class="lead">Chagua njia inayokufaa zaidi kutufikia</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <!-- Contact Information -->
+                    <div class="contact-card fade-in">
+                        <h4 class="section-title">Taarifa za Mawasiliano</h4>
+                        
+                        <div class="contact-info-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h5>Mahali</h5>
+                                <p>Barabara ya Uhuru, Kituo cha Magomeni<br>
+                                Dar es Salaam, Tanzania</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h5>Simu</h5>
+                                <p>Kuu: <a href="tel:+255123456789">+255 123 456 789</a><br>
+                                Dharura: <a href="tel:+255123456790">+255 123 456 790</a></p>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h5>Barua Pepe</h5>
+                                <p>Kuu: <a href="mailto:info@shuleyamfano.tz">info@shuleyamfano.tz</a><br>
+                                Mkuu: <a href="mailto:mkuu@shuleyamfano.tz">mkuu@shuleyamfano.tz</a></p>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-item">
+                            <div class="contact-icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h5>WhatsApp</h5>
+                                <p><a href="https://wa.me/255123456789">+255 123 456 789</a><br>
+                                <small>Kujibu kutoka 8:00 - 17:00</small></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Working Hours -->
+                    <div class="working-hours fade-in">
+                        <h4 class="section-title">Masaa ya Kazi</h4>
+                        
+                        <div class="hours-item">
+                            <span class="hours-day">Jumatatu - Ijumaa</span>
+                            <span class="hours-time">7:30 - 17:00</span>
+                        </div>
+                        
+                        <div class="hours-item">
+                            <span class="hours-day">Jumamosi</span>
+                            <span class="hours-time">8:00 - 13:00</span>
+                        </div>
+                        
+                        <div class="hours-item">
+                            <span class="hours-day">Jumapili</span>
+                            <span class="hours-time closed">Tumefungwa</span>
+                        </div>
+                        
+                        <div class="hours-item">
+                            <span class="hours-day">Likizo za Dola</span>
+                            <span class="hours-time closed">Tumefungwa</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-8">
+                    <!-- Contact Form -->
+                    <div class="contact-form fade-in">
+                        <h4 class="section-title">Tuma Ujumbe</h4>
+                        <p class="mb-4">Jaza fomu hapa chini na tutatumia majibu haraka iwezekanavyo</p>
+                        
+                        <!-- Alert Messages -->
+                        <div id="alertContainer"></div>
+                        
+                        <form id="contactForm" novalidate>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="firstName" class="form-label">
+                                            <i class="fas fa-user me-2"></i>Jina la Kwanza *
+                                        </label>
+                                        <input type="text" class="form-control" id="firstName" name="firstName" required>
+                                        <div class="form-validation" id="firstNameFeedback"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="lastName" class="form-label">
+                                            <i class="fas fa-user me-2"></i>Jina la Mwisho *
+                                        </label>
+                                        <input type="text" class="form-control" id="lastName" name="lastName" required>
+                                        <div class="form-validation" id="lastNameFeedback"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="email" class="form-label">
+                                            <i class="fas fa-envelope me-2"></i>Barua Pepe *
+                                        </label>
+                                        <input type="email" class="form-control" id="email" name="email" required>
+                                        <div class="form-validation" id="emailFeedback"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="phone" class="form-label">
+                                            <i class="fas fa-phone me-2"></i>Nambari ya Simu *
+                                        </label>
+                                        <input type="tel" class="form-control" id="phone" name="phone" required>
+                                        <div class="form-validation" id="phoneFeedback"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="category" class="form-label">
+                                            <i class="fas fa-tag me-2"></i>Aina ya Ujumbe *
+                                        </label>
+                                        <select class="form-select" id="category" name="category" required>
+                                            <option value="">Chagua aina ya ujumbe...</option>
+                                            <option value="admission">Kuingia Shuleni</option>
+                                            <option value="academic">Maswala ya Masomo</option>
+                                            <option value="fees">Malipo ya Ada</option>
+                                            <option value="discipline">Nidhamu</option>
+                                            <option value="transport">Usafiri</option>
+                                            <option value="health">Afya na Zahanati</option>
+                                            <option value="complaint">Malalamiko</option>
+                                            <option value="suggestion">Mapendekezo</option>
+                                            <option value="other">Mengineyo</option>
+                                        </select>
+                                        <div class="form-validation" id="categoryFeedback"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="priority" class="form-label">
+                                            <i class="fas fa-exclamation-circle me-2"></i>Kipaumbele
+                                        </label>
+                                        <select class="form-select" id="priority" name="priority">
+                                            <option value="low">Chini</option>
+                                            <option value="medium" selected>Kati</option>
+                                            <option value="high">Juu</option>
+                                            <option value="urgent">Dharura</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="subject" class="form-label">
+                                    <i class="fas fa-heading me-2"></i>Mada ya Ujumbe *
+                                </label>
+                                <input type="text" class="form-control" id="subject" name="subject" required>
+                                <div class="form-validation" id="subjectFeedback"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message" class="form-label">
+                                    <i class="fas fa-comment me-2"></i>Ujumbe *
+                                </label>
+                                <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                                <div class="form-validation" id="messageFeedback"></div>
+                                <small class="text-muted">Andika ujumbe wako kwa undani. Herufi 50 - 1000.</small>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="newsletter" name="newsletter">
+                                    <label class="form-check-label" for="newsletter">
+                                        Nataka kupokea habari za shule kupitia barua pepe
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="terms" name="terms" required>
+                                    <label class="form-check-label" for="terms">
+                                        Nakubali <a href="#" class="text-primary">masharti na taratibu</a> za shule *
+                                    </label>
+                                    <div class="form-validation" id="termsFeedback"></div>
+                                </div>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary" id="submitBtn">
+                                    <i class="fas fa-paper-plane me-2"></i>
+                                    Tuma Ujumbe
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Social Links -->
+                        <div class="social-links">
+                            <a href="https://facebook.com/shuleyamfano" class="social-link facebook" title="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="https://wa.me/255123456789" class="social-link whatsapp" title="WhatsApp">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                            <a href="mailto:info@shuleyamfano.tz" class="social-link email" title="Email">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="tel:+255123456789" class="social-link phone" title="Simu">
+                                <i class="fas fa-phone"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map Section -->
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="map-container fade-in">
+                        <h4 class="section-title">Mahali Tulipo</h4>
+                        <p class="mb-4">Tuko katika eneo la Magomeni, Dar es Salaam. Karibu ututembelee!</p>
+                        
+                        <div class="map-placeholder">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <p>Ramani ya Shule ya Mfano</p>
+                            <small>Barabara ya Uhuru, Magomeni - Dar es Salaam</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="fw-bold mb-3">
+                        <i class="fas fa-graduation-cap me-2"></i>
+                        Shule ya Mfano
+                    </h5>
+                    <p>Tunatoa elimu bora kwa maendeleo ya watoto wetu kwa ujuzi, maadili na utamaduni wa Kitanzania.</p>
+                    
+                    <div class="social-links mt-3">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f fa-lg"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-youtube fa-lg"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <h5 class="fw-bold mb-3">Viungo vya Haraka</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="kuhusu.html" class="text-white-50">Kuhusu Shule</a></li>
+                        <li class="mb-2"><a href="masomo.html" class="text-white-50">Masomo</a></li>
+                        <li class="mb-2"><a href="wanafunzi.html" class="text-white-50">Wanafunzi</a></li>
+                        <li class="mb-2"><a href="matangazo.html" class="text-white-50">Matangazo</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <h5 class="fw-bold mb-3">Mawasiliano</h5>
+                    <div class="contact-info">
+                        <p class="mb-2">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            Barabara ya Uhuru, Dar es Salaam
+                        </p>
+                        <p class="mb-2">
+                            <i class="fas fa-phone me-2"></i>
+                            +255 123 456 789
+                        </p>
+                        <p class="mb-2">
+                            <i class="fas fa-envelope me-2"></i>
+                            info@shuleyamfano.tz
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="my-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 Shule ya Mfano. Haki zote zimehifadhiwa.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <small class="text-white-50">Imeundwa kwa mapenzi na teknolojia ya kisasa</small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Firebase Configuration (Replace with your actual config)
+        const firebaseConfig = {
+
+    apiKey: "AIzaSyD77WynpG4VIa_df5XFP1N4rJ-L4EyckN0",
+
+    authDomain: "mpendae-school.firebaseapp.com",
+
+    projectId: "mpendae-school",
+
+    storageBucket: "mpendae-school.firebasestorage.app",
+
+    messagingSenderId: "233219000135",
+
+    appId: "1:233219000135:web:8e19b7691770d7f629ee62"
+
+  };
+
+        // Initialize Firebase (In production, load Firebase SDK from CDN)
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const analytics = firebase.analytics();
+
+        // Form validation patterns
+        const validationPatterns = {
+            name: /^[a-zA-Z\s]{2,30}$/,
+            email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+            phone: /^(\+255|0)[67]\d{8}$/
+        };
+
+        // Form elements
+        const contactForm = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const alertContainer = document.getElementById('alertContainer');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+
+        // Real-time validation
+        function validateField(field, pattern, customMessage = '') {
+            const value = field.value.trim();
+            const feedback = document.getElementById(field.id + 'Feedback');
+            let isValid = true;
+            let message = '';
+
+            if (field.hasAttribute('required') && !value) {
+                isValid = false;
+                message = 'Uwande huu ni lazima ujazwe';
+            } else if (value && pattern && !pattern.test(value)) {
+                isValid = false;
+                message = customMessage || 'Taarifa hii si sahihi';
+            } else if (field.type === 'email' && value && !validationPatterns.email.test(value)) {
+                isValid = false;
+                message = 'Barua pepe si sahihi';
+            } else if (field.id === 'phone' && value && !validationPatterns.phone.test(value)) {
+                isValid = false;
+                message = 'Nambari ya simu si sahihi (mfano: +255712345678)';
+            } else if (field.id === 'message' && value && (value.length < 50 || value.length > 1000)) {
+                isValid = false;
+                message = `Ujumbe unahitaji kuwa herufi 50-1000 (sasa: ${value.length})`;
+            }
+
+            if (feedback) {
+                feedback.textContent = message;
+                feedback.className = `form-validation ${isValid ? 'valid' : 'invalid'}`;
+            }
+
+            field.classList.toggle('is-valid', isValid && value);
+            field.classList.toggle('is-invalid', !isValid);
+
+            return isValid;
+        }
+
+        // Add real-time validation to form fields
+        document.addEventListener('DOMContentLoaded', function() {
+            const fields = [
+                { id: 'firstName', pattern: validationPatterns.name },
+                { id: 'lastName', pattern: validationPatterns.name },
+                { id: 'email', pattern: validationPatterns.email },
+                { id: 'phone', pattern: validationPatterns.phone },
+                { id: 'subject', pattern: null },
+                { id: 'message', pattern: null },
+                { id: 'category', pattern: null },
+                { id: 'terms', pattern: null }
+            ];
+
+            fields.forEach(fieldConfig => {
+                const field = document.getElementById(fieldConfig.id);
+                if (field) {
+                    field.addEventListener('blur', () => {
+                        validateField(field, fieldConfig.pattern);
+                    });
+
+                    field.addEventListener('input', () => {
+                        // Clear validation on input for better UX
+                        const feedback = document.getElementById(field.id + 'Feedback');
+                        if (feedback && field.classList.contains('is-invalid')) {
+                            validateField(field, fieldConfig.pattern);
+                        }
+                    });
+                }
+            });
+
+            // Animate cards on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all animated elements
+            const animatedElements = document.querySelectorAll('.contact-card, .contact-form, .map-container, .working-hours');
+            animatedElements.forEach((element, index) => {
+                element.style.animationDelay = `${index * 0.2}s`;
+                observer.observe(element);
+            });
+        });
+
+        // Show alert messages
+        function showAlert(message, type = 'success') {
+            const alertHTML = `
+                <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-triangle'} me-2"></i>
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            `;
+            alertContainer.innerHTML = alertHTML;
+            alertContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Show loading state
+        function showLoading(show = true) {
+            if (show) {
+                loadingOverlay.style.display = 'flex';
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Inatuma...';
+            } else {
+                loadingOverlay.style.display = 'none';
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane me-2"></i>Tuma Ujumbe';
+            }
+        }
+
+        // Save to Firebase Firestore
+        async function saveToDatabase(formData) {
+            try {
+                // Show progress
+                console.log('🔄 Saving to Firebase Firestore...');
+                
+                // Prepare data for Firestore
+                const contactData = {
+                    // Personal Info
+                    firstName: formData.firstName,
+                    lastName: formData.lastName,
+                    fullName: `${formData.firstName} ${formData.lastName}`,
+                    email: formData.email,
+                    phone: formData.phone,
+                    
+                    // Message Details
+                    category: formData.category,
+                    priority: formData.priority,
+                    subject: formData.subject,
+                    message: formData.message,
+                    
+                    // Preferences
+                    newsletter: formData.newsletter,
+                    
+                    // Metadata
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                    status: 'unread',
+                    source: 'website-contact-form',
+                    userAgent: navigator.userAgent,
+                    referrer: document.referrer || 'direct',
+                    ipAddress: null, // Will be added by Cloud Function
+                    
+                    // Analytics
+                    sessionId: getSessionId(),
+                    pageUrl: window.location.href,
+                    responseTime: null,
+                    assignedTo: null
+                };
+
+                // Add document to Firestore
+                const docRef = await db.collection('contacts').add(contactData);
+                
+                console.log('✅ Document saved with ID:', docRef.id);
+                
+                // Log analytics event
+                if (window.firebaseAnalytics) {
+                    logEvent(window.firebaseAnalytics, 'contact_form_submit', {
+                        category: formData.category,
+                        priority: formData.priority,
+                        form_source: 'contact_page'
+                    });
+                }
+                
+                // Save backup to localStorage
+                const localBackup = JSON.parse(localStorage.getItem('contactMessages') || '[]');
+                localBackup.push({
+                    id: docRef.id,
+                    timestamp: new Date().toISOString(),
+                    ...contactData
+                });
+                localStorage.setItem('contactMessages', JSON.stringify(localBackup));
+                
+                return { 
+                    success: true, 
+                    messageId: docRef.id,
+                    timestamp: new Date().toISOString()
+                };
+                
+            } catch (error) {
+                console.error('❌ Error saving to Firebase:', error);
+                
+                // Fallback: Save to localStorage only
+                const fallbackId = 'offline_' + Date.now();
+                const offlineMessages = JSON.parse(localStorage.getItem('offlineMessages') || '[]');
+                offlineMessages.push({
+                    id: fallbackId,
+                    timestamp: new Date().toISOString(),
+                    ...formData,
+                    status: 'offline-pending'
+                });
+                localStorage.setItem('offlineMessages', JSON.stringify(offlineMessages));
+                
+                // Determine error type
+                if (error.code === 'permission-denied') {
+                    throw new Error('Hakuna ruhusa ya kuandika data. Wasiliana na msimamizi.');
+                } else if (error.code === 'unavailable') {
+                    throw new Error('Huduma haijpatikani kwa sasa. Ujumbe umehifadhiwa na utatumwa baadaye.');
+                } else {
+                    throw new Error(`Tatizo la kiufundi: ${error.message}`);
+                }
+            }
+        }
+        
+        // Generate session ID for analytics
+        function getSessionId() {
+            let sessionId = sessionStorage.getItem('sessionId');
+            if (!sessionId) {
+                sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                sessionStorage.setItem('sessionId', sessionId);
+            }
+            return sessionId;
+        }
+
+        // Form submission handler
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Validate all fields
+            const formFields = contactForm.querySelectorAll('input, textarea, select');
+            let isFormValid = true;
+            
+            formFields.forEach(field => {
+                if (field.type !== 'checkbox' || field.id === 'terms') {
+                    const pattern = field.id === 'firstName' || field.id === 'lastName' ? validationPatterns.name :
+                                  field.id === 'email' ? validationPatterns.email :
+                                  field.id === 'phone' ? validationPatterns.phone : null;
+                    
+                    if (!validateField(field, pattern)) {
+                        isFormValid = false;
+                    }
+                }
+            });
+
+            // Special validation for terms checkbox
+            const termsCheckbox = document.getElementById('terms');
+            if (!termsCheckbox.checked) {
+                isFormValid = false;
+                const feedback = document.getElementById('termsFeedback');
+                if (feedback) {
+                    feedback.textContent = 'Lazima ukubali masharti na taratibu';
+                    feedback.className = 'form-validation invalid';
+                }
+            }
+
+            if (!isFormValid) {
+                showAlert('Tafadhali jaza uwandani wote kwa usahihi', 'danger');
+                return;
+            }
+
+            // Show loading state
+            showLoading(true);
+
+            try {
+                // Collect form data
+                const formData = {
+                    firstName: document.getElementById('firstName').value.trim(),
+                    lastName: document.getElementById('lastName').value.trim(),
+                    email: document.getElementById('email').value.trim(),
+                    phone: document.getElementById('phone').value.trim(),
+                    category: document.getElementById('category').value,
+                    priority: document.getElementById('priority').value,
+                    subject: document.getElementById('subject').value.trim(),
+                    message: document.getElementById('message').value.trim(),
+                    newsletter: document.getElementById('newsletter').checked,
+                    userAgent: navigator.userAgent,
+                    referrer: document.referrer
+                };
+
+                // Save to database (Firebase)
+                const result = await saveToDatabase(formData);
+
+                if (result.success) {
+                    showAlert(`
+                        Ujumbe wako umetumwa kwa mafanikio! 
+                        <br><small>Nambari ya kumbukumbu: ${result.messageId}</small>
+                        <br><small>Tutajibu ndani ya masaa 24</small>
+                    `, 'success');
+
+                    // Reset form
+                    contactForm.reset();
+                    
+                    // Clear validation states
+                    formFields.forEach(field => {
+                        field.classList.remove('is-valid', 'is-invalid');
+                        const feedback = document.getElementById(field.id + 'Feedback');
+                        if (feedback) {
+                            feedback.textContent = '';
+                            feedback.className = 'form-validation';
+                        }
+                    });
+
+                    // Send confirmation email (would be handled by backend)
+                    console.log('Would send confirmation email to:', formData.email);
+                    
+                    // Analytics tracking (would use real analytics)
+                    console.log('Contact form submitted:', {
+                        category: formData.category,
+                        priority: formData.priority,
+                        timestamp: new Date().toISOString()
+                    });
+                }
+
+            } catch (error) {
+                console.error('Form submission error:', error);
+                showAlert(`
+                    Samahani, kuna tatizo la kiufundi. 
+                    <br><small>${error.message}</small>
+                    <br><small>Unaweza kupiga simu +255 123 456 789 badala yake</small>
+                `, 'danger');
+            } finally {
+                showLoading(false);
+            }
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(30, 58, 138, 0.95)';
+            } else {
+                navbar.style.background = 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))';
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Character counter for message field
+        const messageField = document.getElementById('message');
+        if (messageField) {
+            const maxLength = 1000;
+            const minLength = 50;
+            
+            messageField.addEventListener('input', function() {
+                const currentLength = this.value.length;
+                const feedback = document.getElementById('messageFeedback');
+                
+                if (feedback) {
+                    if (currentLength < minLength) {
+                        feedback.textContent = `Herufi ${minLength - currentLength} zaidi zinahitajika`;
+                        feedback.className = 'form-validation invalid';
+                    } else if (currentLength > maxLength) {
+                        feedback.textContent = `Herufi ${currentLength - maxLength} zimezidi`;
+                        feedback.className = 'form-validation invalid';
+                    } else {
+                        feedback.textContent = `Herufi ${currentLength}/${maxLength}`;
+                        feedback.className = 'form-validation valid';
+                    }
+                }
+            });
+        }
+
+        // Phone number formatting
+        const phoneField = document.getElementById('phone');
+        if (phoneField) {
+            phoneField.addEventListener('input', function() {
+                let value = this.value.replace(/\D/g, ''); // Remove non-digits
+                
+                // Add +255 prefix if not present and starts with 0 or 7/6
+                if (value.startsWith('0')) {
+                    value = '255' + value.substring(1);
+                } else if (value.startsWith('7') || value.startsWith('6')) {
+                    value = '255' + value;
+                }
+                
+                // Format: +255 XXX XXX XXX
+                if (value.startsWith('255') && value.length >= 3) {
+                    let formatted = '+255';
+                    const remaining = value.substring(3);
+                    
+                    if (remaining.length > 0) {
+                        formatted += ' ' + remaining.substring(0, 3);
+                    }
+                    if (remaining.length > 3) {
+                        formatted += ' ' + remaining.substring(3, 6);
+                    }
+                    if (remaining.length > 6) {
+                        formatted += ' ' + remaining.substring(6, 9);
+                    }
+                    
+                    this.value = formatted;
+                } else if (!value.startsWith('255')) {
+                    // For other international numbers, just add + prefix
+                    this.value = value ? '+' + value : '';
+                }
+            });
+        }
+
+        // Auto-save form data to prevent data loss
+        function saveFormData() {
+            const formData = {};
+            const inputs = contactForm.querySelectorAll('input, textarea, select');
+            
+            inputs.forEach(input => {
+                if (input.type === 'checkbox') {
+                    formData[input.id] = input.checked;
+                } else {
+                    formData[input.id] = input.value;
+                }
+            });
+            
+            localStorage.setItem('contactFormDraft', JSON.stringify(formData));
+        }
+
+        function loadFormData() {
+            const savedData = localStorage.getItem('contactFormDraft');
+            if (savedData) {
+                try {
+                    const formData = JSON.parse(savedData);
+                    
+                    Object.keys(formData).forEach(key => {
+                        const field = document.getElementById(key);
+                        if (field) {
+                            if (field.type === 'checkbox') {
+                                field.checked = formData[key];
+                            } else {
+                                field.value = formData[key];
+                            }
+                        }
+                    });
+                } catch (e) {
+                    console.error('Error loading saved form data:', e);
+                }
+            }
+        }
+
+        // Load saved data on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFormData();
+        });
+
+        // Save data as user types (debounced)
+        let saveTimeout;
+        contactForm.addEventListener('input', function() {
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(saveFormData, 1000);
+        });
+
+        // Clear saved data on successful submission
+        contactForm.addEventListener('submit', function() {
+            // This will be called after successful submission
+            setTimeout(() => {
+                if (alertContainer.querySelector('.alert-success')) {
+                    localStorage.removeItem('contactFormDraft');
+                }
+            }, 3000);
+        });
+
+        // Page visibility API to handle tab switching
+        document.addEventListener('visibilitychange', function() {
+            if (document.visibilityState === 'hidden') {
+                saveFormData();
+            }
+        });
+
+        // Initialize tooltips if Bootstrap is loaded
+        if (typeof bootstrap !== 'undefined') {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        }
+    </script>
+</body>
+</html>

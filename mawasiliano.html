@@ -471,19 +471,6 @@
             }
         }
 
-        .form-validation {
-            font-size: 0.875rem;
-            margin-top: 0.25rem;
-        }
-
-        .form-validation.invalid {
-            color: var(--danger-color);
-        }
-
-        .form-validation.valid {
-            color: var(--success-color);
-        }
-
         .loading-overlay {
             position: fixed;
             top: 0;
@@ -664,7 +651,7 @@
                         <!-- Alert Messages -->
                         <div id="alertContainer"></div>
                         
-                        <form id="contactForm" novalidate>
+                        <form id="contactForm">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -672,7 +659,6 @@
                                             <i class="fas fa-user me-2"></i>Jina la Kwanza *
                                         </label>
                                         <input type="text" class="form-control" id="firstName" name="firstName" required>
-                                        <div class="form-validation" id="firstNameFeedback"></div>
                                     </div>
                                 </div>
                                 
@@ -682,7 +668,6 @@
                                             <i class="fas fa-user me-2"></i>Jina la Mwisho *
                                         </label>
                                         <input type="text" class="form-control" id="lastName" name="lastName" required>
-                                        <div class="form-validation" id="lastNameFeedback"></div>
                                     </div>
                                 </div>
                             </div>
@@ -691,20 +676,18 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="email" class="form-label">
-                                            <i class="fas fa-envelope me-2"></i>Barua Pepe *
+                                            <i class="fas fa-envelope me-2"></i>Barua Pepe
                                         </label>
-                                        <input type="email" class="form-control" id="email" name="email" required>
-                                        <div class="form-validation" id="emailFeedback"></div>
+                                        <input type="email" class="form-control" id="email" name="email">
                                     </div>
                                 </div>
                                 
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="phone" class="form-label">
-                                            <i class="fas fa-phone me-2"></i>Nambari ya Simu *
+                                            <i class="fas fa-phone me-2"></i>Nambari ya Simu
                                         </label>
-                                        <input type="tel" class="form-control" id="phone" name="phone" required>
-                                        <div class="form-validation" id="phoneFeedback"></div>
+                                        <input type="tel" class="form-control" id="phone" name="phone">
                                     </div>
                                 </div>
                             </div>
@@ -727,7 +710,6 @@
                                             <option value="suggestion">Mapendekezo</option>
                                             <option value="other">Mengineyo</option>
                                         </select>
-                                        <div class="form-validation" id="categoryFeedback"></div>
                                     </div>
                                 </div>
                                 
@@ -751,7 +733,6 @@
                                     <i class="fas fa-heading me-2"></i>Mada ya Ujumbe *
                                 </label>
                                 <input type="text" class="form-control" id="subject" name="subject" required>
-                                <div class="form-validation" id="subjectFeedback"></div>
                             </div>
 
                             <div class="form-group">
@@ -759,8 +740,6 @@
                                     <i class="fas fa-comment me-2"></i>Ujumbe *
                                 </label>
                                 <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
-                                <div class="form-validation" id="messageFeedback"></div>
-                                <small class="text-muted">Andika ujumbe wako kwa undani. Herufi 50 - 1000.</small>
                             </div>
 
                             <div class="form-group">
@@ -769,16 +748,6 @@
                                     <label class="form-check-label" for="newsletter">
                                         Nataka kupokea habari za shule kupitia barua pepe
                                     </label>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="terms" name="terms" required>
-                                    <label class="form-check-label" for="terms">
-                                        Nakubali <a href="#" class="text-primary">masharti na taratibu</a> za shule *
-                                    </label>
-                                    <div class="form-validation" id="termsFeedback"></div>
                                 </div>
                             </div>
 
@@ -827,7 +796,7 @@
         </div>
     </section>
 
-    <!-- Footer -->
+     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="row">
@@ -886,134 +855,30 @@
             </div>
         </div>
     </footer>
-
     <!-- Bootstrap 5 JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     
     <!-- Custom JavaScript -->
     <script>
-        // Firebase Configuration (Replace with your actual config)
+        // Firebase Configuration
         const firebaseConfig = {
+            apiKey: "AIzaSyD77WynpG4VIa_df5XFP1N4rJ-L4EyckN0",
+            authDomain: "mpendae-school.firebaseapp.com",
+            projectId: "mpendae-school",
+            storageBucket: "mpendae-school.firebasestorage.app",
+            messagingSenderId: "233219000135",
+            appId: "1:233219000135:web:8e19b7691770d7f629ee62"
+        };
 
-    apiKey: "AIzaSyD77WynpG4VIa_df5XFP1N4rJ-L4EyckN0",
-
-    authDomain: "mpendae-school.firebaseapp.com",
-
-    projectId: "mpendae-school",
-
-    storageBucket: "mpendae-school.firebasestorage.app",
-
-    messagingSenderId: "233219000135",
-
-    appId: "1:233219000135:web:8e19b7691770d7f629ee62"
-
-  };
-
-        // Initialize Firebase (In production, load Firebase SDK from CDN)
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
-        const analytics = firebase.analytics();
-
-        // Form validation patterns
-        const validationPatterns = {
-            name: /^[a-zA-Z\s]{2,30}$/,
-            email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-            phone: /^(\+255|0)[67]\d{8}$/
-        };
 
         // Form elements
         const contactForm = document.getElementById('contactForm');
         const submitBtn = document.getElementById('submitBtn');
         const alertContainer = document.getElementById('alertContainer');
         const loadingOverlay = document.getElementById('loadingOverlay');
-
-        // Real-time validation
-        function validateField(field, pattern, customMessage = '') {
-            const value = field.value.trim();
-            const feedback = document.getElementById(field.id + 'Feedback');
-            let isValid = true;
-            let message = '';
-
-            if (field.hasAttribute('required') && !value) {
-                isValid = false;
-                message = 'Uwande huu ni lazima ujazwe';
-            } else if (value && pattern && !pattern.test(value)) {
-                isValid = false;
-                message = customMessage || 'Taarifa hii si sahihi';
-            } else if (field.type === 'email' && value && !validationPatterns.email.test(value)) {
-                isValid = false;
-                message = 'Barua pepe si sahihi';
-            } else if (field.id === 'phone' && value && !validationPatterns.phone.test(value)) {
-                isValid = false;
-                message = 'Nambari ya simu si sahihi (mfano: +255712345678)';
-            } else if (field.id === 'message' && value && (value.length < 50 || value.length > 1000)) {
-                isValid = false;
-                message = `Ujumbe unahitaji kuwa herufi 50-1000 (sasa: ${value.length})`;
-            }
-
-            if (feedback) {
-                feedback.textContent = message;
-                feedback.className = `form-validation ${isValid ? 'valid' : 'invalid'}`;
-            }
-
-            field.classList.toggle('is-valid', isValid && value);
-            field.classList.toggle('is-invalid', !isValid);
-
-            return isValid;
-        }
-
-        // Add real-time validation to form fields
-        document.addEventListener('DOMContentLoaded', function() {
-            const fields = [
-                { id: 'firstName', pattern: validationPatterns.name },
-                { id: 'lastName', pattern: validationPatterns.name },
-                { id: 'email', pattern: validationPatterns.email },
-                { id: 'phone', pattern: validationPatterns.phone },
-                { id: 'subject', pattern: null },
-                { id: 'message', pattern: null },
-                { id: 'category', pattern: null },
-                { id: 'terms', pattern: null }
-            ];
-
-            fields.forEach(fieldConfig => {
-                const field = document.getElementById(fieldConfig.id);
-                if (field) {
-                    field.addEventListener('blur', () => {
-                        validateField(field, fieldConfig.pattern);
-                    });
-
-                    field.addEventListener('input', () => {
-                        // Clear validation on input for better UX
-                        const feedback = document.getElementById(field.id + 'Feedback');
-                        if (feedback && field.classList.contains('is-invalid')) {
-                            validateField(field, fieldConfig.pattern);
-                        }
-                    });
-                }
-            });
-
-            // Animate cards on scroll
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver(function(entries) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('fade-in');
-                    }
-                });
-            }, observerOptions);
-
-            // Observe all animated elements
-            const animatedElements = document.querySelectorAll('.contact-card, .contact-form, .map-container, .working-hours');
-            animatedElements.forEach((element, index) => {
-                element.style.animationDelay = `${index * 0.2}s`;
-                observer.observe(element);
-            });
-        });
 
         // Show alert messages
         function showAlert(message, type = 'success') {
@@ -1044,64 +909,29 @@
         // Save to Firebase Firestore
         async function saveToDatabase(formData) {
             try {
-                // Show progress
                 console.log('🔄 Saving to Firebase Firestore...');
                 
                 // Prepare data for Firestore
                 const contactData = {
-                    // Personal Info
                     firstName: formData.firstName,
                     lastName: formData.lastName,
                     fullName: `${formData.firstName} ${formData.lastName}`,
-                    email: formData.email,
-                    phone: formData.phone,
-                    
-                    // Message Details
+                    email: formData.email || null,
+                    phone: formData.phone || null,
                     category: formData.category,
                     priority: formData.priority,
                     subject: formData.subject,
                     message: formData.message,
-                    
-                    // Preferences
                     newsletter: formData.newsletter,
-                    
-                    // Metadata
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                     status: 'unread',
-                    source: 'website-contact-form',
-                    userAgent: navigator.userAgent,
-                    referrer: document.referrer || 'direct',
-                    ipAddress: null, // Will be added by Cloud Function
-                    
-                    // Analytics
-                    sessionId: getSessionId(),
-                    pageUrl: window.location.href,
-                    responseTime: null,
-                    assignedTo: null
+                    source: 'website-contact-form'
                 };
 
                 // Add document to Firestore
                 const docRef = await db.collection('contacts').add(contactData);
                 
                 console.log('✅ Document saved with ID:', docRef.id);
-                
-                // Log analytics event
-                if (window.firebaseAnalytics) {
-                    logEvent(window.firebaseAnalytics, 'contact_form_submit', {
-                        category: formData.category,
-                        priority: formData.priority,
-                        form_source: 'contact_page'
-                    });
-                }
-                
-                // Save backup to localStorage
-                const localBackup = JSON.parse(localStorage.getItem('contactMessages') || '[]');
-                localBackup.push({
-                    id: docRef.id,
-                    timestamp: new Date().toISOString(),
-                    ...contactData
-                });
-                localStorage.setItem('contactMessages', JSON.stringify(localBackup));
                 
                 return { 
                     success: true, 
@@ -1111,72 +941,23 @@
                 
             } catch (error) {
                 console.error('❌ Error saving to Firebase:', error);
-                
-                // Fallback: Save to localStorage only
-                const fallbackId = 'offline_' + Date.now();
-                const offlineMessages = JSON.parse(localStorage.getItem('offlineMessages') || '[]');
-                offlineMessages.push({
-                    id: fallbackId,
-                    timestamp: new Date().toISOString(),
-                    ...formData,
-                    status: 'offline-pending'
-                });
-                localStorage.setItem('offlineMessages', JSON.stringify(offlineMessages));
-                
-                // Determine error type
-                if (error.code === 'permission-denied') {
-                    throw new Error('Hakuna ruhusa ya kuandika data. Wasiliana na msimamizi.');
-                } else if (error.code === 'unavailable') {
-                    throw new Error('Huduma haijpatikani kwa sasa. Ujumbe umehifadhiwa na utatumwa baadaye.');
-                } else {
-                    throw new Error(`Tatizo la kiufundi: ${error.message}`);
-                }
+                throw new Error(`Tatizo la kiufundi: ${error.message}`);
             }
-        }
-        
-        // Generate session ID for analytics
-        function getSessionId() {
-            let sessionId = sessionStorage.getItem('sessionId');
-            if (!sessionId) {
-                sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-                sessionStorage.setItem('sessionId', sessionId);
-            }
-            return sessionId;
         }
 
         // Form submission handler
         contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            // Validate all fields
-            const formFields = contactForm.querySelectorAll('input, textarea, select');
-            let isFormValid = true;
-            
-            formFields.forEach(field => {
-                if (field.type !== 'checkbox' || field.id === 'terms') {
-                    const pattern = field.id === 'firstName' || field.id === 'lastName' ? validationPatterns.name :
-                                  field.id === 'email' ? validationPatterns.email :
-                                  field.id === 'phone' ? validationPatterns.phone : null;
-                    
-                    if (!validateField(field, pattern)) {
-                        isFormValid = false;
-                    }
-                }
-            });
+            // Basic validation - only check required fields
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const category = document.getElementById('category').value;
+            const subject = document.getElementById('subject').value.trim();
+            const message = document.getElementById('message').value.trim();
 
-            // Special validation for terms checkbox
-            const termsCheckbox = document.getElementById('terms');
-            if (!termsCheckbox.checked) {
-                isFormValid = false;
-                const feedback = document.getElementById('termsFeedback');
-                if (feedback) {
-                    feedback.textContent = 'Lazima ukubali masharti na taratibu';
-                    feedback.className = 'form-validation invalid';
-                }
-            }
-
-            if (!isFormValid) {
-                showAlert('Tafadhali jaza uwandani wote kwa usahihi', 'danger');
+            if (!firstName || !lastName || !category || !subject || !message) {
+                showAlert('Tafadhali jaza uwanda wote wenye alama ya *', 'danger');
                 return;
             }
 
@@ -1186,17 +967,15 @@
             try {
                 // Collect form data
                 const formData = {
-                    firstName: document.getElementById('firstName').value.trim(),
-                    lastName: document.getElementById('lastName').value.trim(),
+                    firstName: firstName,
+                    lastName: lastName,
                     email: document.getElementById('email').value.trim(),
                     phone: document.getElementById('phone').value.trim(),
-                    category: document.getElementById('category').value,
+                    category: category,
                     priority: document.getElementById('priority').value,
-                    subject: document.getElementById('subject').value.trim(),
-                    message: document.getElementById('message').value.trim(),
-                    newsletter: document.getElementById('newsletter').checked,
-                    userAgent: navigator.userAgent,
-                    referrer: document.referrer
+                    subject: subject,
+                    message: message,
+                    newsletter: document.getElementById('newsletter').checked
                 };
 
                 // Save to database (Firebase)
@@ -1211,26 +990,6 @@
 
                     // Reset form
                     contactForm.reset();
-                    
-                    // Clear validation states
-                    formFields.forEach(field => {
-                        field.classList.remove('is-valid', 'is-invalid');
-                        const feedback = document.getElementById(field.id + 'Feedback');
-                        if (feedback) {
-                            feedback.textContent = '';
-                            feedback.className = 'form-validation';
-                        }
-                    });
-
-                    // Send confirmation email (would be handled by backend)
-                    console.log('Would send confirmation email to:', formData.email);
-                    
-                    // Analytics tracking (would use real analytics)
-                    console.log('Contact form submitted:', {
-                        category: formData.category,
-                        priority: formData.priority,
-                        timestamp: new Date().toISOString()
-                    });
                 }
 
             } catch (error) {
@@ -1243,6 +1002,30 @@
             } finally {
                 showLoading(false);
             }
+        });
+
+        // Initialize animations and effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate cards on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all animated elements
+            const animatedElements = document.querySelectorAll('.contact-card, .contact-form, .map-container, .working-hours');
+            animatedElements.forEach((element, index) => {
+                element.style.animationDelay = `${index * 0.2}s`;
+                observer.observe(element);
+            });
         });
 
         // Navbar scroll effect
@@ -1268,142 +1051,6 @@
                 }
             });
         });
-
-        // Character counter for message field
-        const messageField = document.getElementById('message');
-        if (messageField) {
-            const maxLength = 1000;
-            const minLength = 50;
-            
-            messageField.addEventListener('input', function() {
-                const currentLength = this.value.length;
-                const feedback = document.getElementById('messageFeedback');
-                
-                if (feedback) {
-                    if (currentLength < minLength) {
-                        feedback.textContent = `Herufi ${minLength - currentLength} zaidi zinahitajika`;
-                        feedback.className = 'form-validation invalid';
-                    } else if (currentLength > maxLength) {
-                        feedback.textContent = `Herufi ${currentLength - maxLength} zimezidi`;
-                        feedback.className = 'form-validation invalid';
-                    } else {
-                        feedback.textContent = `Herufi ${currentLength}/${maxLength}`;
-                        feedback.className = 'form-validation valid';
-                    }
-                }
-            });
-        }
-
-        // Phone number formatting
-        const phoneField = document.getElementById('phone');
-        if (phoneField) {
-            phoneField.addEventListener('input', function() {
-                let value = this.value.replace(/\D/g, ''); // Remove non-digits
-                
-                // Add +255 prefix if not present and starts with 0 or 7/6
-                if (value.startsWith('0')) {
-                    value = '255' + value.substring(1);
-                } else if (value.startsWith('7') || value.startsWith('6')) {
-                    value = '255' + value;
-                }
-                
-                // Format: +255 XXX XXX XXX
-                if (value.startsWith('255') && value.length >= 3) {
-                    let formatted = '+255';
-                    const remaining = value.substring(3);
-                    
-                    if (remaining.length > 0) {
-                        formatted += ' ' + remaining.substring(0, 3);
-                    }
-                    if (remaining.length > 3) {
-                        formatted += ' ' + remaining.substring(3, 6);
-                    }
-                    if (remaining.length > 6) {
-                        formatted += ' ' + remaining.substring(6, 9);
-                    }
-                    
-                    this.value = formatted;
-                } else if (!value.startsWith('255')) {
-                    // For other international numbers, just add + prefix
-                    this.value = value ? '+' + value : '';
-                }
-            });
-        }
-
-        // Auto-save form data to prevent data loss
-        function saveFormData() {
-            const formData = {};
-            const inputs = contactForm.querySelectorAll('input, textarea, select');
-            
-            inputs.forEach(input => {
-                if (input.type === 'checkbox') {
-                    formData[input.id] = input.checked;
-                } else {
-                    formData[input.id] = input.value;
-                }
-            });
-            
-            localStorage.setItem('contactFormDraft', JSON.stringify(formData));
-        }
-
-        function loadFormData() {
-            const savedData = localStorage.getItem('contactFormDraft');
-            if (savedData) {
-                try {
-                    const formData = JSON.parse(savedData);
-                    
-                    Object.keys(formData).forEach(key => {
-                        const field = document.getElementById(key);
-                        if (field) {
-                            if (field.type === 'checkbox') {
-                                field.checked = formData[key];
-                            } else {
-                                field.value = formData[key];
-                            }
-                        }
-                    });
-                } catch (e) {
-                    console.error('Error loading saved form data:', e);
-                }
-            }
-        }
-
-        // Load saved data on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            loadFormData();
-        });
-
-        // Save data as user types (debounced)
-        let saveTimeout;
-        contactForm.addEventListener('input', function() {
-            clearTimeout(saveTimeout);
-            saveTimeout = setTimeout(saveFormData, 1000);
-        });
-
-        // Clear saved data on successful submission
-        contactForm.addEventListener('submit', function() {
-            // This will be called after successful submission
-            setTimeout(() => {
-                if (alertContainer.querySelector('.alert-success')) {
-                    localStorage.removeItem('contactFormDraft');
-                }
-            }, 3000);
-        });
-
-        // Page visibility API to handle tab switching
-        document.addEventListener('visibilitychange', function() {
-            if (document.visibilityState === 'hidden') {
-                saveFormData();
-            }
-        });
-
-        // Initialize tooltips if Bootstrap is loaded
-        if (typeof bootstrap !== 'undefined') {
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl);
-            });
-        }
     </script>
 </body>
-</html>
+</html> 

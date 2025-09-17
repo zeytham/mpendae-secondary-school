@@ -48,13 +48,13 @@
         }
 
         .hero-section {
-            background: linear-gradient(rgba(30, 58, 138, 0.8), rgba(59, 130, 246, 0.8)), 
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23e5e7eb" width="1200" height="600"/><path fill="%23d1d5db" d="M0 400l50-16.7c50-16.6 150-50 250-50s200 33.4 250 50 100 16.7 150 0 100-50 150-16.7c50 33.4 150 100 200 100s100-66.6 150-66.7V600H0z"/></svg>') center/cover;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             min-height: 600px;
             display: flex;
             align-items: center;
             text-align: center;
             color: white;
+            padding: 2rem 0;
         }
 
         .hero-content h1 {
@@ -160,6 +160,59 @@
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
         }
 
+        .hero-slideshow-container {
+            position: relative;
+            max-width: 800px;
+            margin: 2rem auto 0;
+        }
+
+        .hero-slide {
+            display: none;
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        .hero-slide.active {
+            display: block;
+        }
+
+        .hero-slide img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-indicators {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .hero-indicator {
+            height: 12px;
+            width: 12px;
+            margin: 0 5px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .hero-indicator.active,
+        .hero-indicator:hover {
+            background-color: white;
+            transform: scale(1.2);
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* About preview slideshow styles */
         .slideshow-container {
             position: relative;
             max-width: 100%;
@@ -209,8 +262,12 @@
         }
 
         @media (max-width: 768px) {
-            .hero-content h1 {
+            .hero-title {
                 font-size: 2.5rem;
+            }
+            
+            .hero-slide img {
+                height: 250px;
             }
             
             .hero-content p {
@@ -264,11 +321,28 @@
     <section class="hero-section">
         <div class="container">
             <div class="hero-content">
-                <h1 class="animate__animated animate__fadeInDown">Karibu Shule ya Mfano</h1>
-                <p class="animate__animated animate__fadeInUp">Tunatoa elimu bora kwa maendeleo ya mtoto wako kwa ujuzi, maadili na utamaduni</p>
-                <div class="animate__animated animate__fadeInUp animate__delay-1s">
-                    <a href="kuhusu.html" class="btn btn-primary btn-lg me-3">Jifunze Zaidi</a>
-                    <a href="mawasiliano.html" class="btn btn-outline-light btn-lg">Wasiliana Nasi</a>
+                <h1 class="hero-title animate__animated animate__fadeInDown">Karibu Mpendae Skuli</h1>
+                
+                <div class="hero-slideshow-container animate__animated animate__fadeInUp">
+                    <div class="hero-slide active">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='400' viewBox='0 0 800 400'><defs><linearGradient id='grad1' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%231e3a8a;stop-opacity:1' /><stop offset='100%' style='stop-color:%233b82f6;stop-opacity:1' /></linearGradient></defs><rect width='800' height='400' fill='url(%23grad1)'/><text x='400' y='200' text-anchor='middle' dy='0.35em' font-size='48' fill='white' font-family='Arial, sans-serif'>Mpendae Skuli</text><text x='400' y='250' text-anchor='middle' dy='0.35em' font-size='24' fill='rgba(255,255,255,0.8)' font-family='Arial, sans-serif'>Jengo la Shule</text></svg>" alt="Jengo la Shule">
+                    </div>
+                    <div class="hero-slide">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='400' viewBox='0 0 800 400'><defs><linearGradient id='grad2' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%23059669;stop-opacity:1' /><stop offset='100%' style='stop-color:%2310b981;stop-opacity:1' /></linearGradient></defs><rect width='800' height='400' fill='url(%23grad2)'/><text x='400' y='200' text-anchor='middle' dy='0.35em' font-size='48' fill='white' font-family='Arial, sans-serif'>Wanafunzi</text><text x='400' y='250' text-anchor='middle' dy='0.35em' font-size='24' fill='rgba(255,255,255,0.8)' font-family='Arial, sans-serif'>Mazingira ya Kujifunza</text></svg>" alt="Wanafunzi Darasani">
+                    </div>
+                    <div class="hero-slide">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='400' viewBox='0 0 800 400'><defs><linearGradient id='grad3' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%23d97706;stop-opacity:1' /><stop offset='100%' style='stop-color:%23f59e0b;stop-opacity:1' /></linearGradient></defs><rect width='800' height='400' fill='url(%23grad3)'/><text x='400' y='200' text-anchor='middle' dy='0.35em' font-size='48' fill='white' font-family='Arial, sans-serif'>Michezo</text><text x='400' y='250' text-anchor='middle' dy='0.35em' font-size='24' fill='rgba(255,255,255,0.8)' font-family='Arial, sans-serif'>Shughuli za Kimwili</text></svg>" alt="Shughuli za Michezo">
+                    </div>
+                    <div class="hero-slide">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='400' viewBox='0 0 800 400'><defs><linearGradient id='grad4' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%237c3aed;stop-opacity:1' /><stop offset='100%' style='stop-color:%23a855f7;stop-opacity:1' /></linearGradient></defs><rect width='800' height='400' fill='url(%23grad4)'/><text x='400' y='200' text-anchor='middle' dy='0.35em' font-size='48' fill='white' font-family='Arial, sans-serif'>Maendeleo</text><text x='400' y='250' text-anchor='middle' dy='0.35em' font-size='24' fill='rgba(255,255,255,0.8)' font-family='Arial, sans-serif'>Utaalamu na Ujuzi</text></svg>" alt="Maendeleo ya Ujuzi">
+                    </div>
+                    
+                    <div class="hero-indicators">
+                        <span class="hero-indicator active" onclick="currentHeroSlide(1)"></span>
+                        <span class="hero-indicator" onclick="currentHeroSlide(2)"></span>
+                        <span class="hero-indicator" onclick="currentHeroSlide(3)"></span>
+                        <span class="hero-indicator" onclick="currentHeroSlide(4)"></span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -492,7 +566,40 @@
     
     <!-- Custom JavaScript -->
     <script>
-        // Slideshow functionality
+        // Hero slideshow functionality
+        let heroSlideIndex = 1;
+        
+        function currentHeroSlide(n) {
+            showHeroSlide(heroSlideIndex = n);
+        }
+        
+        function showHeroSlide(n) {
+            let slides = document.getElementsByClassName('hero-slide');
+            let indicators = document.getElementsByClassName('hero-indicator');
+            
+            if (n > slides.length) { heroSlideIndex = 1; }
+            if (n < 1) { heroSlideIndex = slides.length; }
+            
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('active');
+            }
+            
+            for (let i = 0; i < indicators.length; i++) {
+                indicators[i].classList.remove('active');
+            }
+            
+            slides[heroSlideIndex - 1].classList.add('active');
+            indicators[heroSlideIndex - 1].classList.add('active');
+        }
+        
+        // Auto slideshow for hero
+        function autoHeroSlide() {
+            heroSlideIndex++;
+            showHeroSlide(heroSlideIndex);
+            setTimeout(autoHeroSlide, 5000); // Change slide every 5 seconds
+        }
+        
+        // About preview slideshow functionality
         let slideIndex = 1;
         
         function currentSlide(n) {
@@ -527,6 +634,9 @@
         
         // Start auto slideshow when page loads
         document.addEventListener('DOMContentLoaded', function() {
+            // Start hero slideshow
+            setTimeout(autoHeroSlide, 5000);
+            // Start about preview slideshow  
             setTimeout(autoSlide, 5000);
         });
         

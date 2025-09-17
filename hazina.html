@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rasilimali za Kufundishia - Shule ya Mfano</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #3b82f6;
+            --accent-color: #f59e0b;
+            --success-color: #10b981;
+            --danger-color: #ef4444;
+            --text-dark: #1f2937;
+            --bg-light: #f8fafc;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            padding-top: 76px;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            transform: translateY(-2px);
+        }
+
+        .page-header {
+            background: linear-gradient(rgba(30, 58, 138, 0.9), rgba(59, 130, 246, 0.9)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23e5e7ff" width="1200" height="400"/><path fill="%23d1d5db" d="M0 300l50-16.7c50-16.6 150-50 250-50s200 33.4 250 50 100 16.7 150 0 100-50 150-16.7c50 33.4 150 100 200 100s100-66.6 150-66.7V400H0z"/></svg>') center/cover;
+            padding: 4rem 0;
+            text-align: center;
+            color: white;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .search-section {
+            background: white;
+            padding: 2rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box input {
+            border-radius: 25px;
+            padding: 15px 50px 15px 20px;
+            border: 2px solid #e5e7eb;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.25);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--secondary-color);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            background: var(--primary-color);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .filter-tabs {
+            background: var(--bg-light);
+            padding: 2rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .filter-btn {
+            background: white;
+            border: 2px solid #e5e7eb;
+            color: var(--text-dark);
+            padding: 12px 25px;
+            border-radius: 25px;
+            margin: 0 5px 10px 5px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--secondary-color);
+            border-color: var(--secondary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+        }
+
+        .resource-section {
+            padding: 3rem 0;
+        }
+
+        .resource-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: none;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .resource-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+        }
+
+        .resource-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .resource-card .icon {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .resource-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .resource-card .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent-color);
+            color: white;
+            font-size: 0.8rem;
+            padding: 5px 10px;
+            border-radius: 15px;
+        }
+
+        .download-btn {
+            background: var(--success-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+
+        .download-btn:hover {
+            background: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(16, 185, 129, 0.3);
+        }
+
+        .view-btn {
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+
+        .view-btn:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+        }
+
+        .stats-section {
+            background: var(--bg-light);
+            padding: 3rem 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-top: 0.5rem;
+        }
+
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 3rem 0 1rem 0;
+        }
+
+        .quick-access {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 1000;
+        }
+
+        .quick-access-btn {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+            transition: all 0.3s ease;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .quick-access-btn:hover {
+            transform: scale(1.1);
+            background: #d97706;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .filter-btn {
+                display: block;
+                width: 100%;
+                margin: 5px 0;
+            }
+            
+            .quick-access {
+                right: 10px;
+                bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-graduation-cap me-2"></i>
+                Shule ya Mfano
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Nyumbani</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="kuhusu.html">Kuhusu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="huduma.html">Huduma</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="masomo.html">Masomo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="wanafunzi.html">Wanafunzi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="rasilimali.html">Rasilimali</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="matangazo.html">Matangazo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="mawasiliano.html">Mawasiliano</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1><i class="fas fa-books me-3"></i>Rasilimali za Kufundishia na Kujifunza</h1>
+            <p>Pata rasilimali zote muhimu za elimu kwa urahisi - Karatasi za Zamani, Mipango ya Masomo, Vitabu vya TAI na zaidi</p>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="search-box">
+                        <input type="text" class="form-control" placeholder="Tafuta rasilimali, somo, au kitabu..." id="resourceSearch">
+                        <button class="search-btn" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Tabs -->
+    <section class="filter-tabs">
+        <div class="container">
+            <div class="text-center">
+                <div class="filter-btn active" data-filter="all">
+                    <i class="fas fa-th-large me-2"></i>Zote
+                </div>
+                <div class="filter-btn" data-filter="past-papers">
+                    <i class="fas fa-file-alt me-2"></i>Karatasi za Zamani
+                </div>
+                <div class="filter-btn" data-filter="schemes">
+                    <i class="fas fa-calendar-alt me-2"></i>Mipango ya Kazi
+                </div>
+                <div class="filter-btn" data-filter="lesson-plans">
+                    <i class="fas fa-clipboard-list me-2"></i>Mipango ya Masomo
+                </div>
+                <div class="filter-btn" data-filter="tai-books">
+                    <i class="fas fa-book me-2"></i>Vitabu vya TAI
+                </div>
+                <div class="filter-btn" data-filter="external">
+                    <i class="fas fa-external-link-alt me-2"></i>Viungo vya Nje
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card">
+                        <div class="stat-number">250+</div>
+                        <div class="stat-label">Karatasi za Zamani</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Mipango ya Masomo</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card">
+                        <div class="stat-number">100+</div>
+                        <div class="stat-label">Vitabu vya TAI</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Rasilimali za Dijiti</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section class="resource-section">
+        <div class="container">
+            <!-- Past Papers -->
+            <div class="resource-category" data-category="past-papers">
+                <h2 class="text-primary mb-4"><i class="fas fa-file-alt me-3"></i>Karatasi za Zamani</h2>
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="resource-card">
+                            <span class="badge">Mpya</span>
+                            <div class="icon">
+                                <i class="fas fa-calculator"></i>
+                            </div>
+                            <h4>Hisabati - Daraja la VII</h4>
+                            <p>Karatasi za zamani za Hisabati kwa miaka 2018-2024. Zina majibu kamili na maelezo.</p>
+                            <div class="mt-3">
+                                <button class="download-btn" onclick="downloadResource('hisabati-vii')">
+                                    <i class="fas fa-download me-2"></i>Pakua
+                                </button>
+                                <button class="view-btn" onclick="previewResource('hisabati-vii')">
+                                    <i class="fas fa-eye me-2"></i>Angalia
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4 col-md-6">
+                        <div class="resource-card">
+                            <div class="icon">
+                                <i class="fas fa-globe-africa"></i>
+                            </div>
+                            <h4>Sayansi - Daraja la VII</h4>
+                            <p>Mkusanyiko wa karatasi za zamani za Sayansi kutoka 2018 hadi 2024 na majibu yake.</p>
+                            <div class="mt-3">
+                                <button class="download-btn" onclick="downloadResource('sayansi-vii')">
+                                    <i class="fas fa-download me-2"></i>Pakua
+                                </button>
+                                <button class="view-btn" onclick="previewResource('sayansi-vii')">
+                                    <i class="fas fa-eye me-2"></i>Angalia
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4 col-md-6">
+                        <div class="resource-card">
+                            <div class="icon">
+                                <i class="fas fa-language"></i>
+                            </div>
+                            <h4>Kiswahili - Daraja la VII</h4>
+                            <p>Karatasi za zamani za Kiswahili zenye mazungumzo, ufahamu na uandishi.</p>
+                            <div class="mt-3">
+                                <button class="download-btn" onclick="downloadResource('kiswahili-vii')">
+                                    <i class="fas fa-download me-2"></i>Pakua
+                                </button>
+                                <button class="view-btn" onclick="previewResource('kiswahili-vii')">
+                                    <i class="fas fa-eye me-2"></i>Angalia
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="resource-card">
+                            <div class="icon">
+                                <i class="fas fa-flag"></i>
+                            </div>
+                            <h4>Uraia - Daraja la VII</h4>
+                            <p>Karatasi za zamani za Uraia na Maadili kwa miaka 2018-2024.</p>
+                            <div class="mt-3">
+                                <button class="download-btn" onclick="downloadResource('uraia-vii')">
+                                    <i class="fas fa-download me-2"></i>Pakua
+                                </button>
+                                <button class="view-btn" onclick="previewResource('uraia-vii')">
+                                    <i class="fas fa-eye me-2"></i>Angalia
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="resource-card">
+                            <div class="icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <h4>Jiografia - Daraja la VII</h4>
+                            <p>Karatasi za zamani za Jiografia zenye ramani na maswali ya uchambuzi.</p>
+                            <div class="mt-3">
+                                <button class="download-btn" onclick="downloadResource('jiografia-vii')">
+                                    <i class="fas fa-download me-2"></i>Pakua
+                                </button>
+                                <button class="view-btn" onclick="previewResource('jiografia-vii')">
+                                    <i class="fas fa-eye me-2"></i>Angalia
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="resource-card">
+                            <div class="icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h4>Historia - Daraja la VII</h4>
+                            <p>Karatasi za zamani za Historia ya Tanzania na Afrika.</p>
+                            <div class="mt-3">
+                                <button class="download-btn" onclick="downloadResource('historia-vii')">
+                                    <i class="fas fa-download me-2"></i>Pakua
+                                </button>
+                                <button class="view-btn" onclick="previewResource('historia-vii')">
+                                    <i class="fas fa-eye me-2"></i>Angalia
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Schemes of Work -->
+            <div class="resource-category" data-category="schemes">
+                <h2 class="text-primary mb-4 mt-5"><i class="fas fa-calendar-alt me-3"></i>Mipango ya Kazi</h2>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="resource-card">
+                            <span class="badge">Iliyorekebishwa</span>
+                            <div class="icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h4>Mipango ya Kazi - Daraja la I</h4>
+                            <p>Mipango kamili ya kazi kwa masomo yote ya Daraja la Kwanza kulingana na mtaala wa CBC.</p>
+                            <div class="mt-3">
+                                <button class="download-btn" onclick="downloadResource('schemes-i')">
+                                    <i class="fas fa-download me-2"></i>Pakua
+                                </button>
+                                <button class="view-btn" onclick="previewResource('schemes-i')">
+                                    <i class="fas fa-eye me-2"></i>Angalia
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6 col-md-6">
+                        <div class="resource-card">
+                            <div class="icon">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                            <h4>Mipango ya Kazi - Daraja la VII</h4>
+                            <p>Mipango kamili ya kazi kwa masomo yote ya Daraja la Saba kulingana na mtaala wa CBC.</p>
+                            <div class="mt-3">
+                                <button class="download-btn" onclick="downloadResource('schemes-vii')">
+                                    <i class="fas fa-download me-2"></i>Pakua
+                                </button>
+                                <button class="view-btn" onclick="previewResource('schemes-vii')">
+                                    <i class="fas fa-eye me-2"></i>Angalia
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lesson Plans -->
+            <div class="resource-category" data-category="lesson-plans">
+                <h2 class="text-primary mb-4 mt-5"><i class="fas fa-clipboard-list me-3"></i>Mipango ya Masomo</h2>
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="resource-card">
+                            <div class="icon">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                            </div>
+                            <h4>Mfumo wa Mpango wa Somo</h4>
+                            <p>Mfumo wa kisasa wa kupanga masomo kulingana na muundo wa CBC.</p>
+                            <div class="mt-3">
+                                <button class="download-btn" onclick="downloadResource('lesson-format')">
+                                    <i class="fas fa-download me-2"></i>Pakua
+                                </button>
+                                <button class="view-btn" onclick="previewResource('lesson-format')">
+                                    <i class="fas fa-eye me-2"></i>Angalia
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4 col-md-6">
+                        <div class="resource-card">
+                            <div class="icon">
+                                <i class="fas fa-book-reader"></i>
+                            </div>
+                            <h4>Mipango ya Masomo - Hisabati</h4>
+                            <p>Mipango yaliyoandaliwa ya masomo ya Hisabati kwa kila daraja.</p>
+                            <div class="mt-3">
+                                <button class="download-btn" onclick="downloadResource('math-lessons')">
+                                    <i class="fas fa-download me-2"></i>Pakua
+                                </button>
+                                <button class="view-btn" onclick="previewResource('math-lessons')">
+                                    <i class="fas fa-eye me-2"></i>Angalia
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4 col-md-6">
+                        <div class="resource-card">
+                            <div class="icon">
+                                <i class="fas fa-microscope"></i>
+                            </div>
+                            <h4>Mipango ya Masomo - Sayansi</h4>
+                            <p>Mipango ya masomo ya Sayansi yenye majaribio na shughuli za vitendo.</p>
+                            <div class="mt-3">
+                                <button class="download-btn" onclick="downloadResource('science-lessons')">
+                                    <i class="fas fa-download me-2"></i>Pakua
+                                </button>
+                                <button class="view-btn" onclick="previewResource('science-lessons')">
+                                    <i class="fas fa-eye me-2"></i>Angalia
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAI Books -->
+            <div class="resource-category" data-category="tai-books">
+                <h2 class="text-primary mb-4 mt-5"><i class="fas fa-book me-3"></i>Vitabu vya TAI</h2>
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="resource-card">
+                            <span class="badge">PDF</span>
+                            <div class="icon">
+                                <i class="fas fa-book-open"></i>
+                            </div>
+                            <h4>Hisabati Daraja la I</h4>
+                            <p>Kitabu cha TAI cha Hisabati kwa Daraja la Kwanza - Toleo jipya.</p>
+                            <div class="mt-3">
+                                <button class="download-btn" onclick="downloadResource('tai-math-1')">
+                                    <i class="fas fa-download me-2"></i>Pakua
+                                </button>
+                                <button class="view-btn" onclick="previewResource('tai-math-1')">
+                                    <i class="fas fa-eye me-2"></i>Angalia
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6">
+                        <div class="resource-card">
+                            <span class="badge">PDF</span>
+                            <div class="icon">
+                                <i class="fas fa-atom"></i>
+                            </div>
+                            <h4>Sayansi Daraja la II</h4>
+                            <p>Kitabu cha TAI cha Sayansi kwa Daraja la Pili - Toleo jipya.</p>
+                            <div class="mt-3">
+                                <button class="download-btn" onclick="downloadResource('tai-science-2')">
+                                    <i class="fas fa-download me-2"></i>Pakua
+                                </button>
+                                <button class="view-btn" onclick="previewResource('tai-science-2')">
+                                    <i class="fas fa-eye me-2"></i>Angalia
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6">
+                        <div class="resource-card">
+                            <span class="badge">PDF</span>
+                            <div class="icon">
+                                <i class="fas fa-comment-alt"></i>
+                            </div>
+                            <h4>Kiswahili Daraja la III</h4>
+                            <p>Kitabu cha TAI cha Kiswahili kwa Daraja la Tatu - Toleo jipya.</p>
+                            <div class="mt-3">
+                                <button class="download-btn" onclick="downloadResource('tai-kiswahili-3')">
+                                    <i class="fas fa-download me-2"></i>Pakua
+                                </button>
+                                <button class="view-btn" onclick="previewResource('tai-kiswahili-3')">
+                                    <i class="fas fa-eye me-2"></i>Angalia
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6">
+                        <div class="resource-card">
+                            <span class="badge">PDF</span>
+                            <div class="icon">
+                                <i class="fas fa-flag"></i>
+                            </div>
+                            <h4>Uraia Daraja la IV</h4>
+                            <p>Kitabu cha TAI cha Uraia kwa Daraja la Nne - Toleo jipya.</p>
+                            <div class="mt-3">
+                                <button class="download-btn" onclick="downloadResource('tai-uraia-4')">
+                                    <i class="fas fa-download me-2"></i>Pakua
+                                </button>
+                                <button class="view-btn" onclick="previewResource('tai-uraia-4')">
+                                    <i class="fas fa-eye me-2"></i>Angalia
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="resource-card">
+                            <span class="badge">PDF</span>
+                            <div class="icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <h4>Jiografia Daraja la V</h4>
+                            <p>Kitabu cha TAI cha Jiografia kwa Daraja la Tano - Toleo jipya.</p>
+                            <div class="mt-3">
+                                <button class="download-btn" onclick="downloadResource('tai-geography-5')">
+                                    <i class="fas fa-download me-2"></i>Pakua
+                                </button>
+                                <button class="view-btn" onclick="previewResource('tai-geography-5')">
+                                    <i class="fas fa-eye me-2"></i>Angalia
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6">
+                        <div class="resource-card">
+                            <span class="badge">PDF</span>
+                            <div class="icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h4>Historia Daraja la VI</h4>
+                            <p>Kitabu cha TAI cha Historia kwa Daraja la Sita - Toleo jipya.</p>
+                            <div class="mt-3">
+                                <button class="download-btn" onclick="downloadResource('tai-history-6')">
+                                    <i class="fas fa-download me-2"></i>Pakua
+                                </button>
+                                <button class="view-btn" onclick="previewResource('tai-history-6')">
+                                    <i class="fas fa-eye me-2"></i>Angalia
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6">
+                        <div class="resource-card">
+                            <span class="badge">PDF</span>
+                            <div class="icon">
+                                <i class="fas fa-language"></i>
+                            </div>
+                            <h4>English Daraja la VII</h4>
+                            <p>Kitabu cha TAI cha English kwa Daraja la Saba - Toleo jipya.</p>
+                            <div class="mt-3">
+                                <button class="download-btn" onclick="downloadResource('tai-english-7')">
+                                    <i class="fas fa-download me-2"></i>Pakua
+                                </button>
+                                <button class="view-btn" onclick="previewResource('tai-english-7')">
+                                    <i class="fas fa-eye me-2"></i>Angalia
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6">
+                        <div class="resource-card">
+                            <span class="badge">Mpya</span>
+                            <div class="icon">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <h4>Sanaa Daraja la V</h4>
+                            <p>Kitabu cha TAI cha Sanaa kwa Daraja la Tano - Toleo jipya.</p>
+                            <div class="mt-3">
+                                <button class="download-btn" onclick="downloadResource('tai-arts-5')">
+                                    <i class="fas fa-download me-2"></i>Pakua
+                                </button>
+                                <button class="view-btn" onclick="previewResource('tai-arts-5')">
+                                    <i class="fas fa-eye me-2"></i>Angalia
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- External Resources -->
+            <div class="resource-category" data-category="external">
+                <h2 class="text-primary mb-4 mt-5"><i class="fas fa-external-link-alt me-3"></i>Viungo vya Nje vya Muhimu</h2>
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="resource-card">
+                            <div class="icon">
+                                <i class="fas fa-university"></i>
+                            </div>
+                            <h4>Taasisi ya Elimu Tanzania (TIE)</h4>
+                            <p>Tovuti rasmi ya TIE - mtaala, maelekezo na rasilimali za kufundishia.</p>
+                            <div class="mt-3">
+                                <a href="https://www.tie.go.tz" target="_blank" class="view-btn">
+                                    <i class="fas fa-external-link-alt me-2"></i>Tembelea
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4 col-md-6">
+                        <div class="resource-card">
+                            <div class="icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h4>Wizara ya Elimu</h4>
+                            <p>Tovuti rasmi ya Wizara ya Elimu - sera, miongozo na matangazo muhimu.</p>
+                            <div class="mt-3">
+                                <a href="https://www.moe.go.tz" target="_blank" class="view-btn">
+                                    <i class="fas fa-external-link-alt me-2"></i>Tembelea
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4 col-md-6">
+                        <div class="resource-card">
+                            <div class="icon">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <h4>Baraza la Mitihani la Tanzania (NECTA)</h4>
+                            <p>Tovuti ya NECTA - matokeo ya mitihani, ratiba na maelekezo.</p>
+                            <div class="mt-3">
+                                <a href="https://www.necta.go.tz" target="_blank" class="view-btn">
+                                    <i class="fas fa-external-link-alt me-2"></i>Tembelea
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="resource-card">
+                            <div class="icon">
+                                <i class="fas fa-laptop"></i>
+                            </div>
+                            <h4>Khan Academy Kiswahili</h4>
+                            <p>Masomo ya bure ya mtandaoni kwa Hisabati, Sayansi na masomo mengine.</p>
+                            <div class="mt-3">
+                                <a href="https://sw.khanacademy.org" target="_blank" class="view-btn">
+                                    <i class="fas fa-external-link-alt me-2"></i>Tembelea
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4 col-md-6">
+                        <div class="resource-card">
+                            <div class="icon">
+                                <i class="fas fa-book-reader"></i>
+                            </div>
+                            <h4>BBC Learning English</h4>
+                            <p>Rasilimali za kujifunza Kiingereza kwa wanafunzi na walimu.</p>
+                            <div class="mt-3">
+                                <a href="https://www.bbc.co.uk/learningenglish" target="_blank" class="view-btn">
+                                    <i class="fas fa-external-link-alt me-2"></i>Tembelea
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4 col-md-6">
+                        <div class="resource-card">
+                            <div class="icon">
+                                <i class="fas fa-globe-africa"></i>
+                            </div>
+                            <h4>Shule Direct</h4>
+                            <p>Jukwaa la mitandao ya kijamii kwa elimu Tanzania.</p>
+                            <div class="mt-3">
+                                <a href="https://www.shuledirect.co.tz" target="_blank" class="view-btn">
+                                    <i class="fas fa-external-link-alt me-2"></i>Tembelea
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="fw-bold mb-3">
+                        <i class="fas fa-graduation-cap me-2"></i>
+                        Shule ya Mfano
+                    </h5>
+                    <p>Tunatoa elimu bora kwa maendeleo ya watoto wetu kwa ujuzi, maadili na utamaduni wa Kitanzania.</p>
+                    
+                    <div class="social-links mt-3">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f fa-lg"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-youtube fa-lg"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <h5 class="fw-bold mb-3">Viungo vya Haraka</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="kuhusu.html" class="text-white-50">Kuhusu Shule</a></li>
+                        <li class="mb-2"><a href="masomo.html" class="text-white-50">Masomo</a></li>
+                        <li class="mb-2"><a href="wanafunzi.html" class="text-white-50">Wanafunzi</a></li>
+                        <li class="mb-2"><a href="matangazo.html" class="text-white-50">Matangazo</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <h5 class="fw-bold mb-3">Mawasiliano</h5>
+                    <div class="contact-info">
+                        <p class="mb-2">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            Barabara ya Uhuru, Dar es Salaam
+                        </p>
+                        <p class="mb-2">
+                            <i class="fas fa-phone me-2"></i>
+                            +255 123 456 789
+                        </p>
+                        <p class="mb-2">
+                            <i class="fas fa-envelope me-2"></i>
+                            info@shuleyamfano.tz
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="my-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 Shule ya Mfano. Haki zote zimehifadhiwa.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <small class="text-white-50">Imeundwa kwa mapenzi na teknolojia ya kisasa</small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Download Modal -->
+    <div class="modal fade" id="downloadModal" tabindex="-1" aria-labelledby="downloadModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="downloadModalLabel">
+                        <i class="fas fa-download me-2"></i>Rasilimali
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="downloadContent">
+                        <!-- Content will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Access Buttons -->
+    <div class="quick-access">
+        <button class="quick-access-btn" onclick="scrollToTop()" title="Rudi Juu">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        <button class="quick-access-btn" onclick="showDownloadHistory()" title="Historia ya Downloads">
+            <i class="fas fa-history"></i>
+        </button>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Resource data with downloadable content
+        const resourceData = {
+            'hisabati-vii': {
+                title: 'Karatasi za Zamani - Hisabati Daraja la VII',
+                description: 'Karatasi za zamani za Hisabati kwa miaka 2018-2024 zikijumuisha majibu kamili.',
+                content: 'KARATASI ZA ZAMANI - HISABATI DARAJA LA VII\n\nMwaka 2024\nSehemu A: Chagua jibu sahihi\n1. 15 + 23 = ?\na) 38  b) 37  c) 39  d) 36\n\n2. 45 ÷ 9 = ?\na) 4  b) 5  c) 6  d) 7\n\nSehemu B: Tatua masawala\n3. Andika nambari ya decimal 0.75 kama sehemu...\n\nMAJIBU:\n1. a) 38\n2. b) 5\n3. 3/4',
+                size: '2.5 MB',
+                type: 'PDF'
+            },
+            'sayansi-vii': {
+                title: 'Karatasi za Zamani - Sayansi Daraja la VII',
+                description: 'Mkusanyiko wa karatasi za zamani za Sayansi kutoka 2018 hadi 2024 na majibu yake.',
+                content: 'KARATASI ZA ZAMANI - SAYANSI DARAJA LA VII\n\nMwaka 2024\nSehemu A: Chagua jibu sahihi\n1. Chembe ndogo ya dutu ni:\na) Atomi  b) Molekuli  c) Ioni  d) Elektroni\n\n2. Mzunguko wa damu unasimamia:\na) Kupumua  b) Kula  c) Kusafirisha oksijeni  d) Kulala\n\nMAJIBU:\n1. a) Atomi\n2. c) Kusafirisha oksijeni',
+                size: '3.1 MB',
+                type: 'PDF'
+            },
+            'kiswahili-vii': {
+                title: 'Karatasi za Zamani - Kiswahili Daraja la VII',
+                description: 'Karatasi za zamani za Kiswahili zenye mazungumzo, ufahamu na uandishi.',
+                content: 'KARATASI ZA ZAMANI - KISWAHILI DARAJA LA VII\n\nMwaka 2024\nSehemu A: Sarufi na Msamiati\n1. Neno "mtoto" ni aina gani ya neno?\na) Nomino  b) Kivumishi  c) Kitenzi  d) Kielezi\n\n2. Andika wingi wa "kitabu":\na) Vitabu  b) Kitabu  c) Mitabu  d) Bitabu\n\nMAJIBU:\n1. a) Nomino\n2. a) Vitabu',
+                size: '2.8 MB',
+                type: 'PDF'
+            },
+            'schemes-i': {
+                title: 'Mipango ya Kazi - Daraja la I',
+                description: 'Mipango kamili ya kazi kwa masomo yote ya Daraja la Kwanza kulingana na mtaala wa CBC.',
+                content: 'MPANGO WA KAZI - DARAJA LA KWANZA\n\nSOMO: HISABATI\nJUMA LA 1: Kutambua nambari 1-10\n- Malengo: Kutaja, kuandika na kuhesabu nambari\n- Shughuli: Wimbo wa nambari, kuhesabu vidole\n- Tathmini: Mtihani wa mdomo\n\nSOMO: KISWAHILI\nJUMA LA 1: Herufi A-E\n- Malengo: Kutambua na kuandika herufi\n- Shughuli: Mchezo wa herufi',
+                size: '850 KB',
+                type: 'DOCX'
+            },
+            'tai-math-1': {
+                title: 'Kitabu cha TAI - Hisabati Daraja la I',
+                description: 'Kitabu cha TAI cha Hisabati kwa Daraja la Kwanza - Toleo la 2024.',
+                content: 'KITABU CHA HISABATI - DARAJA LA KWANZA\nTaasisi ya Elimu Tanzania (TAI)\n\nSURA YA 1: NAMBARI 1-10\nKatika sura hii, mtoto atajifunza nambari za 1 hadi 10.\n\nSURA YA 2: KUJUMLISHA\nKujumlisha ni kuunganisha nambari pamoja.\nMfano: 2 + 3 = 5\n\nSURA YA 3: KUTOA\nKutoa ni kuondoa idadi kutoka kwenye nyingine.',
+                size: '4.2 MB',
+                type: 'PDF'
+            }
+        };
+
+        // Download history storage
+        let downloadHistory = JSON.parse(localStorage.getItem('downloadHistory') || '[]');
+
+        // Download function
+        function downloadResource(resourceId) {
+            const resource = resourceData[resourceId];
+            if (!resource) {
+                showNotification('Rasilimali haipatikani!', 'error');
+                return;
+            }
+
+            try {
+                // Create downloadable content
+                const blob = new Blob([resource.content], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${resource.title.replace(/[^a-zA-Z0-9]/g, '_')}.${resource.type.toLowerCase()}`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+
+                // Update download history
+                downloadHistory.unshift({
+                    id: resourceId,
+                    title: resource.title,
+                    date: new Date().toISOString(),
+                    size: resource.size,
+                    type: resource.type
+                });
+
+                if (downloadHistory.length > 50) {
+                    downloadHistory = downloadHistory.slice(0, 50);
+                }
+
+                localStorage.setItem('downloadHistory', JSON.stringify(downloadHistory));
+                showNotification(`${resource.title} imepakuliwa!`, 'success');
+
+            } catch (error) {
+                showNotification('Kuna hitilafu katika kupakua rasilimali!', 'error');
+            }
+        }
+
+        // Preview function
+        function previewResource(resourceId) {
+            const resource = resourceData[resourceId];
+            if (!resource) return;
+
+            const modal = document.getElementById('downloadModal');
+            const modalTitle = modal.querySelector('#downloadModalLabel');
+            const modalBody = modal.querySelector('#downloadContent');
+
+            modalTitle.innerHTML = `<i class="fas fa-eye me-2"></i>Muangalizo: ${resource.title}`;
+            
+            modalBody.innerHTML = `
+                <div class="preview-container">
+                    <div class="resource-info mb-4">
+                        <h5>${resource.title}</h5>
+                        <p class="text-muted">${resource.description}</p>
+                        <div class="resource-meta">
+                            <span class="badge bg-primary me-2">${resource.type}</span>
+                            <span class="badge bg-secondary">${resource.size}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-content border rounded p-3" style="max-height: 300px; overflow-y: auto;">
+                        <pre style="white-space: pre-wrap; font-size: 0.9rem;">${resource.content}</pre>
+                    </div>
+                    
+                    <div class="action-buttons mt-4 text-center">
+                        <button class="btn btn-success me-3" onclick="downloadResource('${resourceId}'); bootstrap.Modal.getInstance(document.getElementById('downloadModal')).hide();">
+                            <i class="fas fa-download me-2"></i>Pakua Sasa
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            const bootstrapModal = new bootstrap.Modal(modal);
+            bootstrapModal.show();
+        }
+
+        // Search function
+        function performSearch() {
+            const searchTerm = document.getElementById('resourceSearch').value.toLowerCase();
+            const cards = document.querySelectorAll('.resource-card');
+            
+            cards.forEach(card => {
+                const title = card.querySelector('h4').textContent.toLowerCase();
+                const description = card.querySelector('p').textContent.toLowerCase();
+                const parent = card.closest('.col-lg-4, .col-lg-3, .col-lg-6, .col-md-6');
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm) || searchTerm === '') {
+                    parent.style.display = 'block';
+                } else {
+                    parent.style.display = 'none';
+                }
+            });
+        }
+
+        // Filter function
+        function filterResources(category) {
+            const sections = document.querySelectorAll('.resource-category');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            
+            filterBtns.forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`[data-filter="${category}"]`).classList.add('active');
+            
+            if (category === 'all') {
+                sections.forEach(section => section.style.display = 'block');
+            } else {
+                sections.forEach(section => {
+                    if (section.dataset.category === category) {
+                        section.style.display = 'block';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                });
+            }
+        }
+
+        // Show notification
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type === 'success' ? 'success' : type === 'error' ? 'danger' : 'info'} alert-dismissible fade show position-fixed`;
+            notification.style.cssText = 'top: 100px; right: 20px; z-index: 9999; min-width: 300px;';
+            notification.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                }
+            }, 5000);
+        }
+
+        // Quick access functions
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showDownloadHistory() {
+            const modal = document.getElementById('downloadModal');
+            const modalTitle = modal.querySelector('#downloadModalLabel');
+            const modalBody = modal.querySelector('#downloadContent');
+
+            modalTitle.innerHTML = '<i class="fas fa-history me-2"></i>Historia ya Downloads';
+            
+            if (downloadHistory.length === 0) {
+                modalBody.innerHTML = `
+                    <div class="text-center">
+                        <i class="fas fa-download fa-3x text-muted mb-3"></i>
+                        <p>Hamna downloads bado</p>
+                    </div>
+                `;
+            } else {
+                const historyHTML = downloadHistory.map(item => `
+                    <div class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1">${item.title}</h6>
+                            <small>${new Date(item.date).toLocaleDateString('sw-TZ')}</small>
+                        </div>
+                        <small class="text-muted">${item.type} - ${item.size}</small>
+                    </div>
+                `).join('');
+                
+                modalBody.innerHTML = `
+                    <div class="list-group">${historyHTML}</div>
+                    <div class="mt-3 text-center">
+                        <button class="btn btn-outline-danger" onclick="clearDownloadHistory()">
+                            <i class="fas fa-trash me-2"></i>Futa Historia
+                        </button>
+                    </div>
+                `;
+            }
+
+            const bootstrapModal = new bootstrap.Modal(modal);
+            bootstrapModal.show();
+        }
+
+        function clearDownloadHistory() {
+            downloadHistory = [];
+            localStorage.setItem('downloadHistory', JSON.stringify(downloadHistory));
+            showNotification('Historia ya downloads imefutwa!', 'success');
+            bootstrap.Modal.getInstance(document.getElementById('downloadModal')).hide();
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Search functionality
+            const searchInput = document.getElementById('resourceSearch');
+            const searchBtn = document.querySelector('.search-btn');
+            
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') performSearch();
+            });
+            
+            searchBtn.addEventListener('click', performSearch);
+
+            // Filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filterResources(this.dataset.filter);
+                });
+            });
+
+            // Animate cards on scroll
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.resource-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                observer.observe(card);
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(30, 58, 138, 0.95)';
+            } else {
+                navbar.style.background = 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))';
+            }
+        });
+    </script>
+</body>
+</html>

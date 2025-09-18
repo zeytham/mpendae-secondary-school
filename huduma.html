@@ -14,9 +14,11 @@
     <!-- Custom CSS -->
     <style>
         :root {
-            --primary-color: #1e3a8a;
-            --secondary-color: #3b82f6;
-            --accent-color: #f59e0b;
+            --primary-color: #009900;
+            --secondary-color: #00cc00;
+            --accent-color: #66ff66;
+            --dark-green: #006600;
+            --light-green: #ccffcc;
             --success-color: #16a34a;
             --text-dark: #1f2937;
             --bg-light: #f8fafc;
@@ -26,97 +28,191 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: var(--text-dark);
             padding-top: 76px;
+            overflow-x: hidden;
         }
 
         .navbar {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             padding: 1rem 0;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 153, 0, 0.3);
+            backdrop-filter: blur(10px);
         }
 
         .navbar-brand {
             font-weight: 700;
             font-size: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            transform: scale(1.05);
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+        }
+
+        .brand-logo {
+            height: 45px;
+            width: auto;
+            margin-right: 12px;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+            transition: all 0.3s ease;
+            border-radius: 8px;
+        }
+
+        .brand-logo:hover {
+            filter: drop-shadow(3px 3px 8px rgba(0,0,0,0.5));
+            transform: rotate(5deg) scale(1.1);
+        }
+
+        .brand-text {
+            display: inline-block;
+            background: linear-gradient(45deg, #ffffff, var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .navbar-nav .nav-link {
             font-weight: 500;
             margin: 0 10px;
             transition: all 0.3s ease;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
         }
 
         .navbar-nav .nav-link:hover {
             transform: translateY(-2px);
+            color: var(--accent-color) !important;
         }
 
         .page-header {
-            background: linear-gradient(rgba(30, 58, 138, 0.9), rgba(59, 130, 246, 0.9)), 
+            background: linear-gradient(rgba(0, 153, 0, 0.9), rgba(0, 204, 0, 0.8)), 
                         url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23e5e7ff" width="1200" height="400"/><path fill="%23d1d5db" d="M0 300l50-16.7c50-16.6 150-50 250-50s200 33.4 250 50 100 16.7 150 0 100-50 150-16.7c50 33.4 150 100 200 100s100-66.6 150-66.7V400H0z"/></svg>') center/cover;
-            padding: 80px 0 60px 0;
+            padding: 100px 0 80px 0;
             color: white;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0,153,0,0.1) 25%, transparent 25%), 
+                        linear-gradient(-45deg, rgba(0,204,0,0.1) 25%, transparent 25%);
+            background-size: 60px 60px;
+            animation: backgroundMove 20s linear infinite;
+        }
+
+        @keyframes backgroundMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(60px, 60px); }
         }
 
         .page-header h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+            background: linear-gradient(45deg, #ffffff, var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-header .lead {
+            font-size: 1.3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+            position: relative;
+            z-index: 2;
         }
 
         .breadcrumb-nav {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 25px;
-            padding: 10px 20px;
+            padding: 12px 25px;
             display: inline-block;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+            z-index: 2;
         }
 
         .breadcrumb-nav a {
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.9);
             text-decoration: none;
-            margin: 0 5px;
+            margin: 0 8px;
+            transition: all 0.3s ease;
         }
 
         .breadcrumb-nav a:hover {
-            color: white;
+            color: var(--accent-color);
+            text-shadow: 0 0 10px rgba(102,255,102,0.5);
         }
 
         .content-section {
-            padding: 4rem 0;
+            padding: 5rem 0;
+            position: relative;
         }
 
         .content-section.bg-light {
-            background: var(--bg-light);
+            background: linear-gradient(135deg, var(--light-green), #e6ffe6);
+        }
+
+        .content-section.bg-light::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%2300cc00" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23009900" opacity="0.1"/><circle cx="50" cy="10" r="1" fill="%2366ff66" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .content-section > .container {
+            position: relative;
+            z-index: 1;
         }
 
         .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--primary-color) !important;
             margin-bottom: 3rem;
             text-align: center;
             position: relative;
+            text-shadow: 2px 2px 4px rgba(0,153,0,0.2);
         }
 
         .section-title::after {
             content: '';
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
             display: block;
-            margin: 1rem auto;
-            border-radius: 2px;
+            margin: 1.5rem auto;
+            border-radius: 3px;
+            box-shadow: 0 2px 8px rgba(0,153,0,0.3);
         }
 
         .service-card {
-            background: white;
+            background: linear-gradient(135deg, #ffffff, #f0fff0);
             border-radius: 20px;
-            padding: 2.5rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 3rem;
+            box-shadow: 0 15px 35px rgba(0, 153, 0, 0.15);
             margin-bottom: 2rem;
             text-align: center;
-            transition: all 0.4s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border-top: 5px solid var(--secondary-color);
             height: 100%;
             position: relative;
@@ -130,7 +226,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(59, 130, 246, 0.05), transparent);
+            background: linear-gradient(45deg, transparent, rgba(0,204,0,0.1), transparent);
             transform: rotate(45deg);
             transition: all 0.5s ease;
             opacity: 0;
@@ -138,7 +234,7 @@
 
         .service-card:hover {
             transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 25px 50px rgba(0, 153, 0, 0.25);
             border-top-color: var(--accent-color);
         }
 
@@ -153,28 +249,37 @@
         }
 
         .service-icon {
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1.5rem auto;
-            font-size: 2.5rem;
+            margin: 0 auto 2rem auto;
+            font-size: 3rem;
             color: white;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 20px rgba(0,153,0,0.3);
         }
 
         .service-card:hover .service-icon {
             transform: rotateY(360deg) scale(1.1);
+            box-shadow: 0 12px 30px rgba(0,204,0,0.4);
         }
 
         .service-card h3 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
+            color: var(--primary-color) !important;
+            margin-bottom: 1.5rem;
+            text-shadow: 1px 1px 2px rgba(0,153,0,0.2);
+        }
+
+        .service-card p {
+            color: var(--dark-green) !important;
+            line-height: 1.8;
+            font-weight: 500;
         }
 
         .service-features {
@@ -184,228 +289,280 @@
         }
 
         .service-features li {
-            padding: 0.5rem 0;
-            color: var(--text-dark);
+            padding: 0.7rem 0;
+            color: var(--dark-green) !important;
             font-weight: 500;
+            display: flex;
+            align-items: center;
         }
 
         .service-features li i {
-            color: var(--success-color);
-            margin-right: 10px;
+            color: var(--secondary-color) !important;
+            margin-right: 15px;
+            font-size: 1.1rem;
         }
 
         .education-levels {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
-            padding: 4rem 0;
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .education-levels::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="2" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+        }
+
+        .education-levels .container {
+            position: relative;
+            z-index: 1;
         }
 
         .level-card {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 2rem;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 3rem;
             text-align: center;
             margin-bottom: 2rem;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
         }
 
         .level-card:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-15px);
         }
 
         .level-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: var(--accent-color);
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            color: var(--accent-color) !important;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
         }
 
         .level-card h4 {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 1rem;
+            color: white !important;
         }
 
-        .health-services {
-            background: var(--bg-light);
+        .level-card p {
+            color: rgba(255,255,255,0.9) !important;
+            line-height: 1.7;
         }
 
-        .health-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .health-item {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .health-item:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .health-icon {
-            font-size: 2.5rem;
-            color: var(--success-color);
-            margin-bottom: 1rem;
+        .level-card ul li {
+            color: rgba(255,255,255,0.85) !important;
         }
 
         .sports-activities {
-            padding: 4rem 0;
+            padding: 5rem 0;
         }
 
         .sports-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
         }
 
         .sport-card {
-            background: white;
-            border-radius: 15px;
+            background: linear-gradient(135deg, #ffffff, #f0fff0);
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            box-shadow: 0 15px 35px rgba(0, 153, 0, 0.15);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid transparent;
         }
 
         .sport-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 153, 0, 0.3);
+            border-color: var(--secondary-color);
         }
 
         .sport-image {
-            height: 200px;
-            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
+            height: 250px;
+            width: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .sport-card:hover .sport-image {
+            transform: scale(1.05);
         }
 
         .sport-info {
-            padding: 1.5rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #ffffff, #f9fff9);
         }
 
         .sport-card h4 {
-            color: var(--primary-color);
+            color: var(--primary-color) !important;
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            text-shadow: 1px 1px 2px rgba(0,153,0,0.2);
+        }
+
+        .sport-info p {
+            color: var(--dark-green) !important;
+            line-height: 1.7;
+            font-weight: 500;
         }
 
         .additional-services {
-            background: var(--bg-light);
+            background: linear-gradient(135deg, var(--light-green), #e6ffe6);
         }
 
         .additional-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
         }
 
         .additional-item {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #ffffff, #f0fff0);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 153, 0, 0.15);
+            transition: all 0.4s ease;
+            border-left: 5px solid var(--secondary-color);
         }
 
         .additional-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 153, 0, 0.25);
         }
 
         .additional-item .icon {
-            font-size: 2rem;
-            color: var(--secondary-color);
-            margin-bottom: 1rem;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(2px 2px 4px rgba(0,153,0,0.3));
+            transition: all 0.3s ease;
+        }
+
+        .additional-item:hover .icon {
+            transform: rotateY(360deg) scale(1.2);
         }
 
         .additional-item h4 {
-            color: var(--primary-color);
+            color: var(--primary-color) !important;
             font-weight: 700;
             margin-bottom: 1rem;
+            font-size: 1.4rem;
+            text-shadow: 1px 1px 2px rgba(0,153,0,0.2);
+        }
+
+        .additional-item p {
+            color: var(--dark-green) !important;
+            line-height: 1.8;
+            font-weight: 500;
         }
 
         .cta-section {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
-            padding: 4rem 0;
+            padding: 5rem 0;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="2" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+        }
+
+        .cta-section .container {
+            position: relative;
+            z-index: 1;
         }
 
         .cta-section h2 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: 700;
             margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .btn-primary {
-            background: var(--accent-color);
+            background: linear-gradient(135deg, var(--accent-color), #90ff00);
             border: none;
-            border-radius: 25px;
-            padding: 15px 40px;
-            font-weight: 600;
+            border-radius: 30px;
+            padding: 18px 45px;
+            font-weight: 700;
             font-size: 1.1rem;
             transition: all 0.3s ease;
+            color: var(--dark-green) !important;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 25px rgba(102,255,102,0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .btn-primary:hover {
-            background: #d97706;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #90ff00, var(--accent-color));
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(102,255,102,0.4);
+            color: var(--primary-color) !important;
         }
 
         .btn-outline-light {
             border: 2px solid white;
-            border-radius: 25px;
-            padding: 13px 35px;
-            font-weight: 600;
+            border-radius: 30px;
+            padding: 16px 40px;
+            font-weight: 700;
+            font-size: 1.1rem;
             transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .btn-outline-light:hover {
             background: white;
-            color: var(--primary-color);
-            transform: translateY(-2px);
+            color: var(--primary-color) !important;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255,255,255,0.3);
         }
 
         .footer {
-            background: var(--primary-color);
+            background: linear-gradient(135deg, var(--dark-green), var(--primary-color));
             color: white;
             padding: 3rem 0 1rem 0;
         }
 
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
+        .footer h5 {
+            color: var(--accent-color) !important;
         }
 
-        .fade-in-up.animated {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
+        /* Responsive Design */
         @media (max-width: 768px) {
             .page-header h1 {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
             }
             
             .section-title {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
             
             .service-card {
@@ -413,18 +570,103 @@
             }
             
             .cta-section h2 {
+                font-size: 2.2rem;
+            }
+
+            .brand-logo {
+                height: 38px;
+                margin-right: 8px;
+            }
+
+            .navbar-brand {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .page-header h1 {
                 font-size: 2rem;
             }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .brand-logo {
+                height: 35px;
+                margin-right: 6px;
+            }
+
+            .navbar-brand {
+                font-size: 1.1rem;
+            }
+
+            .brand-text {
+                flex-direction: column;
+                align-items: flex-start;
+                line-height: 1.2;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .brand-logo {
+                height: 30px;
+                margin-right: 5px;
+            }
+
+            .navbar-brand {
+                font-size: 1rem;
+            }
+        }
+
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .fade-in-up.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading states */
+        .btn-loading {
+            position: relative;
+            pointer-events: none;
+        }
+
+        .btn-loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin-left: -10px;
+            margin-top: -10px;
+            border: 2px solid transparent;
+            border-top: 2px solid currentColor;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation (Same as Homepage) -->
+    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <i class="fas fa-graduation-cap me-2"></i>
-                Shule ya Mfano
+                <img src="logo.png" alt="Shule ya Mfano Logo" class="brand-logo">
+                <span class="brand-text">
+                    <i class="fas fa-graduation-cap me-1"></i>
+                    Shule ya Mfano
+                </span>
             </a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -446,7 +688,7 @@
                         <a class="nav-link" href="masomo.html">Masomo</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="hazina.html">Rasilimali</a>
+                        <a class="nav-link" href="hazina.html">Rasilimali</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="wanafunzi.html">Wanafunzi</a>
@@ -466,7 +708,7 @@
     <section class="page-header">
         <div class="container">
             <h1>Huduma za Shule</h1>
-            <p class="lead">Huduma zetu maalum za elimu, afya, michezo na maendeleo ya mtoto</p>
+            <p class="lead">Huduma zetu maalum za elimu, michezo na maendeleo kamili ya mtoto</p>
             <nav class="breadcrumb-nav">
                 <a href="index.html"><i class="fas fa-home"></i> Nyumbani</a>
                 <i class="fas fa-chevron-right"></i>
@@ -515,15 +757,15 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="service-card fade-in-up">
                         <div class="service-icon">
-                            <i class="fas fa-stethoscope"></i>
+                            <i class="fas fa-trophy"></i>
                         </div>
-                        <h3>Huduma za Afya</h3>
-                        <p>Tunahakikisha afya njema ya wanafunzi kupitia huduma za kimatibabu na mazingira salama.</p>
+                        <h3>Michezo na Burudani</h3>
+                        <p>Tunatoa fursa za michezo mbalimbali na shughuli za burudani kwa maendeleo ya kimwili na kiakili.</p>
                         <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Kliniki ya shule</li>
-                            <li><i class="fas fa-check"></i> Mpango wa lishe</li>
-                            <li><i class="fas fa-check"></i> Uchunguzi wa afya</li>
-                            <li><i class="fas fa-check"></i> Elimu ya afya</li>
+                            <li><i class="fas fa-check"></i> Michezo mbalimbali</li>
+                            <li><i class="fas fa-check"></i> Shughuli za sanaa</li>
+                            <li><i class="fas fa-check"></i> Timu za mashindano</li>
+                            <li><i class="fas fa-check"></i> Mazingira ya kucheza</li>
                         </ul>
                     </div>
                 </div>
@@ -569,108 +811,56 @@
         </div>
     </section>
 
-    <!-- Health Services -->
-    <section class="health-services content-section">
-        <div class="container">
-            <h2 class="section-title fade-in-up">Huduma za Afya</h2>
-            <div class="health-grid fade-in-up">
-                <div class="health-item">
-                    <div class="health-icon">
-                        <i class="fas fa-clinic-medical"></i>
-                    </div>
-                    <h4>Kliniki ya Shule</h4>
-                    <p>Kliniki kamili yenye daktari na muuguzi mzuri kwa matibabu ya haraka.</p>
-                </div>
-                
-                <div class="health-item">
-                    <div class="health-icon">
-                        <i class="fas fa-apple-alt"></i>
-                    </div>
-                    <h4>Mpango wa Lishe</h4>
-                    <p>Chakula chenye lishe kamili na cha kiafya kwa ukuaji mzuri wa watoto.</p>
-                </div>
-                
-                <div class="health-item">
-                    <div class="health-icon">
-                        <i class="fas fa-user-md"></i>
-                    </div>
-                    <h4>Uchunguzi wa Afya</h4>
-                    <p>Uchunguzi wa kila mwezi wa afya ya watoto na ushauri wa afya.</p>
-                </div>
-                
-                <div class="health-item">
-                    <div class="health-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h4>Usalama wa Watoto</h4>
-                    <p>Mazingira salama na yenye ulinzi mzuri wa watoto kila wakati.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Sports & Extra Activities -->
     <section class="sports-activities">
         <div class="container">
             <h2 class="section-title fade-in-up">Michezo na Shughuli za Ziada</h2>
             <div class="sports-grid fade-in-up">
                 <div class="sport-card">
-                    <div class="sport-image">
-                        <i class="fas fa-futbol"></i>
-                    </div>
+                    <img src="mwalimu.png" alt="Mpira wa Miguu" class="sport-image">
                     <div class="sport-info">
                         <h4>Mpira wa Miguu</h4>
-                        <p>Timu ya mpira wa miguu ya shule inayoshiriki mashindano ya kikanda na kimataifa.</p>
+                        <p>Timu ya mpira wa miguu ya shule inayoshiriki mashindano ya kikanda na kimataifa chini ya uongozi wa mwalimu mahiri.</p>
                     </div>
                 </div>
                 
                 <div class="sport-card">
-                    <div class="sport-image">
-                        <i class="fas fa-basketball-ball"></i>
-                    </div>
+                    <img src="mwalimu.png" alt="Mpira wa Kikapu" class="sport-image">
                     <div class="sport-info">
                         <h4>Mpira wa Kikapu</h4>
-                        <p>Mchezo wa mpira wa kikapu kwa wavulana na wasichana wote wenye vipawa.</p>
+                        <p>Mchezo wa mpira wa kikapu kwa wavulana na wasichana wote wenye vipawa vinavyoongozwa na walimu mahiri.</p>
                     </div>
                 </div>
                 
                 <div class="sport-card">
-                    <div class="sport-image">
-                        <i class="fas fa-running"></i>
-                    </div>
+                    <img src="mwalimu.png" alt="Riadha" class="sport-image">
                     <div class="sport-info">
                         <h4>Riadha</h4>
-                        <p>Shughuli za riadha mbalimbali kama kukimbia, kuruka na kutupa.</p>
+                        <p>Shughuli za riadha mbalimbali kama kukimbia, kuruka na kutupa zinazoongozwa na walimu wenye uzoefu.</p>
                     </div>
                 </div>
                 
                 <div class="sport-card">
-                    <div class="sport-image">
-                        <i class="fas fa-music"></i>
-                    </div>
+                    <img src="mwalimu.png" alt="Muziki na Sanaa" class="sport-image">
                     <div class="sport-info">
                         <h4>Muziki na Sanaa</h4>
-                        <p>Klabu za muziki, mchezo wa ala za muziki na sanaa za mbalimbali.</p>
+                        <p>Klabu za muziki, mchezo wa ala za muziki na sanaa za mbalimbali zinazofundishwa na walimu wa sanaa.</p>
                     </div>
                 </div>
                 
                 <div class="sport-card">
-                    <div class="sport-image">
-                        <i class="fas fa-chess"></i>
-                    </div>
+                    <img src="mwalimu.png" alt="Soka la Kichwa" class="sport-image">
                     <div class="sport-info">
                         <h4>Soka la Kichwa</h4>
-                        <p>Mchezo wa soka la kichwa na michezo mingine ya akili kwa wanafunzi.</p>
+                        <p>Mchezo wa soka la kichwa na michezo mingine ya akili kwa wanafunzi chini ya mwongozo wa walimu.</p>
                     </div>
                 </div>
                 
                 <div class="sport-card">
-                    <div class="sport-image">
-                        <i class="fas fa-paint-brush"></i>
-                    </div>
+                    <img src="mwalimu.png" alt="Uchoraji na Ubunifu" class="sport-image">
                     <div class="sport-info">
                         <h4>Uchoraji na Ubunifu</h4>
-                        <p>Klabu za uchoraji, ubunifu wa mikono na sanaa za kibunifu.</p>
+                        <p>Klabu za uchoraji, ubunifu wa mikono na sanaa za kibunifu zinazofundishwa na walimu wasanii.</p>
                     </div>
                 </div>
             </div>
@@ -687,7 +877,7 @@
                         <i class="fas fa-bus"></i>
                     </div>
                     <h4>Huduma za Usafirishaji</h4>
-                    <p>Magari ya shule yanayosafirisha watoto kwa usalama kutoka na kwenda nyumbani kila siku.</p>
+                    <p>Magari ya shule yanayosafirisha watoto kwa usalama kutoka na kwenda nyumbani kila siku. Dereva wetu wamepewa mafunzo ya usalama.</p>
                 </div>
                 
                 <div class="additional-item">
@@ -695,7 +885,7 @@
                         <i class="fas fa-book"></i>
                     </div>
                     <h4>Maktaba ya Kielektroniki</h4>
-                    <p>Maktaba ya kisasa yenye vitabu vya kielektroniki na rasilimali za utafiti.</p>
+                    <p>Maktaba ya kisasa yenye vitabu vya kielektroniki, rasilimali za utafiti na mtandao wa haraka wa intaneti kwa wanafunzi.</p>
                 </div>
                 
                 <div class="additional-item">
@@ -703,7 +893,7 @@
                         <i class="fas fa-laptop"></i>
                     </div>
                     <h4>Kompyuta na Teknolojia</h4>
-                    <p>Chumba cha kompyuta chenye vifaa vya kisasa vya kujifunzia teknolojia.</p>
+                    <p>Chumba cha kompyuta chenye vifaa vya kisasa vya kujifunzia teknolojia, programu za kompyuta na ujuzi wa dijitali.</p>
                 </div>
                 
                 <div class="additional-item">
@@ -711,7 +901,7 @@
                         <i class="fas fa-comments"></i>
                     </div>
                     <h4>Ushauri kwa Wazazi</h4>
-                    <p>Mikutano ya mara kwa mara na wazazi kuhusu maendeleo ya watoto wao.</p>
+                    <p>Mikutano ya mara kwa mara na wazazi kuhusu maendeleo ya watoto wao, changamoto na fursa za ukuaji.</p>
                 </div>
                 
                 <div class="additional-item">
@@ -719,7 +909,7 @@
                         <i class="fas fa-certificate"></i>
                     </div>
                     <h4>Kozi za Ziada</h4>
-                    <p>Kozi maalum za kuongezea ujuzi kama lugha za kigeni na ujuzi wa kompyuta.</p>
+                    <p>Kozi maalum za kuongezea ujuzi kama lugha za kigeni, ujuzi wa kompyuta na maendeleo ya kibinafsi.</p>
                 </div>
                 
                 <div class="additional-item">
@@ -727,7 +917,7 @@
                         <i class="fas fa-home"></i>
                     </div>
                     <h4>Huduma za Bweni</h4>
-                    <p>Makazi salama ya wanafunzi wanaotoka mbali na huduma zote za lazima.</p>
+                    <p>Makazi salama ya wanafunzi wanaotoka mbali na huduma zote za lazima pamoja na mlezi mkuu.</p>
                 </div>
             </div>
         </div>
@@ -737,25 +927,25 @@
     <section class="cta-section">
         <div class="container">
             <h2>Je, Unahitaji Maelezo Zaidi?</h2>
-            <p class="lead mb-4">Wasiliana nasi kwa maelezo zaidi kuhusu huduma zetu au kujisajili</p>
+            <p class="lead mb-4">Wasiliana nasi kwa maelezo zaidi kuhusu huduma zetu au pakua fomu ya kujisajili</p>
             <div class="d-flex flex-wrap gap-3 justify-content-center">
                 <a href="mawasiliano.html" class="btn btn-primary btn-lg">
                     <i class="fas fa-phone me-2"></i>Wasiliana Nasi
                 </a>
-                <a href="#" class="btn btn-outline-light btn-lg">
+                <button id="downloadBtn" class="btn btn-outline-light btn-lg">
                     <i class="fas fa-download me-2"></i>Pakua Fomu
-                </a>
+                </button>
             </div>
         </div>
     </section>
 
-    <!-- Footer (Same as Homepage) -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 mb-4">
                     <h5 class="fw-bold mb-3">
-                        <i class="fas fa-graduation-cap me-2"></i>
+                        <img src="logo.png" alt="Logo" style="height: 30px; margin-right: 8px; filter: brightness(0) invert(1);">
                         Shule ya Mfano
                     </h5>
                     <p>Tunatoa elimu bora kwa maendeleo ya watoto wetu kwa ujuzi, maadili na utamaduni wa Kitanzania.</p>
@@ -771,7 +961,7 @@
                 <div class="col-lg-4 mb-4">
                     <h5 class="fw-bold mb-3">Viungo vya Haraka</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a href="about.html" class="text-white-50">Kuhusu Shule</a></li>
+                        <li class="mb-2"><a href="kuhusu.html" class="text-white-50">Kuhusu Shule</a></li>
                         <li class="mb-2"><a href="huduma.html" class="text-white-50">Huduma</a></li>
                         <li class="mb-2"><a href="masomo.html" class="text-white-50">Masomo</a></li>
                         <li class="mb-2"><a href="wanafunzi.html" class="text-white-50">Wanafunzi</a></li>
@@ -784,7 +974,7 @@
                     <div class="contact-info">
                         <p class="mb-2">
                             <i class="fas fa-map-marker-alt me-2"></i>
-                            Barabara ya Uhuru, Dar es Salaam
+                            Barabara ya Uhuru, Zanzibar
                         </p>
                         <p class="mb-2">
                             <i class="fas fa-phone me-2"></i>
@@ -801,7 +991,7 @@
             <hr class="my-4">
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <p class="mb-0">&copy; 2025 Shule ya Mfano. Haki zote zimehifadhiwa.</p>
+                    <p class="mb-0">&copy; 2025 Shule ya Mpendae. Haki zote zimehifadhiwa.</p>
                 </div>
                 <div class="col-md-6 text-md-end">
                     <small class="text-white-50">Imeundwa kwa mapenzi na teknolojia ya kisasa</small>
@@ -815,14 +1005,31 @@
     
     <!-- Custom JavaScript -->
     <script>
-        // Navbar scroll effect (same as homepage)
+        // Enhanced navbar scroll effect
+        let lastScrollY = 0;
+        const navbar = document.querySelector('.navbar');
+        
         window.addEventListener('scroll', function() {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 100) {
-                navbar.style.background = 'rgba(30, 58, 138, 0.95)';
+            const currentScrollY = window.scrollY;
+            
+            if (currentScrollY > 100) {
+                navbar.style.background = 'rgba(0, 102, 0, 0.95)';
+                navbar.style.backdropFilter = 'blur(10px)';
+                navbar.style.boxShadow = '0 8px 32px rgba(0, 153, 0, 0.4)';
             } else {
                 navbar.style.background = 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))';
+                navbar.style.backdropFilter = 'none';
+                navbar.style.boxShadow = '0 8px 32px rgba(0, 153, 0, 0.3)';
             }
+            
+            // Hide/show navbar on scroll
+            if (currentScrollY > lastScrollY && currentScrollY > 200) {
+                navbar.style.transform = 'translateY(-100%)';
+            } else {
+                navbar.style.transform = 'translateY(0)';
+            }
+            
+            lastScrollY = currentScrollY;
         });
 
         // Smooth scrolling for navigation links
@@ -832,24 +1039,28 @@
                 const targetId = this.getAttribute('href').substring(1);
                 const targetElement = document.getElementById(targetId);
                 if (targetElement) {
-                    targetElement.scrollIntoView({ 
-                        behavior: 'smooth',
-                        block: 'start'
+                    const navHeight = navbar.offsetHeight;
+                    const targetPosition = targetElement.offsetTop - navHeight - 20;
+                    window.scrollTo({ 
+                        top: targetPosition,
+                        behavior: 'smooth'
                     });
                 }
             });
         });
 
-        // Intersection Observer for animations
+        // Enhanced Intersection Observer for animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         };
 
         const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
+            entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('animated');
+                    setTimeout(() => {
+                        entry.target.classList.add('animated');
+                    }, index * 200);
                 }
             });
         }, observerOptions);
@@ -862,7 +1073,172 @@
             });
         });
 
-        // Service cards hover animation
+        // PDF Form Generation and Download
+        function generatePDF() {
+            // Create a comprehensive registration form as PDF content
+            const pdfContent = `%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>
+endobj
+
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+
+5 0 obj
+<< /Length 2000 >>
+stream
+BT
+/F1 16 Tf
+50 750 Td
+(FOMU YA KUJISAJILI - SHULE YA MFANO) Tj
+0 -30 Td
+/F1 12 Tf
+(Tarehe: ________________) Tj
+0 -40 Td
+(TAARIFA ZA MWANAFUNZI) Tj
+0 -25 Td
+(Jina kamili: _________________________________) Tj
+0 -20 Td
+(Tarehe ya kuzaliwa: __________________________) Tj
+0 -20 Td
+(Jinsia: [ ] Mme  [ ] Mke) Tj
+0 -20 Td
+(Darasa analohusu: ___________________________) Tj
+0 -20 Td
+(Shule aliyotoka: _____________________________) Tj
+0 -40 Td
+(TAARIFA ZA MZAZI/MLEZI) Tj
+0 -25 Td
+(Jina la mzazi/mlezi: __________________________) Tj
+0 -20 Td
+(Simu: ______________________________________) Tj
+0 -20 Td
+(Barua pepe: _________________________________) Tj
+0 -20 Td
+(Anwani: ____________________________________) Tj
+0 -20 Td
+(Kazi: ______________________________________) Tj
+0 -40 Td
+(TAARIFA ZA KIAFYA) Tj
+0 -25 Td
+(Je, ana matatizo ya kiafya? [ ] Ndio  [ ] Hapana) Tj
+0 -20 Td
+(Kama ndio, eleza: ____________________________) Tj
+0 -20 Td
+(Dawa anazounda: _____________________________) Tj
+0 -40 Td
+(TAARIFA ZA KIFEDHA) Tj
+0 -25 Td
+(Ada za kila muhula: Tsh 500,000/=) Tj
+0 -20 Td
+(Njia ya kulipa: [ ] Taslimu  [ ] Benki  [ ] Simu) Tj
+0 -40 Td
+(AHADI YA MZAZI) Tj
+0 -25 Td
+(Ninaahidi kumlipa ada za mwanangu kila muhula) Tj
+0 -20 Td
+(na kufuata sheria za shule.) Tj
+0 -30 Td
+(Sahihi ya mzazi: ________________  Tarehe: _____) Tj
+0 -40 Td
+(KWA MATUMIZI YA SHULE PEKEE) Tj
+0 -25 Td
+(Tarehe ya kupokea: ___________________________) Tj
+0 -20 Td
+(Nambari ya uandikishaji: ______________________) Tj
+0 -20 Td
+(Sahihi ya afisa: _____________________________) Tj
+ET
+endstream
+endobj
+
+xref
+0 6
+0000000000 65535 f 
+0000000010 00000 n 
+0000000053 00000 n 
+0000000107 00000 n 
+0000000249 00000 n 
+0000000318 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+2370
+%%EOF`;
+
+            return pdfContent;
+        }
+
+        // Enhanced PDF download with real functionality
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            const btn = this;
+            const originalText = btn.innerHTML;
+            
+            // Show loading state
+            btn.classList.add('btn-loading');
+            btn.innerHTML = '<span>Inapakua...</span>';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                try {
+                    // Generate PDF content
+                    const pdfContent = generatePDF();
+                    
+                    // Create blob and download
+                    const blob = new Blob([pdfContent], { type: 'application/pdf' });
+                    const url = window.URL.createObjectURL(blob);
+                    
+                    // Create download link
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+                    a.download = 'fomu-ya-kujisajili-shule-ya-mfano.pdf';
+                    
+                    // Trigger download
+                    document.body.appendChild(a);
+                    a.click();
+                    
+                    // Cleanup
+                    window.URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+                    
+                    // Show success message
+                    btn.innerHTML = '<i class="fas fa-check me-2"></i>Imepakuliwa!';
+                    btn.style.background = 'linear-gradient(135deg, #16a34a, #22c55e)';
+                    
+                    // Reset button after 3 seconds
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                        btn.style.background = '';
+                        btn.classList.remove('btn-loading');
+                        btn.disabled = false;
+                    }, 3000);
+                    
+                } catch (error) {
+                    console.error('Error generating PDF:', error);
+                    btn.innerHTML = '<i class="fas fa-exclamation-triangle me-2"></i>Hitilafu!';
+                    btn.style.background = 'linear-gradient(135deg, #dc2626, #ef4444)';
+                    
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                        btn.style.background = '';
+                        btn.classList.remove('btn-loading');
+                        btn.disabled = false;
+                    }, 3000);
+                }
+            }, 2000); // 2 second delay to show loading state
+        });
+
+        // Service cards enhanced hover animation
         document.addEventListener('DOMContentLoaded', function() {
             const serviceCards = document.querySelectorAll('.service-card');
             serviceCards.forEach(card => {
@@ -882,7 +1258,7 @@
                 if (entry.isIntersecting) {
                     setTimeout(() => {
                         entry.target.classList.add('animated');
-                    }, index * 200);
+                    }, index * 300);
                 }
             });
         }, { threshold: 0.2 });
@@ -894,14 +1270,14 @@
             });
         });
 
-        // Sports cards hover effect
+        // Sports cards enhanced hover effect
         document.addEventListener('DOMContentLoaded', function() {
             const sportCards = document.querySelectorAll('.sport-card');
             sportCards.forEach(card => {
                 const sportImage = card.querySelector('.sport-image');
                 
                 card.addEventListener('mouseenter', function() {
-                    sportImage.style.transform = 'scale(1.1)';
+                    sportImage.style.transform = 'scale(1.05)';
                     sportImage.style.transition = 'transform 0.3s ease';
                 });
                 
@@ -911,29 +1287,7 @@
             });
         });
 
-        // Health items animation on scroll
-        const healthObserver = new IntersectionObserver(function(entries) {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0) scale(1)';
-                    }, index * 150);
-                }
-            });
-        }, { threshold: 0.3 });
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const healthItems = document.querySelectorAll('.health-item');
-            healthItems.forEach(item => {
-                item.style.opacity = '0';
-                item.style.transform = 'translateY(30px) scale(0.9)';
-                item.style.transition = 'all 0.6s ease';
-                healthObserver.observe(item);
-            });
-        });
-
-        // Additional items hover effect
+        // Additional items hover effect with rotation
         document.addEventListener('DOMContentLoaded', function() {
             const additionalItems = document.querySelectorAll('.additional-item');
             additionalItems.forEach(item => {
@@ -959,7 +1313,7 @@
             }
         });
 
-        // CTA buttons animation
+        // CTA buttons enhanced animation
         document.addEventListener('DOMContentLoaded', function() {
             const ctaButtons = document.querySelectorAll('.cta-section .btn');
             ctaButtons.forEach((button, index) => {
@@ -968,19 +1322,21 @@
                 });
                 
                 button.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(-2px) scale(1)';
+                    if (!this.disabled) {
+                        this.style.transform = 'translateY(-2px) scale(1)';
+                    }
                 });
             });
         });
 
-        // Level cards animation
+        // Level cards staggered animation
         const levelObserver = new IntersectionObserver(function(entries) {
             entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
                     setTimeout(() => {
                         entry.target.style.opacity = '1';
                         entry.target.style.transform = 'translateX(0)';
-                    }, index * 300);
+                    }, index * 400);
                 }
             });
         }, { threshold: 0.4 });
@@ -999,7 +1355,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const serviceIcons = document.querySelectorAll('.service-icon');
             serviceIcons.forEach((icon, index) => {
-                icon.style.animation = `float 3s ease-in-out infinite ${index * 0.5}s`;
+                icon.style.animation = `float 3s ease-in-out infinite ${index * 0.7}s`;
             });
         });
 
@@ -1008,10 +1364,40 @@
         floatStyle.textContent = `
             @keyframes float {
                 0%, 100% { transform: translateY(0px); }
-                50% { transform: translateY(-10px); }
+                50% { transform: translateY(-15px); }
             }
         `;
         document.head.appendChild(floatStyle);
+
+        // Add page loading animation
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.8s ease-in-out';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        // Add scroll progress indicator
+        const progressBar = document.createElement('div');
+        progressBar.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            z-index: 9999;
+            transition: width 0.1s ease;
+        `;
+        document.body.appendChild(progressBar);
+        
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercent = (scrollTop / scrollHeight) * 100;
+            progressBar.style.width = scrollPercent + '%';
+        });
     </script>
 </body>
 </html>

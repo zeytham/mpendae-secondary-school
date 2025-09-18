@@ -14,9 +14,11 @@
     <!-- Custom CSS -->
     <style>
         :root {
-            --primary-color: #1e3a8a;
-            --secondary-color: #3b82f6;
-            --accent-color: #f59e0b;
+            --primary-color: #009900;
+            --secondary-color: #00cc00;
+            --accent-color: #66ff66;
+            --dark-green: #006600;
+            --light-green: #ccffcc;
             --text-dark: #1f2937;
             --bg-light: #f8fafc;
         }
@@ -25,330 +27,542 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: var(--text-dark);
             padding-top: 76px;
+            overflow-x: hidden;
         }
 
         .navbar {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             padding: 1rem 0;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 153, 0, 0.3);
+            backdrop-filter: blur(10px);
         }
 
         .navbar-brand {
             font-weight: 700;
             font-size: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            transform: scale(1.05);
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+        }
+
+        .brand-logo {
+            height: 45px;
+            width: auto;
+            margin-right: 12px;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+            transition: all 0.3s ease;
+            border-radius: 8px;
+        }
+
+        .brand-logo:hover {
+            filter: drop-shadow(3px 3px 8px rgba(0,0,0,0.5));
+            transform: rotate(5deg) scale(1.1);
+        }
+
+        .brand-text {
+            display: inline-block;
+            background: linear-gradient(45deg, #ffffff, var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .navbar-nav .nav-link {
             font-weight: 500;
             margin: 0 10px;
             transition: all 0.3s ease;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
         }
 
         .navbar-nav .nav-link:hover {
             transform: translateY(-2px);
+            color: var(--accent-color) !important;
         }
 
         .page-header {
-            background: linear-gradient(rgba(30, 58, 138, 0.9), rgba(59, 130, 246, 0.9)), 
+            background: linear-gradient(rgba(0, 153, 0, 0.9), rgba(0, 204, 0, 0.8)), 
                         url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23e5e7ff" width="1200" height="400"/><path fill="%23d1d5db" d="M0 300l50-16.7c50-16.6 150-50 250-50s200 33.4 250 50 100 16.7 150 0 100-50 150-16.7c50 33.4 150 100 200 100s100-66.6 150-66.7V400H0z"/></svg>') center/cover;
-            padding: 80px 0 60px 0;
+            padding: 100px 0 80px 0;
             color: white;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0,153,0,0.1) 25%, transparent 25%), 
+                        linear-gradient(-45deg, rgba(0,204,0,0.1) 25%, transparent 25%);
+            background-size: 60px 60px;
+            animation: backgroundMove 20s linear infinite;
+        }
+
+        @keyframes backgroundMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(60px, 60px); }
         }
 
         .page-header h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+            background: linear-gradient(45deg, #ffffff, var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-header .lead {
+            font-size: 1.3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+            position: relative;
+            z-index: 2;
         }
 
         .breadcrumb-nav {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 25px;
-            padding: 10px 20px;
+            padding: 12px 25px;
             display: inline-block;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+            z-index: 2;
         }
 
         .breadcrumb-nav a {
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.9);
             text-decoration: none;
-            margin: 0 5px;
+            margin: 0 8px;
+            transition: all 0.3s ease;
         }
 
         .breadcrumb-nav a:hover {
-            color: white;
+            color: var(--accent-color);
+            text-shadow: 0 0 10px rgba(102,255,102,0.5);
         }
 
         .content-section {
-            padding: 4rem 0;
+            padding: 5rem 0;
+            position: relative;
         }
 
         .content-section.bg-light {
-            background: var(--bg-light);
+            background: linear-gradient(135deg, var(--light-green), #e6ffe6);
+        }
+
+        .content-section.bg-light::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%2300cc00" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23009900" opacity="0.1"/><circle cx="50" cy="10" r="1" fill="%2366ff66" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .content-section > .container {
+            position: relative;
+            z-index: 1;
         }
 
         .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--primary-color) !important;
             margin-bottom: 3rem;
             text-align: center;
             position: relative;
+            text-shadow: 2px 2px 4px rgba(0,153,0,0.2);
         }
 
         .section-title::after {
             content: '';
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
             display: block;
-            margin: 1rem auto;
-            border-radius: 2px;
+            margin: 1.5rem auto;
+            border-radius: 3px;
+            box-shadow: 0 2px 8px rgba(0,153,0,0.3);
         }
 
         .history-timeline {
             position: relative;
-            padding-left: 30px;
+            padding-left: 40px;
         }
 
         .history-timeline::before {
             content: '';
             position: absolute;
-            left: 15px;
+            left: 20px;
             top: 0;
             bottom: 0;
-            width: 2px;
-            background: var(--secondary-color);
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(0,153,0,0.3);
         }
 
         .timeline-item {
             position: relative;
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-left: 20px;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #ffffff, #f0fff0);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 153, 0, 0.15);
+            margin-left: 30px;
+            transition: all 0.4s ease;
+            border-left: 5px solid var(--secondary-color);
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 153, 0, 0.25);
         }
 
         .timeline-item::before {
             content: '';
             position: absolute;
-            left: -32px;
-            top: 25px;
-            width: 12px;
-            height: 12px;
-            background: var(--accent-color);
+            left: -42px;
+            top: 35px;
+            width: 16px;
+            height: 16px;
+            background: var(--secondary-color);
             border-radius: 50%;
-            border: 3px solid white;
-            box-shadow: 0 0 0 3px var(--secondary-color);
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px var(--primary-color);
         }
 
         .timeline-year {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary-color) !important;
+            margin-bottom: 0.8rem;
+            text-shadow: 1px 1px 2px rgba(0,153,0,0.2);
+        }
+
+        .timeline-item h4 {
+            color: var(--dark-green) !important;
             font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-item p {
+            color: var(--text-dark);
+            line-height: 1.7;
         }
 
         .vision-mission-card {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #ffffff, #f0fff0);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 15px 35px rgba(0, 153, 0, 0.15);
             margin-bottom: 2rem;
             text-align: center;
-            transition: all 0.3s ease;
-            border-top: 4px solid var(--secondary-color);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-top: 5px solid var(--secondary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vision-mission-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0,204,0,0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+            opacity: 0;
+        }
+
+        .vision-mission-card:hover::before {
+            opacity: 1;
+            animation: shimmer 1s ease-in-out;
         }
 
         .vision-mission-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 25px 50px rgba(0, 153, 0, 0.25);
         }
 
         .vision-mission-card .icon {
-            font-size: 3rem;
-            color: var(--secondary-color);
-            margin-bottom: 1.5rem;
+            font-size: 4rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            filter: drop-shadow(2px 2px 4px rgba(0,153,0,0.3));
         }
 
         .vision-mission-card h3 {
-            color: var(--primary-color);
-            font-weight: 700;
-            margin-bottom: 1rem;
+            color: var(--primary-color) !important;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .vision-mission-card .lead {
+            color: var(--dark-green) !important;
+            font-weight: 500;
+            line-height: 1.8;
         }
 
         .stats-section {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
-            padding: 4rem 0;
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="2" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+        }
+
+        .stats-section .container {
+            position: relative;
+            z-index: 1;
         }
 
         .stat-item {
             text-align: center;
             padding: 2rem;
-        }
-
-        .stat-number {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--accent-color);
-        }
-
-        .stat-label {
-            font-size: 1.1rem;
-            font-weight: 500;
-            opacity: 0.9;
-        }
-
-        .values-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .value-item {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            text-align: center;
             transition: all 0.3s ease;
         }
 
-        .value-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        .stat-item:hover {
+            transform: scale(1.1);
         }
 
-        .value-item .icon {
-            font-size: 2.5rem;
-            color: var(--secondary-color);
-            margin-bottom: 1rem;
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: var(--accent-color) !important;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        .value-item h4 {
-            color: var(--primary-color);
+        .stat-label {
+            font-size: 1.2rem;
             font-weight: 600;
-            margin-bottom: 1rem;
+            opacity: 0.95;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
         }
 
         .leadership-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
         }
 
         .leader-card {
-            background: white;
-            border-radius: 15px;
+            background: linear-gradient(135deg, #ffffff, #f0fff0);
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            box-shadow: 0 15px 35px rgba(0, 153, 0, 0.15);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid transparent;
+            position: relative;
         }
 
         .leader-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 153, 0, 0.3);
+            border-color: var(--secondary-color);
         }
 
         .leader-image {
-            height: 250px;
-            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 4rem;
+            height: 300px;
+            width: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .leader-card:hover .leader-image {
+            transform: scale(1.05);
         }
 
         .leader-info {
-            padding: 1.5rem;
+            padding: 2rem;
             text-align: center;
+            background: linear-gradient(135deg, #ffffff, #f9fff9);
         }
 
         .leader-name {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--primary-color);
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary-color) !important;
             margin-bottom: 0.5rem;
+            text-shadow: 1px 1px 2px rgba(0,153,0,0.2);
         }
 
         .leader-title {
-            color: var(--secondary-color);
-            font-weight: 500;
+            color: var(--secondary-color) !important;
+            font-weight: 600;
             margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .leader-info p {
+            color: var(--dark-green) !important;
+            line-height: 1.7;
+            font-weight: 500;
         }
 
         .footer {
-            background: var(--primary-color);
+            background: linear-gradient(135deg, var(--dark-green), var(--primary-color));
             color: white;
             padding: 3rem 0 1rem 0;
         }
 
+        .footer h5 {
+            color: var(--accent-color) !important;
+        }
+
         .btn-primary {
-            background: var(--secondary-color);
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
             border: none;
-            border-radius: 25px;
-            padding: 12px 30px;
-            font-weight: 600;
+            border-radius: 30px;
+            padding: 15px 35px;
+            font-weight: 700;
             transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 204, 0, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .btn-primary:hover {
-            background: var(--primary-color);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-green));
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0, 153, 0, 0.4);
         }
 
+        /* Responsive Design */
         @media (max-width: 768px) {
             .page-header h1 {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
             }
             
             .section-title {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
             
             .history-timeline {
-                padding-left: 20px;
+                padding-left: 25px;
             }
             
             .timeline-item {
-                margin-left: 10px;
+                margin-left: 15px;
+                padding: 1.5rem;
             }
             
             .stat-number {
-                font-size: 2.5rem;
+                font-size: 3rem;
+            }
+
+            .brand-logo {
+                height: 38px;
+                margin-right: 8px;
+            }
+
+            .navbar-brand {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .brand-logo {
+                height: 35px;
+                margin-right: 6px;
+            }
+
+            .navbar-brand {
+                font-size: 1.1rem;
+            }
+
+            .brand-text {
+                flex-direction: column;
+                align-items: flex-start;
+                line-height: 1.2;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .brand-logo {
+                height: 30px;
+                margin-right: 5px;
+            }
+
+            .navbar-brand {
+                font-size: 1rem;
             }
         }
 
         /* Animation Classes */
         .fade-in-up {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .fade-in-up.animated {
             opacity: 1;
             transform: translateY(0);
         }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
     </style>
 </head>
 <body>
-    <!-- Navigation (Same as Homepage) -->
+    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <i class="fas fa-graduation-cap me-2"></i>
-                Shule ya Mfano
+                <img src="logo.png" alt="Shule ya Mfano Logo" class="brand-logo">
+                <span class="brand-text">
+                    <i class="fas fa-graduation-cap me-1"></i>
+                    Shule ya Mfano
+                </span>
             </a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -361,7 +575,7 @@
                         <a class="nav-link" href="index.html">Nyumbani</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="about.html">Kuhusu</a>
+                        <a class="nav-link active" href="kuhusu.html">Kuhusu</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="huduma.html">Huduma</a>
@@ -390,7 +604,7 @@
     <section class="page-header">
         <div class="container">
             <h1>Kuhusu Shule Yetu</h1>
-            <p class="lead">Kujua zaidi kuhusu historia, dira, maono na thamani za shule yetu</p>
+            <p class="lead">Kujua zaidi kuhusu historia, dira, maono na uongozi wa shule yetu</p>
             <nav class="breadcrumb-nav">
                 <a href="index.html"><i class="fas fa-home"></i> Nyumbani</a>
                 <i class="fas fa-chevron-right"></i>
@@ -404,36 +618,36 @@
         <div class="container">
             <h2 class="section-title fade-in-up">Historia ya Shule</h2>
             <div class="row">
-                <div class="col-lg-8 mx-auto">
+                <div class="col-lg-10 mx-auto">
                     <div class="history-timeline fade-in-up">
                         <div class="timeline-item">
                             <div class="timeline-year">2010</div>
                             <h4>Mwanzo wa Shule</h4>
-                            <p>Shule ya Mfano ilianzishwa kwa lengo la kutoa elimu bora kwa jamii ya Dar es Salaam. Tulianza na wanafunzi 50 na walimu 5.</p>
+                            <p>Shule ya Mfano ilianzishwa kwa lengo la kutoa elimu bora kwa jamii ya Dar es Salaam. Tulianza na wanafunzi 50 na walimu 5 wenye moyo wa kutoa huduma bora.</p>
                         </div>
                         
                         <div class="timeline-item">
                             <div class="timeline-year">2012</div>
                             <h4>Ujenzi wa Madarasa Mapya</h4>
-                            <p>Tulipanua miundombinu yetu kwa kujenga madarasa 8 mapya na makabati ya vitabu ili kuongeza uwezo wa kupokea wanafunzi zaidi.</p>
+                            <p>Tulipanua miundombinu yetu kwa kujenga madarasa 8 mapya na makabati ya vitabu ili kuongeza uwezo wa kupokea wanafunzi zaidi na kutoa mazingira bora ya masomo.</p>
                         </div>
                         
                         <div class="timeline-item">
                             <div class="timeline-year">2015</div>
                             <h4>Kutambuliwa Kimataifa</h4>
-                            <p>Shule yetu ilipata utambuzi wa kimataifa kwa mafanikio yake ya elimu na kuongezwa kwa programu za kisasa.</p>
+                            <p>Shule yetu ilipata utambuzi wa kimataifa kwa mafanikio yake ya elimu na kuongezwa kwa programu za kisasa za ufundishaji na utawala.</p>
                         </div>
                         
                         <div class="timeline-item">
                             <div class="timeline-year">2018</div>
                             <h4>Teknolojia Mpya</h4>
-                            <p>Tulianzisha mfumo wa kielektroniki wa elimu na kujenga makabati ya kompyuta ili kuongeza ubora wa ufundishaji.</p>
+                            <p>Tulianzisha mfumo wa kielektroniki wa elimu na kujenga makabati ya kompyuta ili kuongeza ubora wa ufundishaji na kujifunza.</p>
                         </div>
                         
                         <div class="timeline-item">
                             <div class="timeline-year">2025</div>
                             <h4>Leo</h4>
-                            <p>Kwa sasa, tunafundisha wanafunzi zaidi ya 500 na tuna walimu 25 wenye uzoefu mkubwa. Tunaendelea kutoa elimu bora.</p>
+                            <p>Kwa sasa, tunafundisha wanafunzi zaidi ya 500 na tuna walimu 25 wenye uzoefu mkubwa. Tunaendelea kutoa elimu bora na ya kisasa.</p>
                         </div>
                     </div>
                 </div>
@@ -509,28 +723,43 @@
         <div class="container">
             <h2 class="section-title fade-in-up">Malengo ya Shule</h2>
             <div class="row">
-                <div class="col-lg-8 mx-auto">
+                <div class="col-lg-10 mx-auto">
                     <div class="fade-in-up">
                         <ul class="list-unstyled">
-                            <li class="mb-3">
-                                <i class="fas fa-check-circle text-success me-3"></i>
-                                <strong>Kutoa elimu bora:</strong> Kuandaa wanafunzi katika masomo yote kwa kutumia mbinu za kisasa za ufundishaji
+                            <li class="mb-4 d-flex align-items-start">
+                                <i class="fas fa-check-circle me-3 mt-1" style="color: var(--secondary-color); font-size: 1.2rem;"></i>
+                                <div>
+                                    <strong style="color: var(--primary-color);">Kutoa elimu bora:</strong> 
+                                    <span style="color: var(--dark-green);">Kuandaa wanafunzi katika masomo yote kwa kutumia mbinu za kisasa za ufundishaji</span>
+                                </div>
                             </li>
-                            <li class="mb-3">
-                                <i class="fas fa-check-circle text-success me-3"></i>
-                                <strong>Kujenga tabia njema:</strong> Kuimarisha maadili na utamaduni mzuri miongoni mwa wanafunzi
+                            <li class="mb-4 d-flex align-items-start">
+                                <i class="fas fa-check-circle me-3 mt-1" style="color: var(--secondary-color); font-size: 1.2rem;"></i>
+                                <div>
+                                    <strong style="color: var(--primary-color);">Kujenga tabia njema:</strong> 
+                                    <span style="color: var(--dark-green);">Kuimarisha maadili na utamaduni mzuri miongoni mwa wanafunzi</span>
+                                </div>
                             </li>
-                            <li class="mb-3">
-                                <i class="fas fa-check-circle text-success me-3"></i>
-                                <strong>Kuongeza ujuzi wa kitaaluma:</strong> Kuwasaidia wanafunzi kupata ujuzi mbalimbali wa maisha
+                            <li class="mb-4 d-flex align-items-start">
+                                <i class="fas fa-check-circle me-3 mt-1" style="color: var(--secondary-color); font-size: 1.2rem;"></i>
+                                <div>
+                                    <strong style="color: var(--primary-color);">Kuongeza ujuzi wa kitaaluma:</strong> 
+                                    <span style="color: var(--dark-green);">Kuwasaidia wanafunzi kupata ujuzi mbalimbali wa maisha</span>
+                                </div>
                             </li>
-                            <li class="mb-3">
-                                <i class="fas fa-check-circle text-success me-3"></i>
-                                <strong>Kuimarisha mazingira mazuri:</strong> Kutunza mazingira salama na ya kufundishia vizuri
+                            <li class="mb-4 d-flex align-items-start">
+                                <i class="fas fa-check-circle me-3 mt-1" style="color: var(--secondary-color); font-size: 1.2rem;"></i>
+                                <div>
+                                    <strong style="color: var(--primary-color);">Kuimarisha mazingira mazuri:</strong> 
+                                    <span style="color: var(--dark-green);">Kutunza mazingira salama na ya kufundishia vizuri</span>
+                                </div>
                             </li>
-                            <li class="mb-3">
-                                <i class="fas fa-check-circle text-success me-3"></i>
-                                <strong>Kushirikiana na jamii:</strong> Kujenga uhusiano mzuri baina ya shule, wazazi na jamii
+                            <li class="mb-4 d-flex align-items-start">
+                                <i class="fas fa-check-circle me-3 mt-1" style="color: var(--secondary-color); font-size: 1.2rem;"></i>
+                                <div>
+                                    <strong style="color: var(--primary-color);">Kushirikiana na jamii:</strong> 
+                                    <span style="color: var(--dark-green);">Kujenga uhusiano mzuri baina ya shule, wazazi na jamii</span>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -539,110 +768,48 @@
         </div>
     </section>
 
-    <!-- Thamani za Shule -->
-    <section class="content-section bg-light">
-        <div class="container">
-            <h2 class="section-title fade-in-up">Thamani na Sera za Shule</h2>
-            <div class="values-grid fade-in-up">
-                <div class="value-item">
-                    <div class="icon">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <h4>Uongozi</h4>
-                    <p>Tunawaongoza wanafunzi kuwa viongozi bora wa kesho katika nyanja zote za maisha.</p>
-                </div>
-                
-                <div class="value-item">
-                    <div class="icon">
-                        <i class="fas fa-handshake"></i>
-                    </div>
-                    <h4>Uwazi</h4>
-                    <p>Tunafanya kazi kwa uwazi na uaminifu katika shughuli zote za shule.</p>
-                </div>
-                
-                <div class="value-item">
-                    <div class="icon">
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>Ubora</h4>
-                    <p>Tunalenga ubora katika kila kitu tunachofanya, kutoka ufundishaji hadi huduma.</p>
-                </div>
-                
-                <div class="value-item">
-                    <div class="icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h4>Ushirikiano</h4>
-                    <p>Tunashirikiana na wazazi na jamii kwa maendeleo ya watoto.</p>
-                </div>
-                
-                <div class="value-item">
-                    <div class="icon">
-                        <i class="fas fa-lightbulb"></i>
-                    </div>
-                    <h4>Ubunifu</h4>
-                    <p>Tunahimiza ubunifu na uvumbuzi katika njia zetu za kufundisha.</p>
-                </div>
-                
-                <div class="value-item">
-                    <div class="icon">
-                        <i class="fas fa-balance-scale"></i>
-                    </div>
-                    <h4>Haki</h4>
-                    <p>Tunahakikisha haki na usawa kwa wanafunzi wote bila ubaguzi.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Uongozi wa Shule -->
-    <section class="content-section">
+    <section class="content-section bg-light">
         <div class="container">
             <h2 class="section-title fade-in-up">Uongozi wa Shule</h2>
             <div class="leadership-grid fade-in-up">
                 <div class="leader-card">
-                    <div class="leader-image">
-                        <i class="fas fa-user-tie"></i>
-                    </div>
+                    <img src="mwalimu.png" alt="Dkt. John Mwalimu" class="leader-image">
                     <div class="leader-info">
                         <div class="leader-name">Dkt. John Mwalimu</div>
                         <div class="leader-title">Mkurugenzi Mkuu</div>
-                        <p>Mwalimu mwenye uzoefu wa miaka 20 katika elimu. Ana shahada ya Uzamivu katika Uongozi wa Elimu.</p>
+                        <p>Mwalimu mwenye uzoefu wa miaka 20 katika elimu. Ana shahada ya Uzamivu katika Uongozi wa Elimu na ameongoza miradi mingi ya maendeleo ya elimu.</p>
                     </div>
                 </div>
                 
                 <div class="leader-card">
-                    <div class="leader-image">
-                        <i class="fas fa-user-graduate"></i>
-                    </div>
+                    <img src="mwalimu.png" alt="Bi. Mary Fundisha" class="leader-image">
                     <div class="leader-info">
                         <div class="leader-name">Bi. Mary Fundisha</div>
                         <div class="leader-title">Mkuu wa Masomo</div>
-                        <p>Msimamizi wa mtaala na mpangaji wa shughuli za kitaaluma. Mwalimu mwenye uzoefu wa miaka 15.</p>
+                        <p>Msimamizi wa mtaala na mpangaji wa shughuli za kitaaluma. Mwalimu mwenye uzoefu wa miaka 15 na mtaalam wa mbinu za ufundishaji wa kisasa.</p>
                     </div>
                 </div>
                 
                 <div class="leader-card">
-                    <div class="leader-image">
-                        <i class="fas fa-user-cog"></i>
-                    </div>
+                    <img src="mwalimu.png" alt="Mw. Peter Simamia" class="leader-image">
                     <div class="leader-info">
                         <div class="leader-name">Mw. Peter Simamia</div>
                         <div class="leader-title">Meneja wa Utawala</div>
-                        <p>Msimamizi wa shughuli za kiutawala na mazingira ya shule. Mwenye uzoefu wa miaka 12.</p>
+                        <p>Msimamizi wa shughuli za kiutawala na mazingira ya shule. Mwenye uzoefu wa miaka 12 katika usimamizi wa taasisi za elimu.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer (Same as Homepage) -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 mb-4">
                     <h5 class="fw-bold mb-3">
-                        <i class="fas fa-graduation-cap me-2"></i>
+                        <img src="logo.png" alt="Logo" style="height: 30px; margin-right: 8px; filter: brightness(0) invert(1);">
                         Shule ya Mfano
                     </h5>
                     <p>Tunatoa elimu bora kwa maendeleo ya watoto wetu kwa ujuzi, maadili na utamaduni wa Kitanzania.</p>
@@ -658,7 +825,7 @@
                 <div class="col-lg-4 mb-4">
                     <h5 class="fw-bold mb-3">Viungo vya Haraka</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a href="about.html" class="text-white-50">Kuhusu Shule</a></li>
+                        <li class="mb-2"><a href="kuhusu.html" class="text-white-50">Kuhusu Shule</a></li>
                         <li class="mb-2"><a href="masomo.html" class="text-white-50">Masomo</a></li>
                         <li class="mb-2"><a href="wanafunzi.html" class="text-white-50">Wanafunzi</a></li>
                         <li class="mb-2"><a href="matangazo.html" class="text-white-50">Matangazo</a></li>
@@ -670,7 +837,7 @@
                     <div class="contact-info">
                         <p class="mb-2">
                             <i class="fas fa-map-marker-alt me-2"></i>
-                            Barabara ya Uhuru, Dar es Salaam
+                            Barabara ya Uhuru, Zanzibar
                         </p>
                         <p class="mb-2">
                             <i class="fas fa-phone me-2"></i>
@@ -687,7 +854,7 @@
             <hr class="my-4">
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <p class="mb-0">&copy; 2025 Shule ya Mfano. Haki zote zimehifadhiwa.</p>
+                    <p class="mb-0">&copy; 2025 Shule ya Mpendae. Haki zote zimehifadhiwa.</p>
                 </div>
                 <div class="col-md-6 text-md-end">
                     <small class="text-white-50">Imeundwa kwa mapenzi na teknolojia ya kisasa</small>
@@ -701,14 +868,31 @@
     
     <!-- Custom JavaScript -->
     <script>
-        // Navbar scroll effect (same as homepage)
+        // Enhanced navbar scroll effect
+        let lastScrollY = 0;
+        const navbar = document.querySelector('.navbar');
+        
         window.addEventListener('scroll', function() {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 100) {
-                navbar.style.background = 'rgba(30, 58, 138, 0.95)';
+            const currentScrollY = window.scrollY;
+            
+            if (currentScrollY > 100) {
+                navbar.style.background = 'rgba(0, 102, 0, 0.95)';
+                navbar.style.backdropFilter = 'blur(10px)';
+                navbar.style.boxShadow = '0 8px 32px rgba(0, 153, 0, 0.4)';
             } else {
                 navbar.style.background = 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))';
+                navbar.style.backdropFilter = 'none';
+                navbar.style.boxShadow = '0 8px 32px rgba(0, 153, 0, 0.3)';
             }
+            
+            // Hide/show navbar on scroll
+            if (currentScrollY > lastScrollY && currentScrollY > 200) {
+                navbar.style.transform = 'translateY(-100%)';
+            } else {
+                navbar.style.transform = 'translateY(0)';
+            }
+            
+            lastScrollY = currentScrollY;
         });
 
         // Smooth scrolling for navigation links
@@ -718,24 +902,28 @@
                 const targetId = this.getAttribute('href').substring(1);
                 const targetElement = document.getElementById(targetId);
                 if (targetElement) {
-                    targetElement.scrollIntoView({ 
-                        behavior: 'smooth',
-                        block: 'start'
+                    const navHeight = navbar.offsetHeight;
+                    const targetPosition = targetElement.offsetTop - navHeight - 20;
+                    window.scrollTo({ 
+                        top: targetPosition,
+                        behavior: 'smooth'
                     });
                 }
             });
         });
 
-        // Intersection Observer for animations
+        // Enhanced Intersection Observer for animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         };
 
         const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
+            entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('animated');
+                    setTimeout(() => {
+                        entry.target.classList.add('animated');
+                    }, index * 200);
                 }
             });
         }, observerOptions);
@@ -752,7 +940,7 @@
         function animateCounter(element) {
             const target = parseInt(element.getAttribute('data-count'));
             let current = 0;
-            const increment = target / 50; // Animation duration control
+            const increment = target / 60; // Animation duration control
             
             const timer = setInterval(() => {
                 current += increment;
@@ -762,7 +950,7 @@
                 } else {
                     element.textContent = Math.floor(current);
                 }
-            }, 40); // Update every 40ms
+            }, 30); // Update every 30ms
         }
 
         // Start counter animation when stats section is visible
@@ -770,8 +958,10 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const counters = entry.target.querySelectorAll('[data-count]');
-                    counters.forEach(counter => {
-                        animateCounter(counter);
+                    counters.forEach((counter, index) => {
+                        setTimeout(() => {
+                            animateCounter(counter);
+                        }, index * 200);
                     });
                     statsObserver.unobserve(entry.target);
                 }
@@ -785,14 +975,14 @@
             }
         });
 
-        // Timeline animation
+        // Enhanced timeline animation
         const timelineObserver = new IntersectionObserver(function(entries) {
             entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
                     setTimeout(() => {
                         entry.target.style.opacity = '1';
                         entry.target.style.transform = 'translateX(0)';
-                    }, index * 200);
+                    }, index * 300);
                 }
             });
         }, { threshold: 0.3 });
@@ -802,20 +992,32 @@
             timelineItems.forEach(item => {
                 item.style.opacity = '0';
                 item.style.transform = 'translateX(-50px)';
-                item.style.transition = 'all 0.6s ease';
+                item.style.transition = 'all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
                 timelineObserver.observe(item);
             });
         });
 
-        // Add hover effects for interactive elements
+        // Enhanced hover effects for interactive elements
         document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.vision-mission-card, .value-item, .leader-card');
+            const cards = document.querySelectorAll('.vision-mission-card, .leader-card');
             cards.forEach(card => {
                 card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                    this.style.transform = 'translateY(-15px) scale(1.03)';
                 });
                 
                 card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Timeline items hover effect
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            timelineItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+                
+                item.addEventListener('mouseleave', function() {
                     this.style.transform = 'translateY(0) scale(1)';
                 });
             });
@@ -826,8 +1028,38 @@
             const scrolled = window.pageYOffset;
             const pageHeader = document.querySelector('.page-header');
             if (pageHeader) {
-                pageHeader.style.transform = `translateY(${scrolled * 0.5}px)`;
+                pageHeader.style.transform = `translateY(${scrolled * 0.3}px)`;
             }
+        });
+
+        // Add loading animation
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.8s ease-in-out';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        // Add scroll progress indicator
+        const progressBar = document.createElement('div');
+        progressBar.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            z-index: 9999;
+            transition: width 0.1s ease;
+        `;
+        document.body.appendChild(progressBar);
+        
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercent = (scrollTop / scrollHeight) * 100;
+            progressBar.style.width = scrollPercent + '%';
         });
     </script>
 </body>

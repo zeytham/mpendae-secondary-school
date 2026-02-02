@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masomo na Mtaala - Shule ya Mfano</title>
+    <title>Masomo na Mtaala - Shule ya Sekondari ya Mpendae</title>
     
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
@@ -28,6 +28,7 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: var(--text-dark);
+            padding-top: 76px;
             overflow-x: hidden;
         }
 
@@ -88,13 +89,10 @@
 
         .page-header {
             background: linear-gradient(rgba(0, 153, 0, 0.9), rgba(0, 204, 0, 0.8)), 
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23e5e7ff" width="1200" height="400"/><path fill="%23ddd6fe" d="M0 250l50-16.7c50-16.6 150-50 250-50s200 33.4 250 50 100 16.7 150 0 100-50 150-16.7c50 33.4 150 100 200 100s100-66.6 150-66.7V400H0z"/></svg>') center/cover;
-            min-height: 400px;
-            display: flex;
-            align-items: center;
-            text-align: center;
+                        url('font.png') center/cover;
+            padding: 120px 0 80px 0;
             color: white;
-            margin-top: 76px;
+            text-align: center;
             position: relative;
             overflow: hidden;
         }
@@ -130,20 +128,47 @@
             z-index: 2;
         }
 
-        .page-header p {
+        .page-header .lead {
             font-size: 1.3rem;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
             position: relative;
             z-index: 2;
         }
 
-        .curriculum-overview {
+        .breadcrumb-nav {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 25px;
+            padding: 12px 25px;
+            display: inline-block;
+            margin-top: 1.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        .breadcrumb-nav a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            margin: 0 8px;
+            transition: all 0.3s ease;
+        }
+
+        .breadcrumb-nav a:hover {
+            color: var(--accent-color);
+            text-shadow: 0 0 10px rgba(102,255,102,0.5);
+        }
+
+        .content-section {
             padding: 5rem 0;
-            background: linear-gradient(135deg, var(--light-green), #e6ffe6);
             position: relative;
         }
 
-        .curriculum-overview::before {
+        .content-section.bg-light {
+            background: linear-gradient(135deg, var(--light-green), #e6ffe6);
+        }
+
+        .content-section.bg-light::before {
             content: '';
             position: absolute;
             top: 0;
@@ -155,21 +180,75 @@
             z-index: 0;
         }
 
-        .curriculum-overview > .container {
+        .content-section > .container {
             position: relative;
             z-index: 1;
         }
 
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--primary-color) !important;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            text-shadow: 2px 2px 4px rgba(0,153,0,0.2);
+        }
+
+        .section-title::after {
+            content: '';
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            display: block;
+            margin: 1.5rem auto;
+            border-radius: 3px;
+            box-shadow: 0 2px 8px rgba(0,153,0,0.3);
+        }
+
+        /* Stats Cards */
+        .stats-card {
+            background: linear-gradient(135deg, #ffffff, #f0fff0);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 153, 0, 0.15);
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            border-top: 5px solid var(--secondary-color);
+        }
+
+        .stats-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 153, 0, 0.25);
+        }
+
+        .stats-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--secondary-color) !important;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,204,0,0.2);
+        }
+
+        .stats-card p {
+            color: var(--primary-color) !important;
+            font-weight: 600;
+            margin-bottom: 0;
+        }
+
+        /* Subject Cards */
         .subject-card {
             background: linear-gradient(135deg, #ffffff, #f0fff0);
             border-radius: 20px;
-            padding: 2.5rem;
+            padding: 2rem;
             margin-bottom: 2rem;
             box-shadow: 0 15px 35px rgba(0, 153, 0, 0.15);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border-left: 5px solid var(--secondary-color);
             position: relative;
             overflow: hidden;
+            height: 100%;
         }
 
         .subject-card::before {
@@ -202,15 +281,15 @@
         }
 
         .subject-icon {
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: white;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             transition: all 0.3s ease;
             box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
@@ -219,35 +298,24 @@
             transform: rotateY(360deg) scale(1.1);
         }
 
-        .subject-card h4 {
+        .subject-card h5 {
             color: var(--primary-color) !important;
             font-weight: 700;
-            margin-bottom: 1rem;
-            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
             text-shadow: 1px 1px 2px rgba(0,153,0,0.2);
         }
 
         .subject-card p {
             color: var(--dark-green) !important;
-            line-height: 1.7;
+            line-height: 1.6;
             font-weight: 500;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0;
+            font-size: 0.95rem;
         }
 
-        .subject-card ul li {
-            color: var(--dark-green) !important;
-            font-weight: 500;
-        }
-
-        .subject-card ul li i {
-            color: var(--secondary-color) !important;
-        }
-
-        .level-section {
-            padding: 5rem 0;
-        }
-
-        .level-card {
+        /* Stream Cards */
+        .stream-card {
             background: linear-gradient(135deg, #ffffff, #f0fff0);
             border-radius: 20px;
             padding: 3rem;
@@ -257,217 +325,183 @@
             border: 2px solid transparent;
         }
 
-        .level-card:hover {
+        .stream-card:hover {
             transform: translateY(-15px) scale(1.02);
             box-shadow: 0 25px 50px rgba(0, 153, 0, 0.3);
             border-color: var(--secondary-color);
         }
 
-        .level-header {
+        .stream-header {
             display: flex;
             align-items: center;
             margin-bottom: 2rem;
         }
 
-        .level-icon {
-            width: 90px;
-            height: 90px;
+        .stream-icon {
+            width: 80px;
+            height: 80px;
             border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: white;
             margin-right: 1.5rem;
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
             transition: all 0.3s ease;
         }
 
-        .level-card:hover .level-icon {
+        .stream-card:hover .stream-icon {
             transform: scale(1.1) rotateY(15deg);
         }
 
-        .level-header h3 {
+        .stream-header h3 {
             color: var(--primary-color) !important;
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
             font-size: 1.8rem;
         }
 
-        .level-header p {
+        .stream-header .stream-subtitle {
             color: var(--dark-green) !important;
             font-weight: 500;
+            font-size: 1rem;
         }
 
-        .level-card h5 {
+        .stream-card h5 {
             color: var(--secondary-color) !important;
             font-weight: 700;
-        }
-
-        .level-card h6 {
-            color: var(--primary-color) !important;
-            font-weight: 600;
-        }
-
-        .level-card ul li {
-            color: var(--dark-green) !important;
-            font-weight: 500;
-        }
-
-        .level-card ul li i {
-            color: var(--secondary-color) !important;
-        }
-
-        .teaching-methods {
-            background: linear-gradient(135deg, var(--light-green), #e6ffe6);
-            padding: 5rem 0;
-        }
-
-        .method-card {
-            background: linear-gradient(135deg, #ffffff, #f0fff0);
-            border-radius: 20px;
-            padding: 2.5rem;
-            text-align: center;
-            height: 100%;
-            box-shadow: 0 10px 30px rgba(0, 153, 0, 0.15);
-            transition: all 0.4s ease;
-            border-top: 5px solid var(--secondary-color);
-        }
-
-        .method-card:hover {
-            transform: translateY(-15px) scale(1.05);
-            box-shadow: 0 20px 40px rgba(0, 153, 0, 0.25);
-        }
-
-        .method-icon {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.2rem;
-            margin: 0 auto 2rem;
-            color: white;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-        }
-
-        .method-card:hover .method-icon {
-            transform: rotateY(360deg) scale(1.1);
-        }
-
-        .method-card h5 {
-            color: var(--primary-color) !important;
-            font-weight: 700;
+            margin-top: 1.5rem;
             margin-bottom: 1rem;
-            font-size: 1.3rem;
         }
 
-        .method-card p {
+        .subject-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.8rem;
+        }
+
+        .subject-item {
+            background: linear-gradient(135deg, rgba(0,204,0,0.1), rgba(102,255,102,0.05));
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            border: 2px solid var(--light-green);
+            transition: all 0.3s ease;
+            font-weight: 600;
             color: var(--dark-green) !important;
-            line-height: 1.7;
-            font-weight: 500;
         }
 
-        .assessment-section {
-            padding: 5rem 0;
+        .subject-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 153, 0, 0.2);
+            border-color: var(--secondary-color);
         }
 
-        .assessment-timeline {
-            position: relative;
-            padding-left: 2.5rem;
+        .subject-item i {
+            color: var(--secondary-color);
+            margin-right: 0.5rem;
         }
 
-        .assessment-timeline::before {
-            content: '';
-            position: absolute;
-            left: 1.2rem;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
-            border-radius: 2px;
+        /* Assessment Info Card */
+        .assessment-card {
+            background: linear-gradient(135deg, #ffffff, #f0fff0);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 15px 35px rgba(0, 153, 0, 0.15);
+            margin-top: 2rem;
+            border-top: 5px solid var(--secondary-color);
         }
 
-        .timeline-item {
-            position: relative;
-            padding-bottom: 3rem;
+        .assessment-card h4 {
+            color: var(--primary-color) !important;
+            font-weight: 700;
+            margin-bottom: 2rem;
         }
 
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -2rem;
-            top: 0.5rem;
-            width: 1.5rem;
-            height: 1.5rem;
-            border-radius: 50%;
-            background: var(--secondary-color);
-            box-shadow: 0 0 0 4px white, 0 0 0 8px var(--primary-color);
+        .assessment-item {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(0,204,0,0.05), rgba(102,255,102,0.03));
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--secondary-color);
+            transition: all 0.3s ease;
         }
 
-        .timeline-item h5 {
+        .assessment-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 20px rgba(0, 153, 0, 0.15);
+        }
+
+        .assessment-item h6 {
             color: var(--primary-color) !important;
             font-weight: 700;
             margin-bottom: 0.5rem;
         }
 
-        .timeline-item p {
+        .assessment-item p {
             color: var(--dark-green) !important;
-            line-height: 1.7;
+            margin-bottom: 0;
             font-weight: 500;
         }
 
-        .stats-card {
+        .score-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Registration Info */
+        .registration-card {
             background: linear-gradient(135deg, #ffffff, #f0fff0);
             border-radius: 20px;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 153, 0, 0.15);
+            padding: 3rem;
+            box-shadow: 0 15px 35px rgba(0, 153, 0, 0.15);
             margin-bottom: 2rem;
-            transition: all 0.3s ease;
-            border-top: 5px solid var(--secondary-color);
+            border-left: 5px solid var(--secondary-color);
         }
 
-        .stats-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 153, 0, 0.25);
-        }
-
-        .stats-number {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--secondary-color) !important;
-            margin-bottom: 0.5rem;
-            text-shadow: 2px 2px 4px rgba(0,204,0,0.2);
-        }
-
-        .stats-card p {
+        .registration-card h4 {
             color: var(--primary-color) !important;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .registration-card p {
+            color: var(--dark-green) !important;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        .document-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .document-list li {
+            padding: 1rem;
+            background: linear-gradient(135deg, rgba(0,204,0,0.05), rgba(102,255,102,0.03));
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            border-left: 3px solid var(--secondary-color);
+            color: var(--dark-green) !important;
             font-weight: 600;
-            margin-bottom: 0;
+            transition: all 0.3s ease;
         }
 
-        .section-title {
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: var(--primary-color) !important;
-            margin-bottom: 3rem;
-            text-align: center;
-            position: relative;
-            text-shadow: 2px 2px 4px rgba(0,153,0,0.2);
+        .document-list li:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(0, 153, 0, 0.15);
         }
 
-        .section-title::after {
-            content: '';
-            width: 100px;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            display: block;
-            margin: 1.5rem auto;
-            border-radius: 3px;
-            box-shadow: 0 2px 8px rgba(0,153,0,0.3);
+        .document-list li i {
+            color: var(--secondary-color);
+            margin-right: 0.8rem;
+            font-size: 1.1rem;
         }
 
         .footer {
@@ -480,97 +514,18 @@
             color: var(--accent-color) !important;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-            border: none;
-            border-radius: 30px;
-            padding: 15px 35px;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(0, 204, 0, 0.3);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .btn-primary:hover {
-            background: linear-gradient(135deg, var(--primary-color), var(--dark-green));
-            transform: translateY(-3px);
-            box-shadow: 0 12px 25px rgba(0, 153, 0, 0.4);
-        }
-
-        .btn-outline-light {
-            border: 2px solid white;
-            border-radius: 30px;
-            padding: 13px 33px;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .btn-outline-light:hover {
-            background: white;
-            color: var(--primary-color) !important;
-            transform: translateY(-3px);
-        }
-
-        .btn-light {
-            background: white;
-            border: none;
-            border-radius: 30px;
-            padding: 15px 35px;
-            font-weight: 700;
-            color: var(--primary-color) !important;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .btn-light:hover {
-            background: var(--light-green);
-            color: var(--dark-green) !important;
-            transform: translateY(-3px);
-        }
-
-        .table th {
-            color: var(--primary-color) !important;
-            font-weight: 700;
-        }
-
-        .table td {
-            color: var(--dark-green) !important;
-            font-weight: 500;
-        }
-
-        .badge {
-            font-size: 0.9rem;
-            padding: 0.5rem 0.8rem;
-        }
-
-        .bg-success {
-            background-color: var(--success-color) !important;
-        }
-
-        .bg-primary {
-            background-color: var(--secondary-color) !important;
-        }
-
-        .bg-info {
-            background-color: var(--info-color) !important;
-        }
-
         /* Responsive Design */
         @media (max-width: 768px) {
             .page-header h1 {
                 font-size: 2.5rem;
             }
             
-            .level-header {
+            .stream-header {
                 flex-direction: column;
                 text-align: center;
             }
             
-            .level-icon {
+            .stream-icon {
                 margin-right: 0;
                 margin-bottom: 1rem;
             }
@@ -582,6 +537,10 @@
 
             .navbar-brand {
                 font-size: 1.3rem;
+            }
+
+            .subject-list {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -601,12 +560,6 @@
 
             .navbar-brand {
                 font-size: 1.1rem;
-            }
-
-            .brand-text {
-                flex-direction: column;
-                align-items: flex-start;
-                line-height: 1.2;
             }
         }
 
@@ -639,10 +592,10 @@
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <img src="logo.png" alt="Shule ya Mfano Logo" class="brand-logo">
+                <img src="logo.png" alt="Shule ya Mpendae Logo" class="brand-logo">
                 <span class="brand-text">
                     <i class="fas fa-graduation-cap me-1"></i>
-                    Shule ya Mfano
+                    Shule ya Sekondari Mpendae
                 </span>
             </a>
             
@@ -684,172 +637,328 @@
     <!-- Page Header -->
     <section class="page-header">
         <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h1>Masomo na Mtaala</h1>
-                    <p>Mtaala wetu unaongozwa na elimu ya kisasa na utamaduni wa Kitanzania</p>
-                </div>
-            </div>
+            <h1>Masomo na Mtaala</h1>
+            <p class="lead">Mtaala wa NECTA kwa elimu ya sekondari - Kutoka kidato cha kwanza hadi cha sita</p>
+            <nav class="breadcrumb-nav">
+                <a href="index.html"><i class="fas fa-home"></i> Nyumbani</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Masomo</span>
+            </nav>
         </div>
     </section>
 
-    <!-- Curriculum Overview -->
-    <section class="curriculum-overview">
+    <!-- Statistics Section -->
+    <section class="content-section">
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center mb-5">
                     <h2 class="section-title fade-in-up">Muhtasari wa Mtaala</h2>
-                    <p class="lead" style="color: var(--dark-green); font-weight: 500;">Tunafuata mtaala wa serikali uliokamilishwa na masomo ya ziada</p>
+                    <p class="lead" style="color: var(--dark-green); font-weight: 500;">
+                        Tunafuata mtaala wa NECTA (National Examinations Council of Tanzania)
+                    </p>
                 </div>
             </div>
 
             <div class="row mb-5">
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-6">
                     <div class="stats-card fade-in-up">
-                        <div class="stats-number">12</div>
+                        <div class="stats-number">11</div>
                         <p class="mb-0">Masomo Makuu</p>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-6">
                     <div class="stats-card fade-in-up">
                         <div class="stats-number">7</div>
-                        <p class="mb-0">Miaka ya Msingi</p>
+                        <p class="mb-0">Madarasa (A - G)</p>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-6">
                     <div class="stats-card fade-in-up">
-                        <div class="stats-number">4</div>
-                        <p class="mb-0">Miaka ya Sekondari</p>
+                        <div class="stats-number">3</div>
+                        <p class="mb-0">Mialuko (F5 - F6)</p>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-6">
                     <div class="stats-card fade-in-up">
-                        <div class="stats-number">8</div>
-                        <p class="mb-0">Shughuli za Ziada</p>
+                        <div class="stats-number">NECTA</div>
+                        <p class="mb-0">Mtihani wa Taifa</p>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Core Subjects -->
+    <!-- Core Subjects (F1-F4) -->
+    <section class="content-section bg-light">
+        <div class="container">
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="section-title fade-in-up">Masomo ya Lazima (Kidato cha 1 - 4)</h2>
+                    <p class="lead" style="color: var(--dark-green); font-weight: 500;">
+                        Masomo yanayofundishwa kwa wanafunzi wote wa O-Level
+                    </p>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <!-- Languages -->
+                <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="subject-card fade-in-up">
-                        <div class="subject-icon" style="background: #e11d48;">
-                            <i class="fas fa-map-marked-alt"></i>
+                        <div class="subject-icon" style="background: #dc2626;">
+                            <i class="fas fa-language"></i>
                         </div>
-                        <h4>Jiografia</h4>
-                        <p>Mazingira, miji na nchi - utambulisho wa dunia yetu</p>
-                        <ul class="list-unstyled">
-                            <li><i class="fas fa-check me-2"></i>Jiografia ya Kiijiologia</li>
-                            <li><i class="fas fa-check me-2"></i>Jiografia ya Kiuchumi</li>
-                            <li><i class="fas fa-check me-2"></i>Mazingira na Uongozi</li>
-                        </ul>
+                        <h5>Kiswahili</h5>
+                        <p>Lugha ya Taifa - Sarufi, Fasihi na Insha</p>
                     </div>
                 </div>
 
-                <div class="col-lg-4">
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="subject-card fade-in-up">
+                        <div class="subject-icon" style="background: #2563eb;">
+                            <i class="fas fa-globe-americas"></i>
+                        </div>
+                        <h5>English</h5>
+                        <p>Lugha ya Kimataifa - Grammar na Composition</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="subject-card fade-in-up">
+                        <div class="subject-icon" style="background: #16a34a;">
+                            <i class="fas fa-quran"></i>
+                        </div>
+                        <h5>Arabic</h5>
+                        <p>Lugha ya Kiarabu - Kusoma na Kuandika</p>
+                    </div>
+                </div>
+
+                <!-- Social Studies -->
+                <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="subject-card fade-in-up">
                         <div class="subject-icon" style="background: #7c3aed;">
                             <i class="fas fa-landmark"></i>
                         </div>
-                        <h4>Historia</h4>
-                        <p>Historia ya Tanzania na dunia - kujifunza kutoka zamani</p>
-                        <ul class="list-unstyled">
-                            <li><i class="fas fa-check me-2"></i>Historia ya Afrika Mashariki</li>
-                            <li><i class="fas fa-check me-2"></i>Utamaduni wa Kitanzania</li>
-                            <li><i class="fas fa-check me-2"></i>Historia ya Dunia</li>
-                        </ul>
+                        <h5>History</h5>
+                        <p>Historia ya Tanzania, Afrika na Dunia</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="subject-card fade-in-up">
+                        <div class="subject-icon" style="background: #ea580c;">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <h5>Geography</h5>
+                        <p>Jiografia ya Kiuchumi na Mazingira</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="subject-card fade-in-up">
+                        <div class="subject-icon" style="background: #0891b2;">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <h5>Civics</h5>
+                        <p>Uraia na Maadili ya Jamii</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="subject-card fade-in-up">
+                        <div class="subject-icon" style="background: #059669;">
+                            <i class="fas fa-mosque"></i>
+                        </div>
+                        <h5>Dini</h5>
+                        <p>IRE - Islamic Religious Education</p>
+                    </div>
+                </div>
+
+                <!-- Sciences & Math -->
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="subject-card fade-in-up">
+                        <div class="subject-icon" style="background: #be123c;">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <h5>Mathematics</h5>
+                        <p>Hisabati - Algebra, Geometry na Trigonometry</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="subject-card fade-in-up">
+                        <div class="subject-icon" style="background: #9333ea;">
+                            <i class="fas fa-atom"></i>
+                        </div>
+                        <h5>Physics</h5>
+                        <p>Fizikia - Nguvu, Nishati na Mawimbi</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="subject-card fade-in-up">
+                        <div class="subject-icon" style="background: #0284c7;">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <h5>Chemistry</h5>
+                        <p>Kemia - Majaribio na Mabadiliko ya Vitu</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="subject-card fade-in-up">
+                        <div class="subject-icon" style="background: #15803d;">
+                            <i class="fas fa-dna"></i>
+                        </div>
+                        <h5>Biology</h5>
+                        <p>Biolojia - Viumbe Hai na Mazingira Yao</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Education Levels -->
-    <section class="level-section">
+    <!-- A-Level Streams (F5-F6) -->
+    <section class="content-section">
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center mb-5">
-                    <h2 class="section-title fade-in-up">Viwango vya Elimu</h2>
-                    <p class="lead" style="color: var(--dark-green); font-weight: 500;">Kutoka darasa la kwanza hadi la nne la sekondari</p>
+                    <h2 class="section-title fade-in-up">Mialuko ya Kidato cha 5 na 6 (A-Level)</h2>
+                    <p class="lead" style="color: var(--dark-green); font-weight: 500;">
+                        Elimu ya juu ya sekondari - Wanafunzi huchagua moja ya mialuko hii
+                    </p>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="level-card fade-in-up">
-                        <div class="level-header">
-                            <div class="level-icon" style="background: var(--success-color);">
-                                <i class="fas fa-seedling"></i>
+            <!-- PCM Stream -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="stream-card fade-in-up">
+                        <div class="stream-header">
+                            <div class="stream-icon" style="background: linear-gradient(135deg, #9333ea, #7c3aed);">
+                                <i class="fas fa-atom"></i>
                             </div>
                             <div>
-                                <h3>Elimu ya Msingi</h3>
-                                <p class="text-muted mb-0">Darasa la 1 hadi la 7</p>
+                                <h3>PCM (Physics, Chemistry, Mathematics)</h3>
+                                <p class="stream-subtitle">Mialuko ya Sayansi - Kwa wanafunzi wanaopenda Hisabati na Fizikia</p>
                             </div>
                         </div>
                         
-                        <h5 class="mb-3">Masomo Makuu:</h5>
-                        <div class="row">
-                            <div class="col-6">
-                                <ul class="list-unstyled">
-                                    <li class="mb-2"><i class="fas fa-book me-2"></i>Kiswahili</li>
-                                    <li class="mb-2"><i class="fas fa-book me-2"></i>Hisabati</li>
-                                    <li class="mb-2"><i class="fas fa-book me-2"></i>Sayansi</li>
-                                    <li class="mb-2"><i class="fas fa-book me-2"></i>Maarifa ya Jamii</li>
-                                </ul>
+                        <p style="color: var(--dark-green); font-weight: 500; line-height: 1.8;">
+                            Mialuko hii inawaandaa wanafunzi kwa kozi za Uhandisi, Sayansi ya Kompyuta, 
+                            Fisikia Amilifu, na nyanja nyingine za kisayansi zinazohitaji ujuzi mkubwa wa hisabati.
+                        </p>
+
+                        <h5>Masomo:</h5>
+                        <div class="subject-list">
+                            <div class="subject-item">
+                                <i class="fas fa-atom"></i> Physics (Fizikia)
                             </div>
-                            <div class="col-6">
-                                <ul class="list-unstyled">
-                                    <li class="mb-2"><i class="fas fa-book me-2"></i>Kiingereza</li>
-                                    <li class="mb-2"><i class="fas fa-book me-2"></i>Sanaa</li>
-                                    <li class="mb-2"><i class="fas fa-book me-2"></i>Michezo</li>
-                                    <li class="mb-2"><i class="fas fa-book me-2"></i>Dini</li>
-                                </ul>
+                            <div class="subject-item">
+                                <i class="fas fa-flask"></i> Chemistry (Kemia)
+                            </div>
+                            <div class="subject-item">
+                                <i class="fas fa-calculator"></i> Mathematics (Hisabati)
                             </div>
                         </div>
 
-                        <div class="mt-3">
-                            <h6>Malengo Makuu:</h6>
-                            <p class="mb-0" style="color: var(--dark-green); font-weight: 500;">Kujenga msingi imara wa kusoma, kuandika, kuhesabu na kufahamu mazingira yao.</p>
+                        <div class="mt-4 p-3" style="background: linear-gradient(135deg, rgba(147,51,234,0.1), rgba(124,58,237,0.05)); border-radius: 12px;">
+                            <h6 style="color: var(--primary-color); font-weight: 700; margin-bottom: 0.8rem;">
+                                <i class="fas fa-graduation-cap me-2"></i>Fursa za Kazi na Masomo:
+                            </h6>
+                            <p style="color: var(--dark-green); font-weight: 500; margin-bottom: 0;">
+                                Uhandisi (Engineering), Sayansi ya Kompyuta, Fisikia, Hisabati Amilifu, 
+                                Teknolojia ya Habari, na nyanja zingine za kisayansi.
+                            </p>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-lg-6">
-                    <div class="level-card fade-in-up">
-                        <div class="level-header">
-                            <div class="level-icon" style="background: var(--secondary-color);">
-                                <i class="fas fa-tree"></i>
+            <!-- PCB Stream -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="stream-card fade-in-up">
+                        <div class="stream-header">
+                            <div class="stream-icon" style="background: linear-gradient(135deg, #15803d, #16a34a);">
+                                <i class="fas fa-dna"></i>
                             </div>
                             <div>
-                                <h3>Elimu ya Sekondari</h3>
-                                <p class="text-muted mb-0">Kidato cha 1 hadi cha 4</p>
+                                <h3>PCB (Physics, Chemistry, Biology)</h3>
+                                <p class="stream-subtitle">Mialuko ya Sayansi za Afya - Kwa wanafunzi wanaopenda Biolojia</p>
                             </div>
                         </div>
                         
-                        <h5 class="mb-3">Masomo ya Lazima:</h5>
-                        <div class="row">
-                            <div class="col-6">
-                                <ul class="list-unstyled">
-                                    <li class="mb-2"><i class="fas fa-book me-2"></i>Kiswahili</li>
-                                    <li class="mb-2"><i class="fas fa-book me-2"></i>Kiingereza</li>
-                                    <li class="mb-2"><i class="fas fa-book me-2"></i>Hisabati</li>
-                                    <li class="mb-2"><i class="fas fa-book me-2"></i>Fizikia</li>
-                                </ul>
+                        <p style="color: var(--dark-green); font-weight: 500; line-height: 1.8;">
+                            Mialuko hii inawaandaa wanafunzi kwa kozi za Udaktari, Uuguzi, Madawa, Sayansi za Afya, 
+                            na nyanja zingine zinazohusiana na afya ya binadamu na viumbe hai.
+                        </p>
+
+                        <h5>Masomo:</h5>
+                        <div class="subject-list">
+                            <div class="subject-item">
+                                <i class="fas fa-atom"></i> Physics (Fizikia)
                             </div>
-                            <div class="col-6">
-                                <ul class="list-unstyled">
-                                    <li class="mb-2"><i class="fas fa-book me-2"></i>Kemia</li>
-                                    <li class="mb-2"><i class="fas fa-book me-2"></i>Biolojia</li>
-                                    <li class="mb-2"><i class="fas fa-book me-2"></i>Historia</li>
-                                    <li class="mb-2"><i class="fas fa-book me-2"></i>Jiografia</li>
-                                </ul>
+                            <div class="subject-item">
+                                <i class="fas fa-flask"></i> Chemistry (Kemia)
+                            </div>
+                            <div class="subject-item">
+                                <i class="fas fa-dna"></i> Biology (Biolojia)
                             </div>
                         </div>
 
-                        <div class="mt-3">
-                            <h6>Malengo Makuu:</h6>
-                            <p class="mb-0" style="color: var(--dark-green); font-weight: 500;">Kuimarisha elimu ya msingi na kuandaa kwa elimu ya juu au kazi za utaalamu.</p>
+                        <div class="mt-4 p-3" style="background: linear-gradient(135deg, rgba(21,128,61,0.1), rgba(22,163,74,0.05)); border-radius: 12px;">
+                            <h6 style="color: var(--primary-color); font-weight: 700; margin-bottom: 0.8rem;">
+                                <i class="fas fa-graduation-cap me-2"></i>Fursa za Kazi na Masomo:
+                            </h6>
+                            <p style="color: var(--dark-green); font-weight: 500; margin-bottom: 0;">
+                                Udaktari (Medicine), Uuguzi (Nursing), Madawa (Pharmacy), Maabara (Laboratory Sciences), 
+                                Lishe (Nutrition), Veterinary, na nyanja zingine za afya.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CBG Stream -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="stream-card fade-in-up">
+                        <div class="stream-header">
+                            <div class="stream-icon" style="background: linear-gradient(135deg, #0891b2, #0284c7);">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div>
+                                <h3>CBG (Commerce, Book-keeping, Geography)</h3>
+                                <p class="stream-subtitle">Mialuko ya Biashara - Kwa wanafunzi wanaopenda Biashara na Uchumi</p>
+                            </div>
+                        </div>
+                        
+                        <p style="color: var(--dark-green); font-weight: 500; line-height: 1.8;">
+                            Mialuko hii inawaandaa wanafunzi kwa kozi za Biashara, Uchumi, Uhasibu, 
+                            na nyanja nyingine za kibiashara na usimamizi.
+                        </p>
+
+                        <h5>Masomo:</h5>
+                        <div class="subject-list">
+                            <div class="subject-item">
+                                <i class="fas fa-shopping-cart"></i> Commerce (Biashara)
+                            </div>
+                            <div class="subject-item">
+                                <i class="fas fa-book"></i> Book-keeping (Uwekaji Hesabu)
+                            </div>
+                            <div class="subject-item">
+                                <i class="fas fa-map-marked-alt"></i> Geography (Jiografia)
+                            </div>
+                        </div>
+
+                        <div class="mt-4 p-3" style="background: linear-gradient(135deg, rgba(8,145,178,0.1), rgba(2,132,199,0.05)); border-radius: 12px;">
+                            <h6 style="color: var(--primary-color); font-weight: 700; margin-bottom: 0.8rem;">
+                                <i class="fas fa-graduation-cap me-2"></i>Fursa za Kazi na Masomo:
+                            </h6>
+                            <p style="color: var(--dark-green); font-weight: 500; margin-bottom: 0;">
+                                Uhasibu (Accounting), Biashara (Business), Benki (Banking), Uchumi (Economics), 
+                                Usimamizi (Management), na nyanja zingine za kiuchumi.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -857,146 +966,68 @@
         </div>
     </section>
 
-    <!-- Teaching Methods -->
-    <section class="teaching-methods">
+    <!-- Assessment System -->
+    <section class="content-section bg-light">
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center mb-5">
-                    <h2 class="section-title fade-in-up">Mbinu za Ufundishaji</h2>
-                    <p class="lead" style="color: var(--dark-green); font-weight: 500;">Tunatumia mbinu za kisasa za kufundishia</p>
+                    <h2 class="section-title fade-in-up">Mfumo wa Tathmini na Mitihani</h2>
+                    <p class="lead" style="color: var(--dark-green); font-weight: 500;">
+                        Tunatumia mfumo wa tathmini unaofuata kanuni za NECTA
+                    </p>
                 </div>
             </div>
 
-            <div class="row g-4">
-                <div class="col-lg-3 col-md-6">
-                    <div class="method-card fade-in-up">
-                        <div class="method-icon" style="background: var(--primary-color);">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <h5>Kujifunza kwa Vikundi</h5>
-                        <p>Wanafunzi wanashirikiana katika vikundi vya kujifunza na kubadilishana maoni.</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="method-card fade-in-up">
-                        <div class="method-icon" style="background: var(--success-color);">
-                            <i class="fas fa-lightbulb"></i>
-                        </div>
-                        <h5>Kujifunza kwa Utafiti</h5>
-                        <p>Wanafunzi wanajifunza kwa kuchunguza na kugundua mambo kwa njia ya utafiti.</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="method-card fade-in-up">
-                        <div class="method-icon" style="background: var(--info-color);">
-                            <i class="fas fa-laptop"></i>
-                        </div>
-                        <h5>Teknolojia ya Elimu</h5>
-                        <p>Tunatumia vifaa vya kieletroni na programu mbalimbali za kielimu.</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="method-card fade-in-up">
-                        <div class="method-icon" style="background: var(--secondary-color);">
-                            <i class="fas fa-hands-helping"></i>
-                        </div>
-                        <h5>Kujifunza kwa Vitendo</h5>
-                        <p>Majaribio ya vitendo, ziara za kielimu na shughuli za nje za darasa.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Assessment Section -->
-    <section class="assessment-section">
-        <div class="container">
             <div class="row">
                 <div class="col-lg-6">
-                    <h2 class="section-title fade-in-up" style="text-align: left; margin-bottom: 2rem;">Mitihani na Tathmini</h2>
-                    <p class="lead mb-4 fade-in-up" style="color: var(--dark-green); font-weight: 500;">Tunatumia mbinu mbalimbali za kutathmini maendeleo ya wanafunzi wetu</p>
-                    
-                    <div class="assessment-timeline fade-in-up">
-                        <div class="timeline-item">
-                            <h5>Jaribio la Kila Wiki</h5>
-                            <p>Mtihani mfupi wa kupima uelewa wa masomo ya wiki hiyo. Husaidia kuona mahitaji ya haraka.</p>
-                        </div>
+                    <div class="assessment-card fade-in-up">
+                        <h4><i class="fas fa-chart-bar me-2"></i>Muundo wa Alama</h4>
                         
-                        <div class="timeline-item">
-                            <h5>Mtihani wa Muhula</h5>
-                            <p>Mtihani mkuu unaofanyika mwishoni mwa kila muhula wa masomo. Hutoa ripoti ya jumla ya maendeleo.</p>
+                        <div class="assessment-item">
+                            <h6>Tathmini ya Darasani (CA) - 40%</h6>
+                            <p>Alama zinazotolewa kutokana na kazi za darasani, majaribio, miradi na ushiriki wa kila siku.</p>
+                            <span class="score-badge">Alama: 0 - 40</span>
                         </div>
-                        
-                        <div class="timeline-item">
-                            <h5>Miradi ya Darasa</h5>
-                            <p>Wanafunzi wanafanya miradi ya kina katika masomo mbalimbali kuonyesha ujuzi wao wa vitendo.</p>
+
+                        <div class="assessment-item">
+                            <h6>Mtihani wa Mwisho (Exam) - 60%</h6>
+                            <p>Mtihani mkuu wa mwishoni mwa muhula au mwaka unaopima uelewa wa jumla.</p>
+                            <span class="score-badge">Alama: 0 - 60</span>
                         </div>
-                        
-                        <div class="timeline-item">
-                            <h5>Tathmini ya Tabia</h5>
-                            <p>Tunaangalia tabia na maadili ya wanafunzi pamoja na utendaji wao wa kimasomo.</p>
+
+                        <div class="mt-4 p-3" style="background: linear-gradient(135deg, var(--secondary-color), var(--primary-color)); border-radius: 12px; color: white;">
+                            <h6 style="margin-bottom: 0.8rem; font-weight: 700;">
+                                <i class="fas fa-info-circle me-2"></i>Jumla ya Alama
+                            </h6>
+                            <p style="margin-bottom: 0;">
+                                Jumla ya alama kwa kila somo ni <strong>100 (CA: 40 + Exam: 60)</strong>
+                            </p>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-lg-6">
-                    <div class="fade-in-up" style="background: linear-gradient(135deg, var(--light-green), #e6ffe6); padding: 3rem; border-radius: 20px; box-shadow: 0 15px 35px rgba(0, 153, 0, 0.15);">
-                        <h4 class="mb-3" style="color: var(--primary-color); font-weight: 700;">Ratiba ya Mitihani</h4>
+                    <div class="assessment-card fade-in-up">
+                        <h4><i class="fas fa-tasks me-2"></i>Aina za Tathmini</h4>
                         
-                        <div class="table-responsive">
-                            <table class="table table-borderless">
-                                <thead>
-                                    <tr class="border-bottom">
-                                        <th>Aina ya Mtihani</th>
-                                        <th>Mzingo</th>
-                                        <th>Kipindi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><strong>Jaribio la Wiki</strong></td>
-                                        <td>10%</td>
-                                        <td>Kila Ijumaa</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Mtihani wa Muhula</strong></td>
-                                        <td>60%</td>
-                                        <td>Mwishoni mwa Muhula</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Miradi</strong></td>
-                                        <td>20%</td>
-                                        <td>Katikati ya Muhula</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Tabia na Maadili</strong></td>
-                                        <td>10%</td>
-                                        <td>Kila Siku</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="assessment-item">
+                            <h6><i class="fas fa-pen me-2"></i>Mitihani ya Muhula</h6>
+                            <p>Mitihani inayofanyika mwishoni mwa kila muhula wa masomo ili kutathmini maendeleo.</p>
                         </div>
-                        
-                        <div class="mt-4">
-                            <h5 style="color: var(--primary-color); font-weight: 700;">Mfumo wa Alama</h5>
-                            <div class="row">
-                                <div class="col-6">
-                                    <ul class="list-unstyled">
-                                        <li><span class="badge bg-success">A</span> 80-100%</li>
-                                        <li><span class="badge bg-primary">B</span> 65-79%</li>
-                                        <li><span class="badge bg-info">C</span> 45-64%</li>
-                                    </ul>
-                                </div>
-                                <div class="col-6">
-                                    <ul class="list-unstyled">
-                                        <li><span class="badge bg-warning">D</span> 30-44%</li>
-                                        <li><span class="badge bg-danger">F</span> 0-29%</li>
-                                    </ul>
-                                </div>
-                            </div>
+
+                        <div class="assessment-item">
+                            <h6><i class="fas fa-file-alt me-2"></i>Kazi za Nyumbani</h6>
+                            <p>Mazoezi ya ziada yanayotolewa kwa wanafunzi kujifunzia nyumbani na kuimarisha uelewa.</p>
+                        </div>
+
+                        <div class="assessment-item">
+                            <h6><i class="fas fa-project-diagram me-2"></i>Miradi ya Darasa</h6>
+                            <p>Miradi ya kina katika masomo mbalimbali inayofanywa na wanafunzi kwa vitendo.</p>
+                        </div>
+
+                        <div class="assessment-item">
+                            <h6><i class="fas fa-microscope me-2"></i>Majaribio ya Vitendo</h6>
+                            <p>Kwa masomo ya sayansi, majaribio ya vitendo katika maabara husaidia kuongeza uelewa.</p>
                         </div>
                     </div>
                 </div>
@@ -1004,96 +1035,7 @@
         </div>
     </section>
 
-    <!-- Special Programs Section -->
-    <section class="level-section" style="background: linear-gradient(135deg, var(--light-green), #e6ffe6);">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center mb-5">
-                    <h2 class="section-title fade-in-up">Programu Maalum</h2>
-                    <p class="lead" style="color: var(--dark-green); font-weight: 500;">Programu za ziada za kuongeza ujuzi wa wanafunzi</p>
-                </div>
-            </div>
-
-            <div class="row g-4">
-                <div class="col-lg-4">
-                    <div class="level-card h-100 fade-in-up">
-                        <div class="level-header">
-                            <div class="level-icon" style="background: #8b5cf6;">
-                                <i class="fas fa-palette"></i>
-                            </div>
-                            <div>
-                                <h4 style="color: var(--primary-color); font-weight: 700;">Sanaa na Utamaduni</h4>
-                            </div>
-                        </div>
-                        <ul class="list-unstyled">
-                            <li class="mb-2"><i class="fas fa-music me-2"></i>Muziki na Wimbo</li>
-                            <li class="mb-2"><i class="fas fa-paint-brush me-2"></i>Mchezo wa Sanaa</li>
-                            <li class="mb-2"><i class="fas fa-theater-masks me-2"></i>Igizo na Utamthiliya</li>
-                            <li class="mb-2"><i class="fas fa-drum me-2"></i>Ngoma za Asili</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col-lg-4">
-                    <div class="level-card h-100 fade-in-up">
-                        <div class="level-header">
-                            <div class="level-icon" style="background: var(--success-color);">
-                                <i class="fas fa-running"></i>
-                            </div>
-                            <div>
-                                <h4 style="color: var(--primary-color); font-weight: 700;">Michezo na Afya</h4>
-                            </div>
-                        </div>
-                        <ul class="list-unstyled">
-                            <li class="mb-2"><i class="fas fa-futbol me-2"></i>Mpira wa Miguu</li>
-                            <li class="mb-2"><i class="fas fa-basketball-ball me-2"></i>Mpira wa Kikapu</li>
-                            <li class="mb-2"><i class="fas fa-volleyball-ball me-2"></i>Mpira wa Wavu</li>
-                            <li class="mb-2"><i class="fas fa-swimmer me-2"></i>Kuogelea</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col-lg-4">
-                    <div class="level-card h-100 fade-in-up">
-                        <div class="level-header">
-                            <div class="level-icon" style="background: var(--secondary-color);">
-                                <i class="fas fa-tools"></i>
-                            </div>
-                            <div>
-                                <h4 style="color: var(--primary-color); font-weight: 700;">Stadi za Mikono</h4>
-                            </div>
-                        </div>
-                        <ul class="list-unstyled">
-                            <li class="mb-2"><i class="fas fa-hammer me-2"></i>Ufundi wa Mbao</li>
-                            <li class="mb-2"><i class="fas fa-cut me-2"></i>Upambo na Kushona</li>
-                            <li class="mb-2"><i class="fas fa-seedling me-2"></i>Kilimo cha Bustani</li>
-                            <li class="mb-2"><i class="fas fa-code me-2"></i>Ujuzi wa Kompyuta</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Call to Action -->
-    <section class="py-5" style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-8 text-white">
-                    <h3 class="mb-3" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">Je, Una Maswali Kuhusu Mtaala Wetu?</h3>
-                    <p class="lead mb-0" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">Wasiliana nasi kwa maelezo zaidi au kutembelea shule yetu</p>
-                </div>
-                <div class="col-lg-4 text-center">
-                    <a href="mawasiliano.html" class="btn btn-light btn-lg me-3">
-                        <i class="fas fa-phone me-2"></i>Wasiliana Nasi
-                    </a>
-                    <a href="kuhusu.html" class="btn btn-outline-light btn-lg">
-                        <i class="fas fa-map-marker-alt me-2"></i>Tembelea
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+    
 
     <!-- Footer -->
     <footer class="footer">
@@ -1101,10 +1043,10 @@
             <div class="row">
                 <div class="col-lg-4 mb-4">
                     <h5 class="fw-bold mb-3">
-                        <img src="logo.png" alt="Logo" style="height: 30px; margin-right: 8px; filter: brightness(0) invert(1);">
-                        Shule ya Mfano
+                        <i class="fas fa-graduation-cap me-2"></i>
+                        Shule ya Sekondari Mpendae
                     </h5>
-                    <p>Tunatoa elimu bora kwa maendeleo ya watoto wetu kwa ujuzi, maadili na utamaduni wa Kitanzania.</p>
+                    <p>Tunatoa elimu bora kwa maendeleo ya vijana wetu kwa ujuzi, maadili na utamaduni wa Kizanzibar.</p>
                     
                     <div class="social-links mt-3">
                         <a href="#" class="text-white me-3"><i class="fab fa-facebook-f fa-lg"></i></a>
@@ -1129,7 +1071,8 @@
                     <div class="contact-info">
                         <p class="mb-2">
                             <i class="fas fa-map-marker-alt me-2"></i>
-                            Barabara ya Uhuru, Zanzibar
+                            Mtaa wa Mpendae, Shehia ya Mpendae<br>
+                            <span class="ms-4">Wilaya ya Mjini, Zanzibar</span>
                         </p>
                         <p class="mb-2">
                             <i class="fas fa-phone me-2"></i>
@@ -1137,7 +1080,7 @@
                         </p>
                         <p class="mb-2">
                             <i class="fas fa-envelope me-2"></i>
-                            info@shuleyamfano.tz
+                            info@mpendae.ac.tz
                         </p>
                     </div>
                 </div>
@@ -1146,7 +1089,7 @@
             <hr class="my-4">
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <p class="mb-0">&copy; 2025 Shule ya Mpendae. Haki zote zimehifadhiwa.</p>
+                    <p class="mb-0">&copy; 2025 Shule ya Sekondari Mpendae. Haki zote zimehifadhiwa.</p>
                 </div>
                 <div class="col-md-6 text-md-end">
                     <small class="text-white-50">Imeundwa kwa mapenzi na teknolojia ya kisasa</small>
@@ -1177,7 +1120,6 @@
                 navbar.style.boxShadow = '0 8px 32px rgba(0, 153, 0, 0.3)';
             }
             
-            // Hide/show navbar on scroll
             if (currentScrollY > lastScrollY && currentScrollY > 200) {
                 navbar.style.transform = 'translateY(-100%)';
             } else {
@@ -1187,7 +1129,7 @@
             lastScrollY = currentScrollY;
         });
         
-        // Smooth scrolling for navigation links
+        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1204,7 +1146,7 @@
             });
         });
         
-        // Enhanced Intersection Observer for animations
+        // Intersection Observer for animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -1215,42 +1157,20 @@
                 if (entry.isIntersecting) {
                     setTimeout(() => {
                         entry.target.classList.add('animated');
-                    }, index * 200);
+                    }, index * 100);
                 }
             });
         }, observerOptions);
         
-        // Observe cards for animation
+        // Observe elements
         document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.fade-in-up');
-            cards.forEach(card => {
-                observer.observe(card);
-            });
-        });
-        
-        // Highlight active section in navigation
-        window.addEventListener('scroll', function() {
-            const sections = document.querySelectorAll('section[id]');
-            const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
-            
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (window.scrollY >= (sectionTop - 200)) {
-                    current = section.getAttribute('id');
-                }
-            });
-            
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').includes(current)) {
-                    link.classList.add('active');
-                }
+            const elements = document.querySelectorAll('.fade-in-up');
+            elements.forEach(element => {
+                observer.observe(element);
             });
         });
 
-        // Add page loading animation
+        // Page loading animation
         document.addEventListener('DOMContentLoaded', function() {
             document.body.style.opacity = '0';
             setTimeout(() => {
@@ -1259,7 +1179,7 @@
             }, 100);
         });
 
-        // Add scroll progress indicator
+        // Scroll progress indicator
         const progressBar = document.createElement('div');
         progressBar.style.cssText = `
             position: fixed;
@@ -1280,21 +1200,7 @@
             progressBar.style.width = scrollPercent + '%';
         });
 
-        // Enhanced hover effects for cards
-        document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.subject-card, .level-card, .method-card, .stats-card');
-            cards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-15px) scale(1.02)';
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0) scale(1)';
-                });
-            });
-        });
-
-        // Parallax effect for page header
+        // Parallax effect
         window.addEventListener('scroll', function() {
             const scrolled = window.pageYOffset;
             const pageHeader = document.querySelector('.page-header');
@@ -1302,24 +1208,6 @@
                 pageHeader.style.transform = `translateY(${scrolled * 0.3}px)`;
             }
         });
-
-        // Add floating animation to subject icons
-        document.addEventListener('DOMContentLoaded', function() {
-            const subjectIcons = document.querySelectorAll('.subject-icon');
-            subjectIcons.forEach((icon, index) => {
-                icon.style.animation = `float 3s ease-in-out infinite ${index * 0.5}s`;
-            });
-        });
-
-        // Add float animation keyframes
-        const floatStyle = document.createElement('style');
-        floatStyle.textContent = `
-            @keyframes float {
-                0%, 100% { transform: translateY(0px); }
-                50% { transform: translateY(-10px); }
-            }
-        `;
-        document.head.appendChild(floatStyle);
     </script>
 </body>
-</html>        
+</html>

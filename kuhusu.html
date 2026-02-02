@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kuhusu Shule - Shule ya Msingi na Sekondari Mfano</title>
+    <title>Kuhusu Shule - Shule ya Sekondari ya Mpendae</title>
     
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
@@ -87,8 +87,8 @@
 
         .page-header {
             background: linear-gradient(rgba(0, 153, 0, 0.9), rgba(0, 204, 0, 0.8)), 
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23e5e7ff" width="1200" height="400"/><path fill="%23d1d5db" d="M0 300l50-16.7c50-16.6 150-50 250-50s200 33.4 250 50 100 16.7 150 0 100-50 150-16.7c50 33.4 150 100 200 100s100-66.6 150-66.7V400H0z"/></svg>') center/cover;
-            padding: 100px 0 80px 0;
+                        url('font.png') center/cover;
+            padding: 120px 0 80px 0;
             color: white;
             text-align: center;
             position: relative;
@@ -204,6 +204,45 @@
             box-shadow: 0 2px 8px rgba(0,153,0,0.3);
         }
 
+        /* Introduction Card */
+        .intro-card {
+            background: linear-gradient(135deg, #ffffff, #f0fff0);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 15px 35px rgba(0, 153, 0, 0.15);
+            margin-bottom: 3rem;
+            border-left: 5px solid var(--secondary-color);
+            transition: all 0.4s ease;
+        }
+
+        .intro-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 153, 0, 0.25);
+        }
+
+        .intro-card h3 {
+            color: var(--primary-color) !important;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .intro-card p {
+            color: var(--dark-green) !important;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .intro-card .highlight {
+            background: linear-gradient(135deg, rgba(0,204,0,0.1), rgba(102,255,102,0.1));
+            padding: 0.3rem 0.6rem;
+            border-radius: 5px;
+            font-weight: 700;
+            color: var(--primary-color) !important;
+        }
+
+        /* History Timeline */
         .history-timeline {
             position: relative;
             padding-left: 40px;
@@ -270,65 +309,7 @@
             line-height: 1.7;
         }
 
-        .vision-mission-card {
-            background: linear-gradient(135deg, #ffffff, #f0fff0);
-            border-radius: 20px;
-            padding: 3rem;
-            box-shadow: 0 15px 35px rgba(0, 153, 0, 0.15);
-            margin-bottom: 2rem;
-            text-align: center;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border-top: 5px solid var(--secondary-color);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .vision-mission-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(0,204,0,0.1), transparent);
-            transform: rotate(45deg);
-            transition: all 0.5s;
-            opacity: 0;
-        }
-
-        .vision-mission-card:hover::before {
-            opacity: 1;
-            animation: shimmer 1s ease-in-out;
-        }
-
-        .vision-mission-card:hover {
-            transform: translateY(-15px) scale(1.03);
-            box-shadow: 0 25px 50px rgba(0, 153, 0, 0.25);
-        }
-
-        .vision-mission-card .icon {
-            font-size: 4rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 2rem;
-            filter: drop-shadow(2px 2px 4px rgba(0,153,0,0.3));
-        }
-
-        .vision-mission-card h3 {
-            color: var(--primary-color) !important;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-        }
-
-        .vision-mission-card .lead {
-            color: var(--dark-green) !important;
-            font-weight: 500;
-            line-height: 1.8;
-        }
-
+        /* Stats Section */
         .stats-section {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
@@ -377,9 +358,10 @@
             text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
         }
 
+        /* Leadership Section */
         .leadership-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2.5rem;
             margin-top: 3rem;
         }
@@ -401,7 +383,7 @@
         }
 
         .leader-image {
-            height: 300px;
+            height: 280px;
             width: 100%;
             object-fit: cover;
             transition: all 0.3s ease;
@@ -418,7 +400,7 @@
         }
 
         .leader-name {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 800;
             color: var(--primary-color) !important;
             margin-bottom: 0.5rem;
@@ -428,16 +410,80 @@
         .leader-title {
             color: var(--secondary-color) !important;
             font-weight: 600;
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
         }
 
-        .leader-info p {
+        .leader-period {
             color: var(--dark-green) !important;
-            line-height: 1.7;
             font-weight: 500;
+            font-size: 0.95rem;
+            font-style: italic;
         }
 
+        /* Organization Structure */
+        .org-structure {
+            background: linear-gradient(135deg, #ffffff, #f0fff0);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 15px 35px rgba(0, 153, 0, 0.15);
+            margin-top: 2rem;
+        }
+
+        .org-level {
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .org-level h4 {
+            color: var(--primary-color) !important;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            padding-left: 2.5rem;
+            position: relative;
+        }
+
+        .org-level h4::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        .org-members {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .org-member {
+            background: linear-gradient(135deg, rgba(0,204,0,0.1), rgba(102,255,102,0.05));
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            border: 2px solid var(--light-green);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: var(--dark-green) !important;
+        }
+
+        .org-member:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 153, 0, 0.2);
+            border-color: var(--secondary-color);
+        }
+
+        .org-member i {
+            color: var(--secondary-color);
+            margin-right: 0.5rem;
+        }
+
+        /* Footer */
         .footer {
             background: linear-gradient(135deg, var(--dark-green), var(--primary-color));
             color: white;
@@ -446,24 +492,6 @@
 
         .footer h5 {
             color: var(--accent-color) !important;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-            border: none;
-            border-radius: 30px;
-            padding: 15px 35px;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(0, 204, 0, 0.3);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .btn-primary:hover {
-            background: linear-gradient(135deg, var(--primary-color), var(--dark-green));
-            transform: translateY(-3px);
-            box-shadow: 0 12px 25px rgba(0, 153, 0, 0.4);
         }
 
         /* Responsive Design */
@@ -497,6 +525,14 @@
             .navbar-brand {
                 font-size: 1.3rem;
             }
+
+            .intro-card {
+                padding: 2rem;
+            }
+
+            .org-structure {
+                padding: 2rem;
+            }
         }
 
         @media (max-width: 576px) {
@@ -517,10 +553,12 @@
                 font-size: 1.1rem;
             }
 
-            .brand-text {
+            .intro-card {
+                padding: 1.5rem;
+            }
+
+            .org-members {
                 flex-direction: column;
-                align-items: flex-start;
-                line-height: 1.2;
             }
         }
 
@@ -546,11 +584,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
     </style>
 </head>
 <body>
@@ -558,10 +591,10 @@
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <img src="logo.png" alt="Shule ya Mfano Logo" class="brand-logo">
+                <img src="logo.png" alt="Shule ya Mpendae Logo" class="brand-logo">
                 <span class="brand-text">
                     <i class="fas fa-graduation-cap me-1"></i>
-                    Shule ya Mfano
+                    Shule ya Sekondari Mpendae
                 </span>
             </a>
             
@@ -604,7 +637,7 @@
     <section class="page-header">
         <div class="container">
             <h1>Kuhusu Shule Yetu</h1>
-            <p class="lead">Kujua zaidi kuhusu historia, dira, maono na uongozi wa shule yetu</p>
+            <p class="lead">Kujua zaidi kuhusu historia, dira, maono na muundo wa Shule ya Sekondari ya Mpendae</p>
             <nav class="breadcrumb-nav">
                 <a href="index.html"><i class="fas fa-home"></i> Nyumbani</a>
                 <i class="fas fa-chevron-right"></i>
@@ -613,41 +646,67 @@
         </div>
     </section>
 
-    <!-- Historia ya Shule -->
+    <!-- Sisi Ni Nani (Who We Are) -->
     <section class="content-section">
+        <div class="container">
+            <h2 class="section-title fade-in-up">Sisi Ni Nani</h2>
+            <div class="intro-card fade-in-up">
+                <h3><i class="fas fa-school me-2"></i>Shule ya Sekondari ya Mpendae</h3>
+                <p>
+                    Shule ya Sekondari ya Mpendae iko kiasi ya <span class="highlight">kilomita tano (5)</span> kutoka katikati ya mji wa Zanzibar. 
+                    Ipo wilaya ya mjini katika <span class="highlight">mkoa wa mjini magharibi</span>. Skuli hii imejengwa kwa mkopo wa Benki ya Dunia 
+                    na ipo katika <span class="highlight">mtaa wa Mpendae, katika shehia ya Mpendae</span>.
+                </p>
+                <p>
+                    Shule ya Mpendae ni ya ghorofa moja ambayo iko chini ya <span class="highlight">Wizara ya Elimu na Mafunzo ya Amali</span>. 
+                    Tunajivunia kutoa elimu bora kwa vijana wetu na kuwaandaa kwa maisha ya baadaye.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Historia ya Shule -->
+    <section class="content-section bg-light">
         <div class="container">
             <h2 class="section-title fade-in-up">Historia ya Shule</h2>
             <div class="row">
                 <div class="col-lg-10 mx-auto">
                     <div class="history-timeline fade-in-up">
                         <div class="timeline-item">
-                            <div class="timeline-year">2010</div>
-                            <h4>Mwanzo wa Shule</h4>
-                            <p>Shule ya Mfano ilianzishwa kwa lengo la kutoa elimu bora kwa jamii ya Dar es Salaam. Tulianza na wanafunzi 50 na walimu 5 wenye moyo wa kutoa huduma bora.</p>
+                            <div class="timeline-year">Agosti 15, 2013</div>
+                            <h4><i class="fas fa-flag-checkered me-2"></i>Mwanzo wa Shule</h4>
+                            <p>
+                                Shule ya Sekondari ya Mpendae ilianza rasmi tarehe 15 Agosti 2013, wanafunzi wa kidato cha tano 
+                                waliripoti na kuanza masomo yao. Shule ilianza na jumla ya <strong>wanafunzi 61</strong> wa kidato cha tano. 
+                                Kati yao, <strong>33 walikuwa wa Sayansi</strong> na <strong>28 wa Sanaa (Arts)</strong>.
+                            </p>
                         </div>
                         
                         <div class="timeline-item">
-                            <div class="timeline-year">2012</div>
-                            <h4>Ujenzi wa Madarasa Mapya</h4>
-                            <p>Tulipanua miundombinu yetu kwa kujenga madarasa 8 mapya na makabati ya vitabu ili kuongeza uwezo wa kupokea wanafunzi zaidi na kutoa mazingira bora ya masomo.</p>
+                            <div class="timeline-year">2013 - 2015</div>
+                            <h4><i class="fas fa-user-tie me-2"></i>Uongozi wa Kwanza</h4>
+                            <p>
+                                Mwalimu Mkuu wa kwanza wa shule alikuwa <strong>Bwana Mbarouk Habibu Rashid</strong> ambaye 
+                                alisimamia mwanzo wa shule na kuweka misingi imara ya utendaji.
+                            </p>
                         </div>
                         
                         <div class="timeline-item">
-                            <div class="timeline-year">2015</div>
-                            <h4>Kutambuliwa Kimataifa</h4>
-                            <p>Shule yetu ilipata utambuzi wa kimataifa kwa mafanikio yake ya elimu na kuongezwa kwa programu za kisasa za ufundishaji na utawala.</p>
+                            <div class="timeline-year">2015 - 2021</div>
+                            <h4><i class="fas fa-user-tie me-2"></i>Uongozi wa Pili</h4>
+                            <p>
+                                <strong>Bwana Mussa Abdi Khamis</strong> alichukua nafasi ya Mwalimu Mkuu na kusimamia 
+                                ukuaji na maendeleo ya shule kwa kipindi cha miaka sita.
+                            </p>
                         </div>
                         
                         <div class="timeline-item">
-                            <div class="timeline-year">2018</div>
-                            <h4>Teknolojia Mpya</h4>
-                            <p>Tulianzisha mfumo wa kielektroniki wa elimu na kujenga makabati ya kompyuta ili kuongeza ubora wa ufundishaji na kujifunza.</p>
-                        </div>
-                        
-                        <div class="timeline-item">
-                            <div class="timeline-year">2025</div>
-                            <h4>Leo</h4>
-                            <p>Kwa sasa, tunafundisha wanafunzi zaidi ya 500 na tuna walimu 25 wenye uzoefu mkubwa. Tunaendelea kutoa elimu bora na ya kisasa.</p>
+                            <div class="timeline-year">2021 - Sasa</div>
+                            <h4><i class="fas fa-user-tie me-2"></i>Uongozi wa Sasa</h4>
+                            <p>
+                                <strong>Bi. Chausiku M. Panju</strong> ni Mwalimu Mkuu wa sasa anayeongoza shule na 
+                                kuendelea na dira ya kutoa elimu bora kwa vijana wa Zanzibar.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -655,148 +714,185 @@
         </div>
     </section>
 
-    <!-- Dira na Maono -->
-    <section class="content-section bg-light">
-        <div class="container">
-            <h2 class="section-title fade-in-up">Dira na Maono</h2>
-            <div class="row">
-                <div class="col-lg-6 mb-4">
-                    <div class="vision-mission-card fade-in-up">
-                        <div class="icon">
-                            <i class="fas fa-eye"></i>
-                        </div>
-                        <h3>Maono Yetu</h3>
-                        <p class="lead">Kuwa shule inayoongoza Tanzania katika kutoa elimu ya hali ya juu inayozingatia maadili, ubunifu na teknolojia ya kisasa ili kutengeneza vijana wenye uongozi bora.</p>
-                    </div>
-                </div>
-                
-                <div class="col-lg-6 mb-4">
-                    <div class="vision-mission-card fade-in-up">
-                        <div class="icon">
-                            <i class="fas fa-bullseye"></i>
-                        </div>
-                        <h3>Dira Yetu</h3>
-                        <p class="lead">Kutoa elimu bora na ya hali ya juu inayochanganya maarifa, ujuzi na maadili kwa kila mtoto ili afikilie uwezo wake kamili na kuwa mwananchi mzuri wa taifa.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Takwimu za Shule -->
+    <!-- Takwimu za Shule (Statistics) -->
     <section class="stats-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-3 col-md-6 mb-4">
                     <div class="stat-item fade-in-up">
-                        <div class="stat-number" data-count="500">0</div>
-                        <div class="stat-label">Wanafunzi</div>
+                        <div class="stat-number" data-count="51">0</div>
+                        <div class="stat-label">Jumla ya Wafanyakazi</div>
                     </div>
                 </div>
                 
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-3 col-md-6 mb-4">
                     <div class="stat-item fade-in-up">
-                        <div class="stat-number" data-count="25">0</div>
+                        <div class="stat-number" data-count="49">0</div>
                         <div class="stat-label">Walimu</div>
                     </div>
                 </div>
                 
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-3 col-md-6 mb-4">
                     <div class="stat-item fade-in-up">
-                        <div class="stat-number" data-count="15">0</div>
-                        <div class="stat-label">Miaka ya Utumishi</div>
+                        <div class="stat-number" data-count="26">0</div>
+                        <div class="stat-label">Walimu wa Kike</div>
                     </div>
                 </div>
                 
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-3 col-md-6 mb-4">
                     <div class="stat-item fade-in-up">
-                        <div class="stat-number" data-count="98">0</div>
-                        <div class="stat-label">% Mafanikio</div>
+                        <div class="stat-number" data-count="24">0</div>
+                        <div class="stat-label">Walimu wa Kiume</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Malengo ya Shule -->
+    <!-- Walimu Wakuu (Headmasters) -->
     <section class="content-section">
         <div class="container">
-            <h2 class="section-title fade-in-up">Malengo ya Shule</h2>
-            <div class="row">
-                <div class="col-lg-10 mx-auto">
-                    <div class="fade-in-up">
-                        <ul class="list-unstyled">
-                            <li class="mb-4 d-flex align-items-start">
-                                <i class="fas fa-check-circle me-3 mt-1" style="color: var(--secondary-color); font-size: 1.2rem;"></i>
-                                <div>
-                                    <strong style="color: var(--primary-color);">Kutoa elimu bora:</strong> 
-                                    <span style="color: var(--dark-green);">Kuandaa wanafunzi katika masomo yote kwa kutumia mbinu za kisasa za ufundishaji</span>
-                                </div>
-                            </li>
-                            <li class="mb-4 d-flex align-items-start">
-                                <i class="fas fa-check-circle me-3 mt-1" style="color: var(--secondary-color); font-size: 1.2rem;"></i>
-                                <div>
-                                    <strong style="color: var(--primary-color);">Kujenga tabia njema:</strong> 
-                                    <span style="color: var(--dark-green);">Kuimarisha maadili na utamaduni mzuri miongoni mwa wanafunzi</span>
-                                </div>
-                            </li>
-                            <li class="mb-4 d-flex align-items-start">
-                                <i class="fas fa-check-circle me-3 mt-1" style="color: var(--secondary-color); font-size: 1.2rem;"></i>
-                                <div>
-                                    <strong style="color: var(--primary-color);">Kuongeza ujuzi wa kitaaluma:</strong> 
-                                    <span style="color: var(--dark-green);">Kuwasaidia wanafunzi kupata ujuzi mbalimbali wa maisha</span>
-                                </div>
-                            </li>
-                            <li class="mb-4 d-flex align-items-start">
-                                <i class="fas fa-check-circle me-3 mt-1" style="color: var(--secondary-color); font-size: 1.2rem;"></i>
-                                <div>
-                                    <strong style="color: var(--primary-color);">Kuimarisha mazingira mazuri:</strong> 
-                                    <span style="color: var(--dark-green);">Kutunza mazingira salama na ya kufundishia vizuri</span>
-                                </div>
-                            </li>
-                            <li class="mb-4 d-flex align-items-start">
-                                <i class="fas fa-check-circle me-3 mt-1" style="color: var(--secondary-color); font-size: 1.2rem;"></i>
-                                <div>
-                                    <strong style="color: var(--primary-color);">Kushirikiana na jamii:</strong> 
-                                    <span style="color: var(--dark-green);">Kujenga uhusiano mzuri baina ya shule, wazazi na jamii</span>
-                                </div>
-                            </li>
-                        </ul>
+            <h2 class="section-title fade-in-up">Walimu Wakuu wa Shule</h2>
+            <p class="text-center mb-5 lead" style="color: var(--dark-green); font-weight: 500;">
+                Tangu kuanzishwa kwake, shule yetu imesimamwa na viongozi wenye uzoefu na weledi
+            </p>
+            <div class="leadership-grid fade-in-up">
+                <div class="leader-card">
+                    <img src="mwalimu.png" alt="Bwana Mbarouk Habibu Rashid" class="leader-image">
+                    <div class="leader-info">
+                        <div class="leader-name">Bwana Mbarouk Habibu Rashid</div>
+                        <div class="leader-title">Mwalimu Mkuu wa Kwanza</div>
+                        <div class="leader-period">2013 - 2015</div>
+                    </div>
+                </div>
+                
+                <div class="leader-card">
+                    <img src="mwalimu.png" alt="Bwana Mussa Abdi Khamis" class="leader-image">
+                    <div class="leader-info">
+                        <div class="leader-name">Bwana Mussa Abdi Khamis</div>
+                        <div class="leader-title">Mwalimu Mkuu wa Pili</div>
+                        <div class="leader-period">2015 - 2021</div>
+                    </div>
+                </div>
+                
+                <div class="leader-card">
+                    <img src="mwalimu.png" alt="Bi. Chausiku M. Panju" class="leader-image">
+                    <div class="leader-info">
+                        <div class="leader-name">Bi. Chausiku M. Panju</div>
+                        <div class="leader-title">Mwalimu Mkuu wa Sasa</div>
+                        <div class="leader-period">2021 - Hadi Sasa</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Uongozi wa Shule -->
+    <!-- Muundo wa Kiutawala (Organizational Structure) -->
     <section class="content-section bg-light">
         <div class="container">
-            <h2 class="section-title fade-in-up">Uongozi wa Shule</h2>
-            <div class="leadership-grid fade-in-up">
-                <div class="leader-card">
-                    <img src="mwalimu.png" alt="Dkt. John Mwalimu" class="leader-image">
-                    <div class="leader-info">
-                        <div class="leader-name">Dkt. John Mwalimu</div>
-                        <div class="leader-title">Mkurugenzi Mkuu</div>
-                        <p>Mwalimu mwenye uzoefu wa miaka 20 katika elimu. Ana shahada ya Uzamivu katika Uongozi wa Elimu na ameongoza miradi mingi ya maendeleo ya elimu.</p>
+            <h2 class="section-title fade-in-up">Muundo wa Kiutawala</h2>
+            <p class="text-center mb-5 lead" style="color: var(--dark-green); font-weight: 500;">
+                Shule ya Mpendae inafanya kazi chini ya muundo ulio wazi na wa kidemokrasia kulingana na kanuni za Wizara ya Elimu
+            </p>
+            
+            <div class="org-structure fade-in-up">
+                <!-- Kamati ya Shule -->
+                <div class="org-level">
+                    <h4><i class="fas fa-users-cog me-2"></i>Kamati ya Shule (Wanachama 9)</h4>
+                    <p style="color: var(--dark-green); margin-bottom: 1.5rem; padding-left: 2.5rem; font-weight: 500;">
+                        Kamati ya Shule ni chombo kikuu cha maamuzi katika shule kulingana na kanuni na taratibu za Wizara. 
+                        Kamati hii inaweka sera na mwelekeo wa kimkakati wa shule.
+                    </p>
+                    <div class="org-members">
+                        <div class="org-member">
+                            <i class="fas fa-user-shield"></i>
+                            Mwenyekiti (Wazazi walichagua)
+                        </div>
+                        <div class="org-member">
+                            <i class="fas fa-user-graduate"></i>
+                            Mwalimu Mkuu (Katibu)
+                        </div>
+                        <div class="org-member">
+                            <i class="fas fa-landmark"></i>
+                            Mwakilishi wa Ofisi ya Sheha
+                        </div>
+                        <div class="org-member">
+                            <i class="fas fa-coins"></i>
+                            Mhazini wa Shule
+                        </div>
+                        <div class="org-member">
+                            <i class="fas fa-book-reader"></i>
+                            Mkuu wa Masomo
+                        </div>
+                        <div class="org-member">
+                            <i class="fas fa-user-friends"></i>
+                            Rais wa Umoja wa Wanafunzi
+                        </div>
+                        <div class="org-member">
+                            <i class="fas fa-users"></i>
+                            Wawakilishi 3 wa Wazazi
+                        </div>
                     </div>
                 </div>
-                
-                <div class="leader-card">
-                    <img src="mwalimu.png" alt="Bi. Mary Fundisha" class="leader-image">
-                    <div class="leader-info">
-                        <div class="leader-name">Bi. Mary Fundisha</div>
-                        <div class="leader-title">Mkuu wa Masomo</div>
-                        <p>Msimamizi wa mtaala na mpangaji wa shughuli za kitaaluma. Mwalimu mwenye uzoefu wa miaka 15 na mtaalam wa mbinu za ufundishaji wa kisasa.</p>
+
+                <!-- Usimamizi wa Kila Siku -->
+                <div class="org-level">
+                    <h4><i class="fas fa-sitemap me-2"></i>Usimamizi wa Kila Siku</h4>
+                    <p style="color: var(--dark-green); margin-bottom: 1.5rem; padding-left: 2.5rem; font-weight: 500;">
+                        Chini ya kamati, shughuli za kila siku zinasimamwa na Mwalimu Mkuu na timu yake ya usimamizi
+                    </p>
+                    <div class="org-members">
+                        <div class="org-member">
+                            <i class="fas fa-user-tie"></i>
+                            Mwalimu Mkuu (Katibu wa Kamati)
+                        </div>
+                        <div class="org-member">
+                            <i class="fas fa-user-cog"></i>
+                            Msaidizi Mwalimu Mkuu (Utawala)
+                        </div>
+                        <div class="org-member">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            Msaidizi Mwalimu Mkuu (Masomo)
+                        </div>
+                        <div class="org-member">
+                            <i class="fas fa-book-open"></i>
+                            Mkuu wa Masomo
+                        </div>
+                        <div class="org-member">
+                            <i class="fas fa-users-class"></i>
+                            Viongozi wa Vikundi
+                        </div>
+                        <div class="org-member">
+                            <i class="fas fa-file-signature"></i>
+                            Msajili
+                        </div>
                     </div>
                 </div>
-                
-                <div class="leader-card">
-                    <img src="mwalimu.png" alt="Mw. Peter Simamia" class="leader-image">
-                    <div class="leader-info">
-                        <div class="leader-name">Mw. Peter Simamia</div>
-                        <div class="leader-title">Meneja wa Utawala</div>
-                        <p>Msimamizi wa shughuli za kiutawala na mazingira ya shule. Mwenye uzoefu wa miaka 12 katika usimamizi wa taasisi za elimu.</p>
+
+                <!-- Walimu na Wafanyakazi Wengine -->
+                <div class="org-level">
+                    <h4><i class="fas fa-user-friends me-2"></i>Walimu na Wafanyakazi Wengine</h4>
+                    <div class="org-members">
+                        <div class="org-member">
+                            <i class="fas fa-flask"></i>
+                            Walimu wa Sayansi
+                        </div>
+                        <div class="org-member">
+                            <i class="fas fa-palette"></i>
+                            Walimu wa Sanaa
+                        </div>
+                        <div class="org-member">
+                            <i class="fas fa-book"></i>
+                            Mkutubi (Mwajiri wa Maktaba)
+                        </div>
+                        <div class="org-member">
+                            <i class="fas fa-clipboard"></i>
+                            Karani
+                        </div>
+                        <div class="org-member">
+                            <i class="fas fa-shield-alt"></i>
+                            Walinzi (4)
+                        </div>
                     </div>
                 </div>
             </div>
@@ -809,10 +905,10 @@
             <div class="row">
                 <div class="col-lg-4 mb-4">
                     <h5 class="fw-bold mb-3">
-                        <img src="logo.png" alt="Logo" style="height: 30px; margin-right: 8px; filter: brightness(0) invert(1);">
-                        Shule ya Mfano
+                        <i class="fas fa-graduation-cap me-2"></i>
+                        Shule ya Sekondari Mpendae
                     </h5>
-                    <p>Tunatoa elimu bora kwa maendeleo ya watoto wetu kwa ujuzi, maadili na utamaduni wa Kitanzania.</p>
+                    <p>Tunatoa elimu bora kwa maendeleo ya vijana wetu kwa ujuzi, maadili na utamaduni wa Kizanzibar.</p>
                     
                     <div class="social-links mt-3">
                         <a href="#" class="text-white me-3"><i class="fab fa-facebook-f fa-lg"></i></a>
@@ -837,7 +933,8 @@
                     <div class="contact-info">
                         <p class="mb-2">
                             <i class="fas fa-map-marker-alt me-2"></i>
-                            Barabara ya Uhuru, Zanzibar
+                            Mtaa wa Mpendae, Shehia ya Mpendae<br>
+                            <span class="ms-4">Wilaya ya Mjini, Zanzibar</span>
                         </p>
                         <p class="mb-2">
                             <i class="fas fa-phone me-2"></i>
@@ -845,7 +942,7 @@
                         </p>
                         <p class="mb-2">
                             <i class="fas fa-envelope me-2"></i>
-                            info@shuleyamfano.tz
+                            info@mpendae.ac.tz
                         </p>
                     </div>
                 </div>
@@ -854,7 +951,7 @@
             <hr class="my-4">
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <p class="mb-0">&copy; 2025 Shule ya Mpendae. Haki zote zimehifadhiwa.</p>
+                    <p class="mb-0">&copy; 2025 Shule ya Sekondari Mpendae. Haki zote zimehifadhiwa.</p>
                 </div>
                 <div class="col-md-6 text-md-end">
                     <small class="text-white-50">Imeundwa kwa mapenzi na teknolojia ya kisasa</small>
@@ -940,7 +1037,7 @@
         function animateCounter(element) {
             const target = parseInt(element.getAttribute('data-count'));
             let current = 0;
-            const increment = target / 60; // Animation duration control
+            const increment = target / 60;
             
             const timer = setInterval(() => {
                 current += increment;
@@ -950,7 +1047,7 @@
                 } else {
                     element.textContent = Math.floor(current);
                 }
-            }, 30); // Update every 30ms
+            }, 30);
         }
 
         // Start counter animation when stats section is visible
@@ -997,12 +1094,12 @@
             });
         });
 
-        // Enhanced hover effects for interactive elements
+        // Enhanced hover effects
         document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.vision-mission-card, .leader-card');
+            const cards = document.querySelectorAll('.intro-card, .leader-card, .org-structure');
             cards.forEach(card => {
                 card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-15px) scale(1.03)';
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
                 });
                 
                 card.addEventListener('mouseleave', function() {
